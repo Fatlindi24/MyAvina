@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  birthday  DateTime
+  sex       String
+  state     String
+  phone     String
+  firstName String
+  lastName  String
+  status    String   @default("pending_intake")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 🔐 Add this line:
+  roleHash String?
+
+  intake      Intake?
+  submissions QuizSubmission[]
+}
+
+
+model Intake {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  answers   String // JSON-encoded answers string
+  treatable Boolean
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Quiz {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  questions   Question[] // 1:n
+  createdAt   DateTime   @default(now())
+  isActive    Boolean    @default(false)
+  
+  submissions QuizSubmission[] // ✅ back-relation
+}
+
+model Question {
+  id        Int          @id @default(autoincrement())
+  quizId    Int
+  quiz      Quiz         @relation(fields: [quizId], references: [id])
+  text      String
+  type      QuestionType
+  options   String[] // ✅ optional by nature
+  order     Int
+  createdAt DateTime     @default(now())
+}
+
+enum QuestionType {
+  TEXT
+  MULTIPLE_CHOICE
+  BOOLEAN
+}
+
+model QuizSubmission {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+  quizId Int
+  quiz   Quiz @relation(fields: [quizId], references: [id])
+
+  encryptedAnswers String
+  submittedAt      DateTime @default(now())
+}
+
+
+
+
+model Product {
+  id           Int      @id @default(autoincrement())
+  name         String
+  slug         String   @unique
+  price        String   // e.g., "$59/month"
+  rating       Float    @default(0) // Use Float for ratings like 4.8
+  reviewsCount Int      @default(0)
+  description  String
+  mainImage    String   // URL or path to the image
+  thumbnails   String[] // Array of strings for thumbnail URLs
+  symptoms     String[] // Array of strings for symptoms
+
+  // Storing FAQs as a JSON object is the most direct way to handle this
+  // in a relational database without creating another table.
+  faqs         Json     @default("[]") 
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
