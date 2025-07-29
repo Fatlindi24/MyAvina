@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -22,5 +23,55 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Prompt', sans-serif;
+}
+
+.container {
+  max-width: 1440px;
+  margin: auto;
+}
+
+.info-tag-bg {
+  background-color: rgba(196, 159, 235, 0.62);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+}
+
+
+
+.hero-section-title{
+  font-family: Prompt;
+font-weight: 500;
+font-style: Medium;
+font-size: 48px;
+line-height: 48px;
+letter-spacing: 0%;
+
+}
+.hero-section-paragraph{
+  margin-top: 25px;
+  font-family: Prompt;
+font-weight: 400;
+font-style: Regular;
+font-size: 20px;
+leading-trim: NONE;
+line-height: 23px;
+letter-spacing: 0%;
+
+}
+
+.bg-gradient-purple {
+  background: linear-gradient(90deg, #EEDFFF 40.87%, #C49FEB 100%);
 }
