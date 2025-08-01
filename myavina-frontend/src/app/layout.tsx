@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
+      <body className={montserrat.className}>        
         <Header />
         <main>{children}</main>
         {/* A Footer component could be added here */}
