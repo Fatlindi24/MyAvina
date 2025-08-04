@@ -15,7 +15,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #ffff;
     --foreground: #ededed;
   }
 }
@@ -23,11 +23,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Prompt' !important;
 }
 
 .container {
-  max-width: 1440px;
+  max-width: 1300px;
   margin: auto;
 }
 
@@ -48,16 +48,32 @@ body {
     animation: fadeIn 0.5s ease-in-out;
   }
 }
+/* 2. Set the default top margin for all sections */
+section {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.personalizer-care{
+  padding:0;
+}
 
+/* 1. Override the first section to have a larger top margin */
+section:first-child {
+  margin-top: 50px;
+}
 
+/* 3. Add a bottom margin only to the very last section */
+section:last-child {
+  margin-bottom: 0px;
+}
 
 .hero-section-title{
   font-family: Prompt;
-font-weight: 500;
-font-style: Medium;
-font-size: 48px;
-line-height: 48px;
-letter-spacing: 0%;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: 0%;
 
 }
 .hero-section-paragraph{
@@ -66,12 +82,130 @@ letter-spacing: 0%;
 font-weight: 400;
 font-style: Regular;
 font-size: 20px;
-leading-trim: NONE;
 line-height: 23px;
+letter-spacing: 0%;
+max-width: 90%;
+}
+.hero-button-main{
+  font-family: Poppins;
+font-weight: 400;
+font-style: Regular;
+font-size: 16px;
+leading-trim: NONE;
+line-height: 100%;
 letter-spacing: 0%;
 
 }
+  .hero-button-secondary{
+    font-family: Poppins;
+font-weight: 500;
+font-style: Medium;
+font-size: 16px;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: 0%;
+
+  }
+  .hero-features-grid-span{
+    font-family: Prompt;
+font-weight: 500;
+font-style: Medium;
+font-size: 14px;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: 0%;
+
+  }
 
 .bg-gradient-purple {
   background: linear-gradient(90deg, #EEDFFF 40.87%, #C49FEB 100%);
+}
+ .symptoms-main-title{
+  font-family: Prompt;
+font-weight: 400;
+font-style: Regular;
+font-size: 40px;
+leading-trim: NONE;
+line-height: 100%;
+letter-spacing: 0%;
+
+ }
+
+
+.menopause-care{
+background: radial-gradient(82.13% 82.13% at 50% 50%, #774180 0%, #202020 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  
+}
+
+
+
+
+
+.see-more-personalized-care{
+  background-color: rgba(255, 255, 255, 0.5);
+  color:white;
+}
+@media (max-width:768px) {
+  .see-more-personalized-care{
+  background-color: black;
+  color:white;
+}
+  section{
+    padding:0px 20px;
+  }
+  .hero-section-title{
+    font-family: Prompt;
+font-weight: 500;
+font-style: Medium;
+font-size: 32px;
+line-height: 37px;
+letter-spacing: 0%;
+
+  }
+  .hero-section-paragraph{
+    font-family: Prompt;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 23px;
+    letter-spacing: 0%;
+
+  }
+  .hero-button-main{
+    font-family: Poppins;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+  }
+  .hero-button-secondary{
+    font-family: Poppins;
+font-weight: 500;
+font-style: Medium;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+
+  }
+    .hero-features-grid-span{
+      font-family: Prompt;
+font-weight: 500;
+font-style: Medium;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+
+    }
+ .symptoms-main-title{
+      font-family: Prompt;
+font-weight: 400;
+font-style: Regular;
+font-size: 32px;
+line-height: 100%;
+letter-spacing: 0%;
+
+    }
+    
 }
