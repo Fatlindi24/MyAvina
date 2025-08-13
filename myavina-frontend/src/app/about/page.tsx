@@ -7,17 +7,15 @@ import SectionSix from "@/components/AboutComponents/SectionSix";
 import SectionThree from "@/components/AboutComponents/SectionThree";
 import SectionTwo from "@/components/AboutComponents/SectionTwo";
 
-
 export default function AboutUs() {
-
-    return (
-        <section className="bg-white">
-            <SectionOne />
-            <SectionTwo />
-            <SectionThree />
-            <SectionFour />
-            <SectionFive />
-            <SectionSix />
-        </section>
-    );
+  return (
+    <section className="bg-white p-0 m-0">
+      <SectionOne />
+      <SectionTwo />
+      <SectionThree />
+      <SectionFour />
+      <SectionFive />
+      <SectionSix />
+    </section>
+  );
 }
