@@ -1,60 +1,124 @@
-import Image from 'next/image';
-import React from 'react';
+"use client";
 
-// --- Icon Components ---
-const BodyIcon = () => (<Image src="/Images/homepage/body.svg" alt="Body icon" width={38} height={38}/>);
-const VaginalIcon = () => (<Image src="/Images/homepage/vaginal.svg" alt="Vaginal icon" width={38} height={38} />);
-const OralIcon = () => (<Image src="/Images/homepage/capsule.png" alt="Oral icon" width={38} height={38}/>);
-const PatchIcon = () => (<Image src="/Images/homepage/patch.png" alt="Patch icon" width={38} height={38}/>);
-const ShieldCheckIcon = () => (<Image src="/Images/homepage/shield-check.png" alt="Shield check icon" width={24} height={24} />);
-const CompoundedIcon = () => (<Image src="/Images/homepage/compunded-icon.png" alt="Compounded icon" width={24} height={24} />);
-const PestleMortarIcon = () => (<Image src="/Images/homepage/pestle-icon.png" alt="Pestle and mortar icon" width={24} height={24} />);
-const PlantIcon = () => (<Image src="/Images/homepage/plant.png" alt="Plant icon" width={24} height={24} />);
+import {
+  Venus,
+  Flower2,
+  Pill,
+  Bandage,
+  ShieldCheck,
+  FlaskConical,
+  Leaf,
+  Salad,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-// --- Data ---
-const choicesData = [
-    { icon: <BodyIcon />, title: "Body", description: "Supports overall hormone balance."},
-    { icon: <VaginalIcon />, title: "Vaginal", description: "Relieves vaginal discomfort."},
-    { icon: <OralIcon />, title: "Oral", description: "Easy hormone therapy by mouth."},
-    { icon: <PatchIcon />, title: "Patch", description: "Hormones delivered through the skin."},
+/* --- Data (icons as components, not JSX elements) --- */
+type Choice = { Icon: LucideIcon; title: string; description: string };
+const choicesData: Choice[] = [
+  {
+    Icon: Venus,
+    title: "Body",
+    description: "Supports overall hormone balance.",
+  },
+  {
+    Icon: Flower2,
+    title: "Vaginal",
+    description: "Relieves vaginal discomfort.",
+  },
+  { Icon: Pill, title: "Oral", description: "Easy hormone therapy by mouth." },
+  {
+    Icon: Bandage,
+    title: "Patch",
+    description: "Hormones delivered through the skin.",
+  },
 ];
-const featuresData = [
-    { icon: <ShieldCheckIcon />, text: "FDA-Approved Pills" },
-    { icon: <CompoundedIcon />, text: "Compounded with Care" },
-    { icon: <PestleMortarIcon />, text: "Made Using Traditional Pestle and Mortar Methods" },
-    { icon: <PlantIcon />, text: "Plant-Based and Plant-Derived Ingredients" },
+
+type Feature = { Icon: LucideIcon; text: string };
+const featuresData: Feature[] = [
+  { Icon: ShieldCheck, text: "FDA-Approved Pills" },
+  { Icon: FlaskConical, text: "Compounded with Care" },
+  { Icon: Salad, text: "Made Using Traditional Pestle and Mortar Methods" },
+  { Icon: Leaf, text: "Plant-Based and Plant-Derived Ingredients" },
 ];
 
-// --- Sub-Components ---
-interface ChoiceCardProps { icon: React.ReactNode; title: string; description: string; }
-const ChoiceCard: React.FC<ChoiceCardProps> = ({ icon, title, description }) => (
-    <div className="bg-[#F5ECFF] text-black p-6 rounded-2xl flex items-center gap-5 cursor-pointer border border-transparent hover:border-purple-300 transition-all duration-300">
-        <div className="bg-white rounded-full p-3 flex-shrink-0 flex items-center justify-center">{icon}</div>
-        <div><h3 className="font-400 text-[18px] ">{title}</h3><p className="text-dark font-400 text-[16px;]">{description}</p></div>
-    </div>
-);
-
-// --- Main Section Component ---
-export const TopChoices = () => {
-    return (
-        <section className="bg-white text-gray-900">
-            <div className="mx-auto max-w-7xl py-16 sm:py-24 px-6 lg:px-8">
-                <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
-                    <div>
-                        <h2 className="lg:text-[32px] text-[24px;] font-500 font-medium  leading-[32px] tracking-normal">The Top Choice Among<br />Physicians for Menopause Care</h2>
-                        <ul className="mt-8 space-y-5">
-                            {featuresData.map((feature, index) => (<li key={index} className="flex items-start gap-3"><div className="flex-shrink-0 mt-0.5">{feature.icon}</div><span className="text-dark-400 lg:text-[18px] text-[14px]">{feature.text}</span></li>))}
-                        </ul>
-                        <p className="mt-8 font-400 font-normal lg:text-[18px] text-[14px;] ">Bioidentical Hormone Replacement Therapy (HRT) is a safe and effective solution for managing symptoms of perimenopause and menopause.</p>
-                    </div>
-                    <div className="mt-12 lg:mt-0">
-                        <div className="grid grid-cols-1 gap-1 lg:gap-2">
-                            {choicesData.map((choice) => (<ChoiceCard key={choice.title} {...choice} />))}
-                        </div>
-                        <div className="mt-10 text-left"><a href="#" className="inline-block bg-black text-white text-[16px] px-8 py-3 rounded-full hover:bg-gray-800 transition-colors">Explore All Treatments</a></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+/* --- Sub-Components --- */
+type ChoiceCardProps = {
+  Icon: LucideIcon;
+  title: string;
+  description: string;
 };
+function ChoiceCard({ Icon, title, description }: ChoiceCardProps) {
+  return (
+    <div className="bg-[#F5ECFF] text-gray-900 p-6 rounded-2xl flex items-center gap-5 border border-transparent hover:border-purple-300 transition-all duration-300">
+      <div className="bg-white rounded-full p-5 flex-shrink-0 flex items-center justify-center shadow-sm">
+        <Icon size={40} strokeWidth={1.75} />
+      </div>
+      <div>
+        <h3 className="text-[18px] font-normal leading-tight">{title}</h3>
+        <p className="text-[16px] font-normal leading-snug text-gray-700 mt-1">
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* --- Main Section --- */
+export default function TopChoices() {
+  return (
+    <section className="bg-white text-gray-900">
+      <div className="mx-auto container py-16 sm:py-24 px-6 lg:px-8">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-[100px] lg:items-center">
+          {/* Left column */}
+          <div>
+            <h2 className="text-[28px] leading-[1.15] font-semibold sm:text-[32px]">
+              The Top Choice Among
+              <br />
+              Physicians for Menopause Care
+            </h2>
+
+            <ul className="mt-8 space-y-5">
+              {featuresData.map(({ Icon, text }, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="flex-shrink-0 mt-0.5">
+                    <Icon size={24} />
+                  </span>
+                  <span className="text-[18px] text-gray-800">{text}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-8 text-[18px] text-gray-700 max-w-xl">
+              Bioidentical Hormone Replacement Therapy (HRT) is a safe and
+              effective solution for managing symptoms of perimenopause and
+              menopause.
+            </p>
+
+            <div className="mt-8">
+              <a
+                href="#"
+                className="inline-block bg-black text-white text-[16px] px-6 py-3 rounded-full hover:bg-gray-800 transition-colors"
+              >
+                Explore All Treatments
+              </a>
+            </div>
+          </div>
+
+          {/* Right column */}
+          <div className="mt-12 lg:mt-0">
+            <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-2">
+              {choicesData.map(({ Icon, title, description }) => (
+                <ChoiceCard
+                  key={title}
+                  Icon={Icon}
+                  title={title}
+                  description={description}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

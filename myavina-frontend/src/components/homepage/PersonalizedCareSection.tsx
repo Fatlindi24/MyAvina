@@ -1,33 +1,222 @@
-import Image from 'next/image';
+"use client";
 
-const InfoTag = ({ label, value, positionClasses }) => (
-  <div className={`absolute ${positionClasses} rounded-lg bg-white/10 backdrop-blur-md border border-white/10 shadow-lg p-3 text-left`}>
-    <span className="text-xs text-purple-200 block">{label}</span>
-    <span className="text-sm text-white ">{value}</span>
-  </div>
-);
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
-export const PersonalizedCareSection = () => {
+// ---- Small corner card
+function InfoCard({
+  title,
+  lines = [],
+  className = "",
+}: {
+  title: string;
+  lines: string[];
+  className?: string;
+}) {
   return (
-    <section className="personalizer-care relative w-full  text-white overflow-hidden">
-      <div className=' py-20 sm:py-32 container rounded-[30px] bg-[url("/Images/homepage/linear-background.png")] bg-cover bg-center bg-no-repeat'>
-        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center">
-          <h2 className="text-[32px] lg:text-[40px] text-[32px] font-[500]">Menopause Care Made Personal</h2>
-          <p className="mt-2 lg:text-[18px] text-[16px] text-purple-200">Your menopause journey, supported every step by MyAvina</p>
-          <div className="relative mt-12 w-full max-w-4xl">
-            <div className="menopause-care backdrop-blur-xl rounded-2xl border border-white/10 p-4 sm:p-6 shadow-2xl">
-              <Image src="/Images/homepage/image 43.png" alt="Personalized care plan preview" width={270} height={270} className="rounded-xl m-auto" />
-              <InfoTag label="Name" value="Sarah" positionClasses="top-20 text-[8] lg:left-4  lg:top-10 top-[10] left-[-10] lg:left-[-120] flex justify-between lg:w-70 w-30 info-tag-bg"/>
-              <InfoTag label="Age" value="55" positionClasses=" top-20 text-[8] left-4 lg:top-25 top-20 left-[-10] lg:left-[-120] flex justify-between lg:w-70 w-30 info-tag-bg" />
-              <InfoTag label="History" value="Hot flashes, Poor sleep" positionClasses="top-12 text-[8] lg:right-4 right-[-10] lg:top-40 top-[180] flex justify-between lg:w-70 w-60 info-tag-bg" />
-              <InfoTag label="Goal" value="Sleep better, Feel balanced" positionClasses="top-32 text-[8] lg:right-4 right-[-10] lg:top-55  top-[230] sm:right-[-120] flex justify-between lg:w-70 w-60 info-tag-bg" />
+    <div
+      className={`rounded-xl bg-white/10 backdrop-blur-md border border-white/15 shadow-lg px-4 py-3 text-left text-white ${className}`}
+    >
+      <p className="text-xs text-purple-200">{title}</p>
+      <div className="mt-1 text-sm leading-5">
+        {lines.map((l, i) => (
+          <div key={i}>{l}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---- One slide (panel)
+function Slide({
+  title,
+  subtitle,
+  image,
+  className = "",
+}: {
+  title: string;
+  subtitle: string;
+  image: string;
+  className?: string;
+}) {
+  return (
+    <div className={`w-full shrink-0 ${className}`}>
+      {/* Title + subtitle */}
+
+      {/* Panel */}
+
+      <div className="relative rounded-[28px] bg-gradient-to-b from-[#6f3a89] to-[#5e2f7a] p-5 md:p-8 lg:p-10 overflow-hidden">
+        <div className="text-center mb-8">
+          <h2 className="text-[28px] md:text-[36px] lg:text-[44px] font-semibold text-white">
+            {title}
+          </h2>
+          <p className="mt-2 text-[15px] md:text-[16px] text-purple-100">
+            {subtitle}
+          </p>
+        </div>
+        {/* Corner cards grid (kept inside container) */}
+        <div className="grid grid-cols-2 gap-y-28 md:gap-y-32 ">
+          {/* Left column */}
+          <div className="flex flex-col gap-6 ">
+            <InfoCard
+              title="Name"
+              lines={["Sarah"]}
+              className="w-[180px] md:w-[350px] flex flex-row items-center justify-between"
+            />
+            <InfoCard
+              title="Age"
+              lines={["55"]}
+              className="w-[180px] md:w-[350px] flex flex-row items-center justify-between"
+            />
+          </div>
+
+          {/* Right column */}
+          <div className="flex flex-col items-end gap-6">
+            <InfoCard
+              title="History"
+              lines={["Hot flashes", "Poor sleep"]}
+              className="w-[150px] md:w-[350px] flex md:flex-row flex-col items-center justify-between"
+            />
+            <InfoCard
+              title="Goal"
+              lines={["Sleep better", "Feel balanced"]}
+              className="w-[150px] md:w-[350px] flex flex-row items-center justify-between"
+            />
+          </div>
+        </div>
+
+        {/* Center image card */}
+        <div className="pointer-events-none select-none absolute inset-0 flex items-center justify-center">
+          <div className="relative w-[82%] md:w-[70%] lg:w-[60%] aspect-[16/8] rounded-3xl bg-black/35 shadow-2xl">
+            <div className="absolute inset-0">
+              <Image
+                src={image}
+                alt="Person"
+                fill
+                className="object-contain"
+                sizes="(min-width:1024px) 60vw, 90vw"
+                priority
+              />
             </div>
           </div>
-<button className="mt-12 bg-dark py-5 px-15 rounded-full transition-colors see-more-personalized-care" >
-  See Your Plan
-</button>
+        </div>
+
+        {/* CTA (center bottom) */}
+        <div className="mt-[100px] md:mt-[160px] lg:mt-[250px] flex justify-center">
+          <button className="rounded-full bg-white/20 hover:bg-white/30 text-white px-7 py-3 text-[15px] font-medium transition">
+            See Your Plan
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---- Slider wrapper
+export default function PersonalizedCareCarousel() {
+  const slides = [
+    {
+      title: "Menopause Care Made Personal",
+      subtitle: "Your menopause journey, supported every step by MyAvina",
+      image: "/Images/homepage/menopause.png",
+    },
+    {
+      title: "Tailored Plans, Real Results",
+      subtitle: "Personalized HRT designed around your symptoms and goals",
+      image: "/Images/homepage/menopause.png",
+    },
+    {
+      title: "Feel Like Yourself Again",
+      subtitle: "Clinically guided care you can trust",
+      image: "/Images/homepage/menopause.png",
+    },
+  ];
+
+  const [index, setIndex] = useState(0);
+  const count = slides.length;
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const next = () => setIndex((i) => (i + 1) % count);
+  const prev = () => setIndex((i) => (i - 1 + count) % count);
+
+  // optional: swipe
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    let startX: number | null = null;
+
+    const down = (e: TouchEvent) => (startX = e.touches[0].clientX);
+    const up = (e: TouchEvent) => {
+      if (startX == null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (dx > 50) prev();
+      else if (dx < -50) next();
+      startX = null;
+    };
+
+    el.addEventListener("touchstart", down, { passive: true });
+    el.addEventListener("touchend", up, { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", down);
+      el.removeEventListener("touchend", up);
+    };
+  }, [count]);
+
+  return (
+    <section className="w-full  py-12 md:py-16 lg:py-20">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Slider viewport */}
+        <div className="relative overflow-hidden rounded-[32px]">
+          {/* Track */}
+          <div
+            ref={trackRef}
+            className="flex transition-transform duration-500 ease-out"
+            style={{ transform: `translateX(-${index * 100}%)` }}
+          >
+            {slides.map((s, i) => (
+              <Slide
+                key={i}
+                title={s.title}
+                subtitle={s.subtitle}
+                image={s.image}
+                className="px-2 sm:px-3 lg:px-4"
+              />
+            ))}
+          </div>
+
+          {/* Controls */}
+          <div className="mt-6 flex items-center justify-center gap-3">
+            <button
+              onClick={prev}
+              aria-label="Previous"
+              className="w-10 h-10 rounded-full border border-[#774180]/30 text-[#774180]/90 hover:bg-[#774180]/10 transition"
+            >
+              ‹
+            </button>
+            <div className="mt-3 flex justify-center gap-2">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIndex(i)}
+                  className={`h-2 rounded-full transition-all ${
+                    i === index ? "w-6 bg-[#774180]" : "w-2 bg-[#774180]/40"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={next}
+              aria-label="Next"
+              className="w-10 h-10 rounded-full bg-[#774180]/20 text-[#774180] hover:bg-[#774180]/30 transition"
+            >
+              ›
+            </button>
+          </div>
+
+          {/* Dots */}
         </div>
       </div>
     </section>
   );
-};
+}

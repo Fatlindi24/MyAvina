@@ -14,29 +14,34 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="bg-purple-50 rounded-xl p-4 shadow-sm flex flex-col items-center text-center transition hover:shadow-md">
-      <Image
-        src={product.image}
-        alt={product.name}
-        width={160}
-        height={160}
-        className="mb-4 object-contain h-[160px]"
-      />
+    <div className="bg-purple-50 rounded-xl p-4 shadow-sm flex flex-col justify-between text-center transition hover:shadow-md h-full">
+      {/* Top Content */}
+      <div>
+        <Image
+          src={product.image}
+          alt={product.name}
+          width={160}
+          height={160}
+          className="mb-4 object-contain h-[160px] mx-auto"
+        />
 
-      <h3 className="font-semibold text-base">{product.name}</h3>
+        <h3 className="font-semibold text-base">{product.name}</h3>
+        <p className="text-sm text-gray-500 mb-1">{product.price}</p>
 
-      <p className="text-sm text-gray-500 mb-1">{product.price}</p>
-
-      <div className="text-yellow-500 text-sm mb-4">
-        {"★".repeat(product.rating)}
+        <div className="text-yellow-500 text-sm mb-4">
+          {"★".repeat(product.rating)}
+        </div>
       </div>
 
-      <Link
-        href={`/products/${product.slug}`}
-        className="inline-block px-4 py-1.5 border border-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition"
-      >
-        Learn More
-      </Link>
+      {/* Bottom Button */}
+      <div>
+        <Link
+          href={`/products/${product.slug}`}
+          className="inline-block px-4 py-1.5 border border-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition"
+        >
+          Learn More
+        </Link>
+      </div>
     </div>
   );
 }

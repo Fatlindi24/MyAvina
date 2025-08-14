@@ -1,5 +1,10 @@
 // data/products.ts
 
+export interface ProductFAQ {
+  q: string;
+  a: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -12,6 +17,8 @@ export interface Product {
   benefits: string[];
   usage: string;
   ingredients: string[];
+  safety?: string;
+  faqs?: ProductFAQ[]; // ✅ New optional FAQs array
 }
 
 export const products: Product[] = [
@@ -35,210 +42,404 @@ export const products: Product[] = [
       "Vegetable Cellulose",
       "Silica",
       "Magnesium Stearate"
-    ]
+    ],
+    faqs: [
+      {
+        q: "Why would I need both estrogen and progesterone?",
+        a: "Both hormones work together to provide comprehensive menopause symptom relief and hormonal balance."
+      },
+      {
+        q: "Is progesterone safe to use in a cream?",
+        a: "Yes, topical progesterone is considered safe when used as directed by a healthcare provider."
+      },
+      {
+        q: 'What does "bioest" mean?',
+        a: "Bioest refers to bioidentical estrogen that matches your body's natural hormone structure."
+      },
+      {
+        q: "Why isn't the bottle full?",
+        a: "The bottle contains the exact amount needed for your prescribed dosage and treatment duration."
+      },
+      {
+        q: "Is the progesterone in the cream safe if I have a peanut allergy?",
+        a: "Please consult with your healthcare provider about any allergies before starting treatment."
+      }
+    ],
+    safety: "Consult your healthcare provider before use, especially if you have a history of hormone-sensitive conditions.",
+
   },
   {
     id: "2",
-    name: "Estrogen Patch",
-    price: "$39/month",
+    name: "Estrogen Cream",
+    price: "$49/month",
     image: "/Images/products/product.png",
-    rating: 4,
+    rating: 4.5,
     category: "Body Creams",
-    slug: "estrogen-patch",
-    description: "Estrogen patches deliver consistent hormone therapy through the skin.",
+    slug: "estrogen-cream",
+    description: "Topical cream to help alleviate menopause symptoms like hot flashes and mood swings.",
     benefits: [
       "Reduces hot flashes and night sweats",
-      "Improves mood and energy",
-      "Promotes skin hydration"
+      "Improves skin elasticity",
+      "Supports mood stability"
     ],
-    usage: "Apply to clean, dry skin on the lower abdomen. Replace twice weekly.",
+    usage: "Apply a pea-sized amount to clean, dry skin once daily.",
     ingredients: [
-      "Estradiol",
-      "Acrylic Adhesive",
-      "Backing Film"
-    ]
+      "Bioidentical Estrogen",
+      "Aloe Vera Extract",
+      "Vitamin E",
+      "Jojoba Oil"
+    ],
+    faqs: [
+      {
+        q: "How long does it take to feel the effects?",
+        a: "Many users report symptom relief within 1-2 weeks of consistent use."
+      },
+      {
+        q: "Can I use this cream with other medications?",
+        a: "Consult your healthcare provider to ensure no interactions with your current medications."
+      }
+    ],
   },
   {
     id: "3",
-    name: "Estrogen Patch 2",
-    price: "$39/month",
+    name: "Menopause Relief Bundle",
+    price: "$79/month",
     image: "/Images/products/product.png",
-    rating: 4,
-    category: "Testosterone Patches",
-    slug: "estrogen-patch-2",
-    description: "A convenient supplement to support hormonal balance.",
+    rating: 4.8,
+    category: "Bundles",
+    slug: "menopause-relief-bundle",
+    description: "A comprehensive bundle including progesterone capsules and estrogen cream for holistic menopause support.",
     benefits: [
-      "Regulates mood",
-      "Supports vaginal health"
+      "Combines benefits of both progesterone and estrogen",
+      "Convenient monthly supply",
+      "Tailored for menopause symptom relief"
     ],
-    usage: "Apply one patch and replace every 3 days.",
+    usage: "Take one capsule daily and apply cream as directed.",
     ingredients: [
-      "Estradiol",
-      "Medical Adhesive"
-    ]
+      "Progesterone Capsules",
+      "Estrogen Cream"
+    ],
+    faqs: [
+      {
+        q: "What is included in the bundle?",
+        a: "The bundle includes both progesterone capsules and estrogen cream for complete menopause support."
+      },
+      {
+        q: "Is this bundle more cost-effective?",
+        a: "Yes, purchasing the bundle saves you compared to buying each product separately."
+      }
+    ],
   },
   {
     id: "4",
-    name: "Estrogen Patch 3",
-    price: "$39/month",
+    name: "Hormone Harmony Drops",
+    price: "$29/month",
     image: "/Images/products/product.png",
-    rating: 5,
-    category: "Patch",
-    slug: "estrogen-patch-3",
-    description: "Advanced transdermal delivery for fast relief from menopause symptoms.",
+    rating: 4.2,
+    category: "Drops",
+    slug: "hormone-harmony-drops",
+    description: "Liquid drops formulated to help balance hormones and reduce menopause symptoms.",
     benefits: [
-      "Balances hormones",
-      "Boosts energy",
-      "Minimizes bloating"
+      "Supports hormonal balance",
+      "Reduces mood swings",
+      "Enhances energy levels"
     ],
-    usage: "Use as directed by your physician.",
+    usage: "Take 10 drops under the tongue twice daily.",
     ingredients: [
-      "Estradiol USP",
-      "Polymer Matrix"
-    ]
-  },
+      "Natural Herbal Extracts",
+      "Vitamin D3",
+      "Zinc"
+    ],
+    faqs: [
+      {
+        q: "How do I take the drops?",
+        a: "Place 10 drops under your tongue and hold for 30 seconds before swallowing."
+      },
+      {
+        q: "Can I mix the drops with water?",
+        a: "For best results, take the drops directly without mixing with other liquids."
+      }
+    ],
+  }
+ ,
   {
     id: "5",
-    name: "Progesterone Cream",
-    price: "$39/month",
+    name: "Calm & Cool Tea",
+    price: "$19/month",
     image: "/Images/products/product.png",
-    rating: 5,
-    category: "Body Creams",
-    slug: "progesterone-cream",
-    description: "A soothing cream to help balance hormones and alleviate menopause symptoms.",
+    rating: 4.0,
+    category: "Teas",
+    slug: "calm-cool-tea",
+    description: "Herbal tea blend designed to promote relaxation and reduce stress during menopause.",
     benefits: [
-      "Reduces anxiety and irritability",
-      "Supports restful sleep",
-      "Improves skin elasticity"
+      "Promotes relaxation and calmness",
+      "Supports digestive health",
+      "Helps with sleep quality"
     ],
-    usage: "Apply a small amount to the skin daily, as directed by your healthcare provider.",
+    usage: "Steep one tea bag in hot water for 5-7 minutes, drink once daily.",
     ingredients: [
-      "Micronized Progesterone",
-      "Emollients",
-      "Preservatives"
-    ]
+      "Chamomile",
+      "Lemon Balm",
+      "Peppermint"
+    ],
+    faqs: [
+      {
+        q: "How often can I drink this tea?",
+        a: "You can enjoy this tea daily to help manage stress and promote relaxation."
+      },
+      {
+        q: "Is this tea caffeine-free?",
+        a: "Yes, Calm & Cool Tea is naturally caffeine-free."
+      }
+    ],
   },
   {
     id: "6",
-    name: "Estrogen Cream",
-    price: "$39/month",
+    name: "Vitality Multivitamin",
+    price: "$24/month",
     image: "/Images/products/product.png",
-    rating: 4,
-    category: "Body Creams",
-    slug: "estrogen-cream",
-    description: "Topical estrogen cream for menopause symptom relief.",
+    rating: 4.7,
+    category: "Supplements",
+    slug: "vitality-multivitamin",
+    description: "Daily multivitamin formulated to support overall health and wellness during menopause.",
     benefits: [
-      "Alleviates hot flashes",
-      "Enhances mood stability",
-      "Improves skin hydration"
+      "Boosts immune system",
+      "Supports bone health",
+      "Enhances energy levels"
     ],
-    usage: "Apply to the skin as directed by your healthcare provider.",
+    usage: "Take one tablet daily with food.",
     ingredients: [
-      "Estradiol",
-      "Emollients",
-      "Preservatives"
-    ]
+      "Vitamins A, C, D, E, K",
+      "B Vitamins",
+      "Zinc",
+      "Magnesium"
+    ],
+    faqs: [
+      {
+        q: "Can I take this multivitamin with other supplements?",
+        a: "Yes, but consult your healthcare provider for personalized advice."
+      },
+      {
+        q: "Is this multivitamin suitable for vegetarians?",
+        a: "Yes, Vitality Multivitamin is vegetarian-friendly."
+      }
+    ],
   },
   {
     id: "7",
-    name: "Testosterone Cream",
-    price: "$39/month",
+    name: "Menopause Support Probiotic",
+    price: "$34/month",
     image: "/Images/products/product.png",
-    rating: 5,
-    category: "Body Creams",
-    slug: "testosterone-cream",
-    description: "Testosterone cream to help boost energy and libido during menopause.",
+    rating: 4.3,
+    category: "Probiotics",
+    slug: "menopause-support-probiotic",
+    description: "Probiotic supplement designed to support digestive health and hormonal balance during menopause.",
     benefits: [
-      "Increases energy levels",
-      "Enhances libido",
-      "Supports muscle mass"
+      "Promotes gut health",
+      "Supports immune function",
+      "Helps with hormonal balance"
     ],
-    usage: "Apply a small amount to the skin daily, as directed by your healthcare provider.",
+    usage: "Take one capsule daily with water.",
     ingredients: [
-      "Testosterone Propionate",
-      "Emollients",
-      "Preservatives"
-    ]
+      "Lactobacillus Acidophilus",
+      "Bifidobacterium Bifidum",
+      "Prebiotic Fiber"
+    ],
+    faqs: [
+      {
+        q: "How long does it take to see results?",
+        a: "Many users notice improvements in digestion and energy levels within a few weeks."
+      },
+      {
+        q: "Can I take this probiotic with antibiotics?",
+        a: "Consult your healthcare provider before combining probiotics with antibiotics."
+      }
+    ],
   },
   {
     id: "8",
-    name: "DHEA Supplement",
-    price: "$39/month",
+    name: "Mood Boost Essential Oil Blend",
+    price: "$15/month",
     image: "/Images/products/product.png",
-    rating: 4,
-    category: "Supplements",
-    slug: "dhea-supplement",
-    description: "DHEA supplement to support hormone balance and energy levels.",
+    rating: 4.6,
+    category: "Essential Oils",
+    slug: "mood-boost-essential-oil-blend",
+    description: "A calming essential oil blend to help uplift mood and reduce stress during menopause.",
     benefits: [
-      "Boosts energy and mood",
-      "Supports hormonal balance",
-      "Enhances libido"
+      "Enhances mood and emotional well-being",
+      "Reduces anxiety and stress",
+      "Promotes relaxation"
     ],
-    usage: "Take one capsule daily with food.",
+    usage: "Diffuse in a diffuser or apply diluted to pulse points.",
     ingredients: [
-      "Dehydroepiandrosterone (DHEA)",
-      "Gelatin Capsule"
-    ]
+      "Lavender Oil",
+      "Bergamot Oil",
+      "Ylang Ylang Oil"
+    ],
+    faqs: [
+      {
+        q: "How do I use this essential oil blend?",
+        a: "You can diffuse it in a diffuser or apply it diluted to your pulse points."
+      },
+      {
+        q: "Is this essential oil safe for sensitive skin?",
+        a: "Always dilute essential oils before applying to the skin, especially if you have sensitive skin."
+      }
+    ],
   },
   {
     id: "9",
-    name: "Vitamin D3 Supplement",
-    price: "$39/month",
+    name: "Sleep Well Herbal Supplement",
+    price: "$22/month",
     image: "/Images/products/product.png",
-    rating: 5,
+    rating: 4.1,
     category: "Supplements",
-    slug: "vitamin-d3-supplement",
-    description: "Vitamin D3 to support bone health and immune function.",
+    slug: "sleep-well-herbal-supplement",
+    description: "Herbal supplement designed to promote restful sleep and reduce insomnia during menopause.",
     benefits: [
-      "Supports bone density",
-      "Boosts immune system",
-      "Improves mood"
+      "Supports restful sleep",
+      "Reduces insomnia symptoms",
+      "Promotes relaxation"
     ],
-    usage: "Take one capsule daily with a meal.",
+    usage: "Take two capsules 30 minutes before bedtime.",
     ingredients: [
-      "Cholecalciferol (Vitamin D3)",
-      "Gelatin Capsule"
-    ]
+      "Valerian Root Extract",
+      "L-Theanine",
+      "Melatonin"
+    ],
+    faqs: [
+      {
+        q: "How long before bed should I take this supplement?",
+        a: "Take it 30 minutes before bedtime for best results."
+      },
+      {
+        q: "Is this supplement habit-forming?",
+        a: "No, Sleep Well is formulated to be non-habit forming."
+      }
+    ],
   },
   {
     id: "10",
-    name: "Calcium + Magnesium Supplement",
-    price: "$39/month",
+    name: "Hydration Boost Electrolyte Powder",
+    price: "$18/month",
     image: "/Images/products/product.png",
-    rating: 5,
-    category: "Supplements",
-    slug: "calcium-magnesium-supplement",
-    description: "A balanced supplement to support bone health during menopause.",
+    rating: 4.4,
+    category: "Hydration",
+    slug: "hydration-boost-electrolyte-powder",
+    description: "Electrolyte powder to help maintain hydration and energy levels during menopause.",
     benefits: [
-      "Strengthens bones",
-      "Supports muscle function",
-      "Reduces risk of osteoporosis"
+      "Replenishes electrolytes lost through sweat",
+      "Supports hydration and energy levels",
+      "Helps reduce fatigue"
     ],
-    usage: "Take two tablets daily with meals.",
+    usage: "Mix one scoop with 8-12 oz of water and drink before or after exercise.",
     ingredients: [
-      "Calcium Carbonate",
-      "Magnesium Oxide",
-      "Vitamin D3"
-    ]
+      "Sodium Chloride",
+      "Potassium Citrate",
+      "Magnesium Citrate"
+    ],
+    faqs: [
+      {
+        q: "Can I use this electrolyte powder daily?",
+        a: "Yes, it can be used daily to support hydration, especially during exercise."
+      },
+      {
+        q: "Is this product gluten-free?",
+        a: "Yes, Hydration Boost is gluten-free."
+      }
+    ],
   },
   {
     id: "11",
-    name: "Omega-3 Fish Oil",
-    price: "$39/month",
+    name: "Stress Relief Aromatherapy Roll-On",
+    price: "$12/month",
     image: "/Images/products/product.png",
-    rating: 5,
-    category: "Supplements",
-    slug: "omega-3-fish-oil",
-    description: "Omega-3 fatty acids to support heart health and reduce inflammation.",
+    rating: 4.5,
+    category: "Aromatherapy",
+    slug: "stress-relief-aromatherapy-roll-on",
+    description: "Convenient roll-on blend to help reduce stress and promote relaxation throughout the day.",
     benefits: [
-      "Supports cardiovascular health",
-      "Reduces joint pain",
-      "Improves skin health"
+      "Easy to apply on-the-go",
+      "Promotes relaxation and calmness",
+      "Reduces stress and anxiety"
     ],
-    usage: "Take two softgels daily with meals.",
+    usage: "Roll onto pulse points as needed throughout the day.",
     ingredients: [
-      "Fish Oil (EPA and DHA)",
-      "Gelatin Softgel"
-    ]
+      "Lavender Oil",
+      "Frankincense Oil",
+      "Coconut Oil"
+    ],
+    faqs: [
+      {
+        q: "How often can I use this roll-on?",
+        a: "You can use it as often as needed to help manage stress."
+      },
+      {
+        q: "Is this product safe for sensitive skin?",
+        a: "Yes, but always do a patch test before full application."
+      }
+    ],
+  },
+  {
+    id: "12",
+    name: "Joint Support Formula",
+    price: "$27/month",
+    image: "/Images/products/product.png",
+    rating: 4.3,
+    category: "Supplements",
+    slug: "joint-support-formula",
+    description: "Supplement designed to support joint health and mobility during menopause.",
+    benefits: [
+      "Supports joint flexibility",
+      "Reduces discomfort and stiffness",
+      "Promotes overall joint health"
+    ],
+    usage: "Take two capsules daily with meals.",
+    ingredients: [
+      "Glucosamine Sulfate",
+      "Chondroitin Sulfate",
+      "Turmeric Extract"
+    ],
+    faqs: [
+      {
+        q: "How long does it take to see results?",
+        a: "Many users report improved joint comfort within 4-6 weeks of consistent use."
+      },
+      {
+        q: "Can I take this with other joint supplements?",
+        a: "Consult your healthcare provider for personalized advice on combining supplements."
+      }
+    ],
+  },
+  {
+    id: "13",
+    name: "Energy Boost Herbal Blend",
+    price: "$20/month",
+    image: "/Images/products/product.png",
+    rating: 4.6,
+    category: "Herbal Blends",
+    slug: "energy-boost-herbal-blend",
+    description: "Herbal blend designed to naturally boost energy levels and combat fatigue during menopause.",
+    benefits: [
+      "Enhances energy and vitality",
+      "Reduces fatigue",
+      "Supports mental clarity"
+    ],
+    usage: "Take one teaspoon in warm water or tea twice daily.",
+    ingredients: [
+      "Ginseng Root",
+      "Ashwagandha",
+      "Green Tea Extract"
+    ],
+    faqs: [
+      {
+        q: "How quickly can I expect an energy boost?",
+        a: "Many users feel increased energy within 30 minutes of consumption."
+      },
+      {
+        q: "Is this blend safe for daily use?",
+        a: "Yes, it is formulated for daily use to support sustained energy levels."
+      }
+    ],
   }
 ];

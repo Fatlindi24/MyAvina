@@ -36,7 +36,7 @@ const SectionFive = () => {
             key={i}
             src={src}
             alt={`logo ${i + 1}`}
-            className="h-8 mx-8 object-contain mt-12"
+            className="h-8 mx-8 object-contain my-12"
           />
         ))}
       </Marquee>

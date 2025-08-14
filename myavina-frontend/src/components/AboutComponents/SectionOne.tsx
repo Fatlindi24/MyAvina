@@ -4,8 +4,8 @@ import React from "react";
 
 const SectionOne = () => {
   return (
-    <div className="container">
-      <div className="mx-auto px-4 pt-16 container grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div className="container mx-auto">
+      <div className="pt-16 container grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Heading column with new paragraph above */}
         <div>
           <p className="text-lg text-gray-700 mb-4">About Us</p>

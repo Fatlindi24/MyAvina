@@ -1,10 +1,35 @@
+"use client";
 // app/products/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, ChevronRight, Star, Plus } from "lucide-react";
+import {
+  Check,
+  ChevronRight,
+  Star,
+  Plus,
+  Venus,
+  Flower2,
+  Pill,
+  Bandage,
+  Bed,
+  Droplet,
+  ThermometerIcon,
+  CheckCircle2,
+  Truck,
+  Stethoscope,
+  Users,
+  Zap,
+  ChevronLeft,
+  ShieldCheck,
+} from "lucide-react";
 import { products } from "@/data/products";
 import { testimonials } from "@/data/testimonials";
+import TreatmentInformation from "@/components/product/TreatmentInformation";
+import TestimonialsSlider from "@/components/product/TestimonialsSlider";
+import RelatedProductsCarousel from "@/components/RelatedProductsCarousel";
+import ProductFAQ from "@/components/product/ProductFAQ";
+import React from "react";
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const product = products.find((p) => p.slug === params.slug);
@@ -15,399 +40,414 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     .slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* HERO with STICKY IMAGE */}
-      <section className="grid grid-cols-1 lg:grid-cols-[minmax(0,520px)_1fr] gap-12 mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-        {/* LEFT: Sticky Product Image */}
+    <div className=" min-h-screen bg-white ">
+      {/* HERO */}
+      <section className="grid grid-cols-1 lg:grid-cols-[560px_1fr] gap-10 lg:gap-12 mb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+        {/* LEFT: Sticky Product Image + Functional Carousel */}
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <div className="relative w-full h-[420px] lg:h-[520px] bg-purple-50 rounded-2xl overflow-hidden">
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-        </div>
+          {(() => {
+            // 1) Images for the gallery (first is the main product image)
+            const gallery = [
+              product.image,
+              "/Images/learn/learn1.png",
+              "/Images/products/product.png",
+              "/Images/learn/learn1.png",
+            ];
 
-        {/* RIGHT: Title, Price, Buttons, Targets, Badges, Accordions */}
-        <div className="space-y-12">
-          {/* Title, rating, description */}
-          <section className="space-y-6">
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
-                {product.name}
-              </h1>
+            // 2) State + handlers
+            const [active, setActive] = React.useState(0);
 
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
+            const prev = () =>
+              setActive((i) => (i === 0 ? gallery.length - 1 : i - 1));
+            const next = () =>
+              setActive((i) => (i === gallery.length - 1 ? 0 : i + 1));
+            const goto = (i: number) => setActive(i);
+
+            // 3) Keyboard arrows
+            React.useEffect(() => {
+              const onKey = (e: KeyboardEvent) => {
+                if (e.key === "ArrowLeft") prev();
+                if (e.key === "ArrowRight") next();
+              };
+              window.addEventListener("keydown", onKey);
+              return () => window.removeEventListener("keydown", onKey);
+            }, []);
+
+            // 4) Simple swipe (touch / mouse)
+            const startX = React.useRef<number | null>(null);
+            const onPointerDown = (e: React.PointerEvent) => {
+              (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+              startX.current = e.clientX;
+            };
+            const onPointerUp = (e: React.PointerEvent) => {
+              if (startX.current == null) return;
+              const delta = e.clientX - startX.current;
+              // threshold ~ 40px
+              if (delta > 40) prev();
+              else if (delta < -40) next();
+              startX.current = null;
+            };
+
+            return (
+              <>
+                {/* Stage */}
+                <div
+                  className="relative w-full h-[420px] lg:h-[520px] bg-[#F1EAFB] rounded-2xl overflow-hidden"
+                  onPointerDown={onPointerDown}
+                  onPointerUp={onPointerUp}
+                >
+                  {/* track */}
+                  <div
+                    className="absolute inset-0 flex transition-transform duration-500 ease-out"
+                    style={{ transform: `translateX(-${active * 100}%)` }}
+                  >
+                    {gallery.map((src, i) => (
+                      <div key={i} className="relative w-full h-full shrink-0">
+                        <Image
+                          src={src}
+                          alt={`${product.name} ${i + 1}`}
+                          fill
+                          className="object-contain"
+                          priority={i === 0}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Nav arrows */}
+                  <button
+                    type="button"
+                    aria-label="Previous image"
+                    onClick={prev}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow flex items-center justify-center hover:bg-white transition"
+                  >
+                    <ChevronLeft className="w-4 h-4 text-gray-700" />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next image"
+                    onClick={next}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow flex items-center justify-center hover:bg-white transition"
+                  >
+                    <ChevronRight className="w-4 h-4 text-gray-700" />
+                  </button>
+                </div>
+
+                {/* Thumbnails */}
+                <div className="mt-4 grid grid-cols-4 gap-4">
+                  {gallery.map((src, i) => (
+                    <button
+                      key={i}
+                      onClick={() => goto(i)}
+                      aria-label={`Select image ${i + 1}`}
+                      className={`relative h-20 rounded-xl overflow-hidden border transition ${
+                        i === active
+                          ? "border-black"
+                          : "border-transparent hover:border-gray-300"
+                      }`}
+                    >
+                      <Image
+                        src={src}
+                        alt={`${product.name} thumb ${i + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </button>
                   ))}
                 </div>
-                <span className="text-sm text-gray-500">
-                  medically reviewed
-                </span>
-              </div>
+              </>
+            );
+          })()}
+        </div>
 
-              <p className="text-gray-600 leading-relaxed">
-                {product.description}
-              </p>
-            </div>
+        {/* RIGHT: Content */}
+        <div className="space-y-8">
+          {/* Title + rating + badges + desc */}
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+              {product.name}
+            </h1>
 
-            {/* Actions */}
-            <div className="space-y-3">
-              {/* Hook up to Cart later */}
-              <button className="w-full bg-black text-white py-3 px-6 rounded-full font-medium hover:bg-gray-800 transition">
-                Add to Cart
-              </button>
-              <button className="w-full border border-gray-300 py-3 px-6 rounded-full font-medium hover:bg-gray-50 transition">
-                1‑Month supply:{" "}
-                <span className="font-semibold">${product.price}</span>
-              </button>
-              <div className="flex items-center text-sm text-gray-600">
-                <Check className="w-4 h-4 mr-2 text-green-600" />
-                30‑day risk‑free
-              </div>
-            </div>
-
-            {/* Targets */}
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-3">
-                Targets 100+ menopause symptoms:
-              </h3>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                {[
-                  "Hot flashes",
-                  "Night sweats",
-                  "Mood swings",
-                  "Sleep issues",
-                ].map((t) => (
-                  <div key={t} className="flex items-center">
-                    <Check className="w-4 h-4 mr-2 text-green-600" />
-                    {t}
-                  </div>
+            {/* Rating row */}
+            <div className="flex flex-wrap items-center gap-3 text-sm mb-4">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-4 h-4 ${
+                      i < Math.round(product.rating)
+                        ? "text-black fill-current"
+                        : "text-gray-300"
+                    }`}
+                    fill={
+                      i < Math.round(product.rating) ? "currentColor" : "none"
+                    }
+                    stroke={
+                      i < Math.round(product.rating) ? "none" : "currentColor"
+                    }
+                  />
                 ))}
+                <span className="ml-1 text-gray-700">{product.rating}</span>
+                <span className="ml-1 text-gray-400">Stars</span>
               </div>
+
+              <span className="inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs text-gray-800">
+                <ShieldCheck className="w-3.5 h-3.5 text-purple-700" />
+                FDA‑approved medication
+              </span>
             </div>
 
-            {/* Badges / Benefits header row */}
-            <div className="space-y-2">
+            <p className="text-gray-700 leading-relaxed max-w-prose">
+              {product.description}
+            </p>
+          </div>
+
+          {/* CTAs */}
+          <div className="space-y-3">
+            <button className="w-full bg-black text-white py-3 rounded-full font-medium hover:bg-gray-900 transition">
+              Start Your Free Assessment
+            </button>
+            <button className="w-full border border-[#D9C8FF] py-3 rounded-full font-medium hover:bg-purple-50/40 transition">
+              1‑Month Supply:{" "}
+              <span className="font-semibold ml-1">{product.price}</span>
+            </button>
+
+            {/* Promo chip */}
+            <div className="flex items-center gap-2 text-xs text-gray-600">
+              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-yellow-100">
+                <Zap className="w-3 h-3 text-yellow-600" />
+              </span>
+              $5 off your first order
+            </div>
+          </div>
+
+          {/* Symptoms (two columns) */}
+          <div>
+            <h3 className="text-[15px] font-semibold text-gray-900 mb-2">
+              Target 100+ menopause symptoms:
+            </h3>
+            <div className="grid grid-cols-2 gap-y-2 gap-x-6 text-sm">
               {[
-                "Free shipping",
-                "Free doctor check‑ins",
-                "Personalized to your body",
-              ].map((b) => (
-                <div key={b} className="flex items-center text-sm">
-                  <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                    <div className="w-2 h-2 bg-purple-600 rounded-full" />
-                  </div>
-                  {b}
+                "Night sweats & hot flashes",
+                "Hormonal weight gain",
+                "Low energy & fatigue",
+                "Joint & hip pain",
+                "Low libido & vaginal dryness",
+                "Brain fog",
+              ].map((t) => (
+                <div key={t} className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-gray-900" />
+                  <span className="text-gray-800">{t}</span>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
 
-          <div className="border-b" />
-
-          {/* Treatment Information (accordions) */}
-          <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Treatment Information
-              </h2>
-            </div>
-            <div className="lg:col-span-2 space-y-4">
-              {/* DESCRIPTION */}
-              <details className="border border-gray-200 rounded-lg">
-                <summary className="px-6 py-4 cursor-pointer font-medium flex items-center justify-between">
-                  DESCRIPTION <Plus className="w-4 h-4" />
-                </summary>
-                <div className="px-6 pb-4 text-gray-600">
-                  <p>{product.description}</p>
+          {/* Benefits / service rows */}
+          <div className="space-y-4">
+            {[
+              {
+                icon: Truck,
+                title: "Free shipping",
+                sub: "We’ll deliver your treatments discreetly, fast, and free.",
+              },
+              {
+                icon: Stethoscope,
+                title: "Free doctor check‑ins",
+                sub: "Your questions answered by a licensed specialist, anytime.",
+              },
+              {
+                icon: Users,
+                title: "Community & care, 24/7",
+                sub: "Join live events, share stories, and find answers day or night.",
+              },
+            ].map(({ icon: Icon, title, sub }) => (
+              <div key={title} className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex w-7 h-7 rounded-full bg-purple-100 items-center justify-center">
+                  <Icon className="w-4 h-4 text-purple-700" />
+                </span>
+                <div>
+                  <p className="text-sm font-medium text-gray-900">{title}</p>
+                  <p className="text-xs text-gray-500">{sub}</p>
                 </div>
-              </details>
+              </div>
+            ))}
+          </div>
 
-              {/* HOW TO USE */}
-              <details className="border border-gray-200 rounded-lg">
-                <summary className="px-6 py-4 cursor-pointer font-medium flex items-center justify-between">
-                  HOW TO USE <Plus className="w-4 h-4" />
-                </summary>
-                <div className="px-6 pb-4 text-gray-600">
-                  <p>{product.usage}</p>
-                </div>
-              </details>
-
-              {/* INGREDIENTS */}
-              <details className="border border-gray-200 rounded-lg">
-                <summary className="px-6 py-4 cursor-pointer font-medium flex items-center justify-between">
-                  INGREDIENTS <Plus className="w-4 h-4" />
-                </summary>
-                <div className="px-6 pb-4 text-gray-600">
-                  <ul className="list-disc list-inside space-y-1">
-                    {product.ingredients?.map((ing, i) => (
-                      <li key={i}>{ing}</li>
-                    ))}
-                  </ul>
-                </div>
-              </details>
-
-              {/* BENEFITS */}
-              <details className="border border-gray-200 rounded-lg">
-                <summary className="px-6 py-4 cursor-pointer font-medium flex items-center justify-between">
-                  BENEFITS <Plus className="w-4 h-4" />
-                </summary>
-                <div className="px-6 pb-4 text-gray-600">
-                  <ul className="list-disc list-inside space-y-1">
-                    {product.benefits?.map((b, i) => (
-                      <li key={i}>{b}</li>
-                    ))}
-                  </ul>
-                </div>
-              </details>
-            </div>
-          </section>
+          {/* Divider + Treatment details */}
+          <div className="border-b mt-4" />
+          <TreatmentInformation product={product} />
         </div>
       </section>
 
       {/* 90% STAT SECTION */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative h-80 bg-purple-50 rounded-2xl overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-24 h-32 bg-teal-600 rounded-lg flex items-center justify-center">
-              <span className="text-white text-4xl font-bold">M</span>
+      <section className="bg-[#f6f6f6] py-12 mb-16 w-full mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top Icons Row */}
+        <div className="container mx-auto ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {/* Body */}
+            <div className="flex items-center gap-4">
+              <div className="p-5 rounded-full bg-white flex items-center justify-center">
+                <Venus className="text-purple-600 w-6 h-6" />
+              </div>
+              <div>
+                <p className="font-bold">Body</p>
+                <p className="text-sm text-gray-600">
+                  Supports overall hormone balance.
+                </p>
+              </div>
+            </div>
+
+            {/* Vaginal */}
+            <div className="flex items-center gap-4">
+              <div className="p-5 rounded-full bg-white flex items-center justify-center">
+                <Flower2 className="text-purple-600 w-6 h-6" />
+              </div>
+              <div>
+                <p className="font-bold">Vaginal</p>
+                <p className="text-sm text-gray-600">
+                  Relieves vaginal discomfort.
+                </p>
+              </div>
+            </div>
+
+            {/* Oral */}
+            <div className="flex items-center gap-4">
+              <div className="p-5 rounded-full bg-white flex items-center justify-center">
+                <Pill className="text-purple-600 w-6 h-6" />
+              </div>
+              <div>
+                <p className="font-bold">Oral</p>
+                <p className="text-sm text-gray-600">
+                  Easy hormone therapy by mouth.
+                </p>
+              </div>
+            </div>
+
+            {/* Patch */}
+            <div className="flex items-center gap-4">
+              <div className="p-5 rounded-full bg-white flex items-center justify-center">
+                <Bandage className="text-purple-600 w-6 h-6" />
+              </div>
+              <div>
+                <p className="font-bold">Patch</p>
+                <p className="text-sm text-gray-600">
+                  Hormones delivered through the skin.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <div>
-          <div className="flex items-center mb-4">
-            <span className="text-6xl font-bold text-gray-900">90%</span>
-            <div className="ml-4 w-16 h-8 bg-orange-200 rounded-full flex items-center justify-center">
-              <div className="w-6 h-6 bg-orange-400 rounded-full" />
+
+        {/* Bottom Two-Part Flex Layout */}
+        <div className="flex flex-col mx-auto lg:flex-row items-center justify-between gap-12 container">
+          {/* Left - Image */}
+          <div className="flex-shrink-0 w-full lg:w-1/2">
+            <div className="relative w-full h-100 rounded-2xl overflow-hidden">
+              <Image
+                src="/Images/learn/learn1.png"
+                alt="Learn"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
           </div>
-          <p className="text-lg text-gray-600 mb-6">
-            of women report better sleep and more energy within weeks of
-            starting treatment.
-          </p>
-          <button className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">
-            See if it&apos;s right for you
-          </button>
+
+          {/* Right - Content */}
+          <div className="w-full lg:w-1/2">
+            <div className="flex items-center ">
+              <span className="text-[128px] font-bold text-gray-900">90%</span>
+              <div className="ml-4 relative w-[160px] h-[120px]">
+                <Image
+                  src="/Images/pill.png"
+                  alt="Pill"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
+            <p className="text-lg text-gray-600 mb-6">
+              of women report better sleep and more energy within weeks of
+              starting treatment.
+            </p>
+            <p className="text-lg text-gray-600 mb-6">
+              Bioidentical estrogen and progesterone can help stabilize hormone
+              levels naturally — so you can sleep deeper, wake refreshed, and
+              feel more like yourself again.
+            </p>
+            <button className="bg-black text-white w-full lg:w-[70%] px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">
+              See if it&apos;s right for you
+            </button>
+          </div>
         </div>
       </section>
 
       {/* WHAT ARE ... SECTION */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            What Are {product.name}?
-          </h2>
-          <p className="text-gray-600 mb-6 leading-relaxed">
-            {product.name} are a type of therapy designed to help relieve common
-            menopause symptoms like hot flashes, vaginal dryness, mood changes,
-            and sleep issues.
-          </p>
-          <div className="space-y-3 mb-6">
-            {[
-              "Reduces hot flashes & night sweats",
-              "Supports restful sleep and steady mood",
-              "Promotes vaginal and urinary health",
-            ].map((t) => (
-              <div key={t} className="flex items-center">
-                <Check className="w-4 h-4 mr-3 text-green-600" />
-                <span className="text-sm">{t}</span>
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 mb-[40px]">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12">
+          {/* Left - Text (4/7) */}
+          <div className="w-full lg:w-4/7">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
+              What Are {product.name}?
+            </h2>
+            <p className="text-gray-600 mb-8 leading-relaxed text-lg">
+              {product.name} are a type of hormone replacement therapy (HRT)
+              used to relieve menopause symptoms like hot flashes, vaginal
+              dryness, and mood changes. They help restore estrogen levels in
+              the body, which naturally decline during menopause.
+            </p>
+
+            <p className="font-semibold mb-4">Key Benefits:</p>
+            <div className="space-y-4 mb-8">
+              <div className="flex items-center">
+                <ThermometerIcon className="w-5 h-5 text-purple-600 mr-3" />
+                <span className="text-gray-700">
+                  Reduces hot flashes and night sweats
+                </span>
               </div>
-            ))}
+              <div className="flex items-center">
+                <Bed className="w-5 h-5 text-purple-600 mr-3" />
+                <span className="text-gray-700">Improves sleep and mood</span>
+              </div>
+              <div className="flex items-center">
+                <Droplet className="w-5 h-5 text-purple-600 mr-3" />
+                <span className="text-gray-700">
+                  Supports vaginal and urinary health
+                </span>
+              </div>
+            </div>
+
+            <button className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">
+              Get Started Today
+            </button>
           </div>
-          <button className="border border-black px-6 py-2 rounded-full font-medium hover:bg-black hover:text-white transition">
-            Get Started Today
-          </button>
-        </div>
-        <div className="relative h-80 bg-purple-50 rounded-2xl overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-24 h-32 bg-teal-600 rounded-lg flex items-center justify-center">
-              <span className="text-white text-4xl font-bold">M</span>
+
+          {/* Right - Image (3/7) */}
+          <div className="w-full lg:w-3/7">
+            <div className="relative w-full h-96 rounded-2xl overflow-hidden">
+              <Image
+                src="/Images/learn/learn1.png"
+                alt={product.name}
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* TESTIMONIALS (3 cards, with arrows UI) */}
-      <section className="mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
-          What Women Are Saying
-        </h2>
-        <p className="text-center text-gray-600 mb-8">
-          About <span className="text-purple-600 font-semibold">MYAVINA</span>
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.slice(0, 3).map((t) => (
-            <div key={t.id} className="bg-gray-50 rounded-2xl p-6">
-              <div className="flex text-yellow-400 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-6 leading-relaxed">{t.text}</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-gray-300 rounded-full mr-3" />
-                <div>
-                  <p className="font-medium text-gray-900">{t.name}</p>
-                  <p className="text-sm text-gray-500">{t.role}</p>
-                </div>
-                <div className="ml-auto">
-                  <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                    <Check className="w-3 h-3 text-green-600" />
-                  </div>
-                </div>
-              </div>
-              <p className="text-xs text-gray-400 mt-2">{t.date}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex justify-center mt-8 space-x-2">
-          <button className="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50">
-            <ChevronRight className="w-4 h-4 rotate-180" />
-          </button>
-          <button className="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center hover:bg-purple-700">
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-      </section>
+      <TestimonialsSlider items={testimonials} auto={true} interval={5000} />
 
       {/* RELATED PRODUCTS */}
-      <section className="mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">
-            Explore More Support for
-            <br />
-            Your Menopause Journey
-          </h2>
-          <Link
-            href="/shop"
-            className="text-purple-600 font-medium flex items-center"
-          >
-            Shop all <ChevronRight className="w-4 h-4 ml-1" />
-          </Link>
-        </div>
+      <RelatedProductsCarousel excludeSlug={product.slug} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {related.map((rp) => (
-            <Link key={rp.id} href={`/products/${rp.slug}`} className="group">
-              <div className="bg-purple-50 rounded-2xl p-6 text-center group-hover:shadow-lg transition">
-                <div className="relative w-full h-36 mb-4">
-                  <Image
-                    src={rp.image}
-                    alt={rp.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-1">{rp.name}</h3>
-                <p className="text-sm text-gray-500 mb-2">${rp.price}</p>
-                <div className="flex justify-center text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-current" />
-                  ))}
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="flex justify-center mt-8 space-x-2">
-          <button className="w-8 h-8 border border-gray-300 rounded-full flex items-center justify-center">
-            <ChevronRight className="w-3 h-3 rotate-180" />
-          </button>
-          <button className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center">
-            <ChevronRight className="w-3 h-3" />
-          </button>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8">
-          MYAVINA Estrogen Body Cream
-          <br />
-          (with Progesterone) FAQs
-        </h2>
-
-        <div className="space-y-4">
-          {[
-            {
-              q: "Why would I need both estrogen and progesterone?",
-              a: "Both hormones work together to provide comprehensive menopause symptom relief and hormonal balance.",
-            },
-            {
-              q: "Is progesterone safe to use in a cream?",
-              a: "Yes, topical progesterone is considered safe when used as directed by a healthcare provider.",
-            },
-            {
-              q: 'What does "bioest" mean?',
-              a: "Bioest refers to bioidentical estrogen that matches your body's natural hormone structure.",
-            },
-            {
-              q: "Why isn't the bottle full?",
-              a: "The bottle contains the exact amount needed for your prescribed dosage and treatment duration.",
-            },
-            {
-              q: "Is the progesterone in the cream safe if I have a peanut allergy?",
-              a: "Please consult with your healthcare provider about any allergies before starting treatment.",
-            },
-          ].map((item) => (
-            <details key={item.q} className="border border-gray-200 rounded-lg">
-              <summary className="px-6 py-4 cursor-pointer font-medium flex items-center justify-between">
-                {item.q}
-                <Plus className="w-4 h-4" />
-              </summary>
-              <div className="px-6 pb-4 text-gray-600">
-                <p>{item.a}</p>
-              </div>
-            </details>
-          ))}
-        </div>
-      </section>
+      <ProductFAQ title={`${product.name} FAQs`} faq={product.faqs || []} />
 
       {/* CTA Banner */}
-      <section className="bg-purple-600 rounded-2xl p-8 text-center text-white mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-bold mb-2">
-          Ready to Feel Like Yourself Again?
-        </h2>
-        <p className="mb-6 opacity-90">
-          Start your personalized menopause plan today and join thousands of
-          women feeling their best.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-          <button className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">
-            Start Treatment Today
-          </button>
-          <button className="border border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white hover:text-purple-600 transition">
-            Take the Quiz
-          </button>
-        </div>
-      </section>
-
-      {/* Newsletter */}
-      <section className="bg-gray-900 rounded-2xl p-8 text-center text-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <h3 className="text-lg font-semibold mb-2">
-          Join our newsletter for trusted menopause advice, health tips, and
-          exclusive updates.
-        </h3>
-        <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mt-4">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="flex-1 px-4 py-2 rounded-full text-gray-900"
-          />
-          <button className="bg-white text-gray-900 px-6 py-2 rounded-full font-medium hover:bg-gray-100 transition">
-            Subscribe
-          </button>
-        </div>
-      </section>
     </div>
   );
 }

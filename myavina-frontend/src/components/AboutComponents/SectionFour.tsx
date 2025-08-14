@@ -115,8 +115,19 @@ const SectionFour = () => {
               <option value="" disabled>
                 Select State
               </option>
-              {/* <option value="NY">New York</option> */}
-              {/* Add your state options here */}
+              <option value="NY">New York</option>
+              <option value="CA">California</option>
+              <option value="TX">Texas</option>
+              <option value="FL">Florida</option>
+              <option value="IL">Illinois</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="OH">Ohio</option>
+              <option value="MI">Michigan</option>
+              <option value="GA">Georgia</option>
+              <option value="NC">North Carolina</option>
+              <option value="NJ">New Jersey</option>
+              <option value="VA">Virginia</option>
+              <option value="WA">Washington</option>
             </select>
             <button
               type="submit"

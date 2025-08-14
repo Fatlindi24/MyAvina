@@ -54,7 +54,7 @@ const SectionSix = () => {
         flex items-center px-16
         [clip-path:polygon(0_0,85%_0,100%_100%,0_100%)]
         z-10
-      "
+        "
           >
             <div className="max-w-lg space-y-6 text-white">
               <h2 className="text-3xl md:text-4xl font-bold">

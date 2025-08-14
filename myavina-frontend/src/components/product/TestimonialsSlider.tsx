@@ -1,55 +1,78 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { ChevronLeft, ChevronRight, Star, Check } from "lucide-react";
 import type { Testimonial } from "@/data/testimonials";
 
+type Props = {
+  items?: Testimonial[]; // testimonials array
+  auto?: boolean; // autoplay on/off
+  interval?: number; // autoplay interval (ms)
+};
+
 export default function TestimonialsSlider({
-  items = [], // Added default empty array to prevent undefined errors
+  items = [],
   auto = false,
   interval = 6000,
-}: {
-  items?: Testimonial[]; // Made items optional
-  auto?: boolean;
-  interval?: number;
-}) {
+}: Props) {
   const [index, setIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(1); // responsive
   const count = items.length;
-  const timer = useRef<number | null>(null);
 
-  const visibleItems = 3;
-  const maxIndex = Math.max(0, count - visibleItems);
+  // --- Responsive items per view (Tailwind breakpoints) ---
+  useEffect(() => {
+    const compute = () => {
+      const w = window.innerWidth;
+      if (w >= 1024) setItemsPerView(3); // lg+
+      else if (w >= 768) setItemsPerView(2); // md
+      else setItemsPerView(1); // base
+    };
+    compute();
+    window.addEventListener("resize", compute);
+    return () => window.removeEventListener("resize", compute);
+  }, []);
+
+  const maxIndex = useMemo(
+    () => Math.max(0, count - itemsPerView),
+    [count, itemsPerView]
+  );
+
+  // Clamp index if data or viewport changes
+  useEffect(() => {
+    setIndex((i) => Math.min(i, maxIndex));
+  }, [maxIndex]);
 
   const next = useCallback(() => {
-    setIndex((i) => Math.min(i + 1, maxIndex));
+    setIndex((i) => (i >= maxIndex ? maxIndex : i + 1));
   }, [maxIndex]);
 
   const prev = useCallback(() => {
-    setIndex((i) => Math.max(i - 1, 0));
+    setIndex((i) => (i <= 0 ? 0 : i - 1));
   }, []);
 
+  // --- Autoplay ---
   useEffect(() => {
-    if (!auto || count <= visibleItems) return;
-    timer.current = window.setInterval(() => {
-      setIndex((i) => {
-        if (i >= maxIndex) return 0; // Reset to beginning
-        return i + 1;
-      });
+    if (!auto || count <= itemsPerView) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i >= maxIndex ? 0 : i + 1));
     }, interval);
-    return () => {
-      if (timer.current) window.clearInterval(timer.current);
-    };
-  }, [auto, interval, count, maxIndex, visibleItems]);
+    return () => window.clearInterval(id);
+  }, [auto, interval, count, itemsPerView, maxIndex]);
 
   const canGoPrev = index > 0;
   const canGoNext = index < maxIndex;
-  const showNavigation = count > visibleItems;
+  const showNavigation = count > itemsPerView;
 
-  // Return early if no items to prevent rendering issues
+  // Translate based on itemsPerView
+  const translateX = `translateX(-${(index * 100) / itemsPerView}%)`;
+
+  // Basis per card (1/1, 1/2, 1/3)
+  const basis = `${100 / itemsPerView}%`;
+
   if (count === 0) {
     return (
-      <section className="my-10">
+      <section className="my-16">
         <h3 className="text-3xl font-bold text-center mb-8">
           What Women Are Saying About{" "}
           <span className="text-purple-600">MYAVINA</span>
@@ -60,97 +83,135 @@ export default function TestimonialsSlider({
   }
 
   return (
-    <section className="my-10">
-      <h3 className="text-3xl font-bold text-center mb-8">
-        What Women Are Saying About{" "}
-        <span className="text-purple-600">MYAVINA</span>
+    <section className="container mx-auto mt-16 mb-16 px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <h3 className="text-4xl md:text-5xl font-bold text-center text-gray-900 leading-tight">
+        What Women Are Saying
       </h3>
+      <p className="text-center text-gray-900 font-bold mt-1 mb-10">
+        About <span className="text-purple-600">MYAVINA</span>
+      </p>
 
-      {/* track */}
-      <div className="overflow-hidden">
-        <div
-          className="flex transition-transform duration-500 ease-out"
-          style={{
-            transform: `translateX(-${(index * 100) / visibleItems}%)`,
-          }}
-        >
-          {items.map((review, i) => (
-            <div
-              key={i}
-              className="min-w-full md:min-w-[50%] lg:min-w-[33.3333%] px-3 mb-4"
-            >
-              <article className="bg-gray-100 rounded-2xl p-6 h-full flex flex-col justify-between">
-                {/* stars */}
-                <div className="flex mb-4 text-2xl leading-none">
-                  {"★".repeat(review.stars)}
-                  {"☆".repeat(5 - review.stars)}
-                </div>
-
-                {/* text */}
-                <p className="text-lg text-gray-900 mb-6">{review.text}</p>
-
-                {/* footer */}
-                <div className="flex items-center">
-                  <div className="relative w-10 h-10 mr-3">
-                    <Image
-                      src={review.avatar || "/placeholder.svg"}
-                      alt={review.name}
-                      fill
-                      className="rounded-full object-cover"
-                    />
-                  </div>
+      {/* Viewport */}
+      <div className="relative">
+        {/* Track */}
+        <div className="overflow-hidden">
+          <div
+            className="flex transition-transform duration-500 ease-out"
+            style={{ transform: translateX }}
+          >
+            {items.map((review) => (
+              <div
+                key={review.id}
+                style={{ flex: `0 0 ${basis}` }}
+                className="pr-6 lg:pr-8"
+              >
+                <article className="bg-gray-50 rounded-2xl p-6 h-full flex flex-col justify-between">
+                  {/* Top: stars + text */}
                   <div>
-                    <p className="font-medium">{review.name}</p>
-                    <p className="text-sm text-gray-500 flex items-center gap-1">
-                      {/* tiny verified icon */}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-green-500"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path d="M16.707 5.293a1 1 0 0 0-1.414 0L8 12.586 4.707 9.293a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l8-8a1 1 0 0 0 0-1.414z" />
-                      </svg>
-                      {review.role}
+                    <div className="flex mb-4">
+                      {[...Array(5)].map((_, i) => {
+                        const filled = i < review.stars;
+                        return (
+                          <Star
+                            key={i}
+                            className={`w-5 h-5 ${
+                              filled
+                                ? "text-black fill-current"
+                                : "text-gray-300"
+                            }`}
+                            fill={filled ? "currentColor" : "none"}
+                            stroke={filled ? "none" : "currentColor"}
+                          />
+                        );
+                      })}
+                    </div>
+                    <p className="text-gray-800 leading-relaxed">
+                      {review.text}
                     </p>
-                    <p className="text-xs text-gray-400">{review.date}</p>
                   </div>
-                </div>
-              </article>
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {showNavigation && (
-        <div className="flex gap-3 justify-center">
-          {/* controls */}
-          <button
-            aria-label="Previous"
-            onClick={canGoPrev ? prev : undefined}
-            disabled={!canGoPrev}
-            className={`flex z-10 w-10 h-10 rounded-full text-white items-center justify-center transition-all ${
-              canGoPrev
-                ? "bg-purple-700 hover:bg-purple-800 cursor-pointer"
-                : "bg-purple-700 opacity-50 cursor-not-allowed"
-            }`}
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            aria-label="Next"
-            onClick={canGoNext ? next : undefined}
-            disabled={!canGoNext}
-            className={`flex z-10 w-10 h-10 rounded-full text-white items-center justify-center transition-all ${
-              canGoNext
-                ? "bg-purple-700 hover:bg-purple-800 cursor-pointer"
-                : "bg-purple-700 opacity-50 cursor-not-allowed"
-            }`}
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
+                  {/* Bottom: user info + date at very bottom */}
+                  <div className="mt-6">
+                    <div className="flex items-center">
+                      {/* Avatar with absolute verify badge */}
+                      <div className="relative">
+                        <Image
+                          src={review.avatar || "/placeholder.svg"}
+                          alt={review.name}
+                          width={40}
+                          height={40}
+                          className="rounded-full object-cover"
+                        />
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-green-600 flex items-center justify-center">
+                          <Check className="w-2 h-2 text-white" />
+                        </div>
+                      </div>
+
+                      <div className="ml-3">
+                        <p className="font-medium text-gray-900">
+                          {review.name}
+                        </p>
+                        <p className="text-sm text-gray-500">{review.role}</p>
+                      </div>
+                    </div>
+
+                    {/* Date at very bottom */}
+                    <p className="text-xs text-gray-400 mt-3">{review.date}</p>
+                  </div>
+                </article>
+              </div>
+            ))}
+          </div>
         </div>
-      )}
+
+        {/* Controls */}
+        {showNavigation && (
+          <div className="flex gap-3 justify-center mt-8">
+            <button
+              aria-label="Previous"
+              onClick={canGoPrev ? prev : undefined}
+              disabled={!canGoPrev}
+              className={`flex w-10 h-10 rounded-full text-white items-center justify-center transition
+                ${
+                  canGoPrev
+                    ? "bg-purple-700 hover:bg-purple-800"
+                    : "bg-purple-700 opacity-50 cursor-not-allowed"
+                }`}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              aria-label="Next"
+              onClick={canGoNext ? next : undefined}
+              disabled={!canGoNext}
+              className={`flex w-10 h-10 rounded-full text-white items-center justify-center transition
+                ${
+                  canGoNext
+                    ? "bg-purple-700 hover:bg-purple-800"
+                    : "bg-purple-700 opacity-50 cursor-not-allowed"
+                }`}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        )}
+
+        {/* Dots */}
+        {showNavigation && (
+          <div className="mt-4 flex justify-center gap-2">
+            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => setIndex(i)}
+                className={`h-2 rounded-full transition-all ${
+                  i === index ? "w-6 bg-purple-600" : "w-2 bg-gray-300"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   );
 }

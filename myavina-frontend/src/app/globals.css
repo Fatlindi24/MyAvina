@@ -9,8 +9,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -133,7 +131,6 @@
 
 .container {
   max-width: 1300px;
-  margin: auto;
 }
 
 .info-tag-bg {
@@ -153,20 +150,14 @@
     animation: fadeIn 0.5s ease-in-out;
   }
 }
-/* 2. Set the default top margin for all sections */
-section {
-  margin-top: 25px;
-  margin-bottom: 25px;
-}
+
 .personalizer-care{
   padding:0;
 }
 
 
 /* 3. Add a bottom margin only to the very last section */
-section:last-child {
-  margin-bottom: 0px;
-}
+
 
 .hero-section-title{
   font-family: Prompt;
