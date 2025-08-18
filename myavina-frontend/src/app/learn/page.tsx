@@ -40,7 +40,7 @@ export default function LearnLandingPage() {
   };
 
   return (
-    <div className="container py-10 space-y-10 prompt px-4">
+    <div className="container mx-auto py-10 space-y-10 prompt px-4">
       {/* Breadcrumbs */}
       <nav className="text-[16px] text-gray-500 mb-4 prompt">
         <Link href="/" className="hover:underline">

@@ -38,7 +38,9 @@ export default function ShopPage() {
             {visible[category] < items.length && (
               <div className="mt-4 text-center">
                 <Link
-                  href={`/shop/${category.toLowerCase().replace(/\s+/g, "-")}`}
+                  href={`/treatments/${category
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
                   className="mt-4 inline-flex items-center text-sm text-purple-700 font-medium hover:underline"
                 >
                   See More

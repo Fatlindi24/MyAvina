@@ -57,30 +57,30 @@ function Slide({
         {/* Corner cards grid (kept inside container) */}
         <div className="grid grid-cols-2 gap-y-28 md:gap-y-32 ">
           {/* Left column */}
-          <div className="flex flex-col gap-6 ">
+          <div className="flex flex-col gap-2 ">
             <InfoCard
               title="Name"
               lines={["Sarah"]}
-              className="w-[180px] md:w-[350px] flex flex-row items-center justify-between"
+              className="w-[140px] lg:w-[350px] md:w-[220px] flex flex-row items-center justify-between"
             />
             <InfoCard
               title="Age"
               lines={["55"]}
-              className="w-[180px] md:w-[350px] flex flex-row items-center justify-between"
+              className="w-[140px] lg:w-[350px] md:w-[220px] flex flex-row items-center justify-between text-[6px] md:text-[12px] lg:text-[14px]"
             />
           </div>
 
           {/* Right column */}
-          <div className="flex flex-col items-end gap-6">
+          <div className="flex flex-col items-end gap-2">
             <InfoCard
               title="History"
-              lines={["Hot flashes", "Poor sleep"]}
-              className="w-[150px] md:w-[350px] flex md:flex-row flex-col items-center justify-between"
+              lines={["Hot flashes"]}
+              className="w-[140px] lg:w-[350px] md:w-[220px] flex md:flex-row flex-col items-center justify-between"
             />
             <InfoCard
               title="Goal"
-              lines={["Sleep better", "Feel balanced"]}
-              className="w-[150px] md:w-[350px] flex flex-row items-center justify-between"
+              lines={["Sleep better"]}
+              className="w-[140px] lg:w-[350px] md:w-[220px] flex md:flex-row flex-col items-center justify-between"
             />
           </div>
         </div>
@@ -102,7 +102,7 @@ function Slide({
         </div>
 
         {/* CTA (center bottom) */}
-        <div className="mt-[100px] md:mt-[160px] lg:mt-[250px] flex justify-center">
+        <div className="mt-[120px] md:mt-[210px] lg:mt-[280px] flex justify-center">
           <button className="rounded-full bg-white/20 hover:bg-white/30 text-white px-7 py-3 text-[15px] font-medium transition">
             See Your Plan
           </button>

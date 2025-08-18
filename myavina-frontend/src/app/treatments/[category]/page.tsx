@@ -48,28 +48,35 @@ export default function CategoryPage({
         {categoryProducts.map((product) => (
           <div
             key={product.id}
-            className="bg-[#f8f6fc] rounded-xl p-4 shadow-sm text-center transition hover:shadow-md"
+            className="bg-[#f8f6fc] rounded-xl p-4 shadow-sm flex flex-col justify-between transition hover:shadow-md"
           >
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={200}
-              height={200}
-              className="mx-auto mb-4 object-contain h-[180px]"
-            />
-            <h3 className="text-lg font-semibold text-gray-800">
-              {product.name}
-            </h3>
-            <p className="text-sm text-gray-500 mb-1">{product.price}</p>
-            <p className="text-yellow-500 text-sm mb-4">
-              {"★".repeat(product.rating)}
-            </p>
-            <Link
-              href={`/products/${product.slug}`}
-              className="inline-flex items-center justify-center px-5 py-2 border border-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition"
-            >
-              Learn More <ChevronRight className="ml-2 h-4 w-4" />
-            </Link>
+            {/* Top content */}
+            <div className="text-center">
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={200}
+                height={200}
+                className="mx-auto mb-4 object-contain h-[180px]"
+              />
+              <h3 className="text-lg font-semibold text-gray-800">
+                {product.name}
+              </h3>
+              <p className="text-sm text-gray-500 mb-1">{product.price}</p>
+              <p className="text-yellow-500 text-sm">
+                {"★".repeat(product.rating)}
+              </p>
+            </div>
+
+            {/* Button */}
+            <div className="mt-4 flex justify-center">
+              <Link
+                href={`/products/${product.slug}`}
+                className="inline-flex items-center justify-center px-5 py-2 border border-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition"
+              >
+                Learn More <ChevronRight className="ml-2 h-4 w-4" />
+              </Link>
+            </div>
           </div>
         ))}
       </div>

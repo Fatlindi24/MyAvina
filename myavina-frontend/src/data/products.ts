@@ -12,6 +12,7 @@ export interface Product {
   image: string;
   rating: number;
   category: string;
+  catslug: string; // ✅ New category slug for better SEO
   slug: string;
   description: string;
   benefits: string[];
@@ -29,6 +30,7 @@ export const products: Product[] = [
     image: "/Images/products/product.png",
     rating: 5,
     category: "Body Creams",
+    catslug: "body-creams",
     slug: "progesterone-capsules",
     description: "Supports hormone balance and overall wellness. Ideal for menopause symptom relief.",
     benefits: [
@@ -75,6 +77,7 @@ export const products: Product[] = [
     image: "/Images/products/product.png",
     rating: 4.5,
     category: "Body Creams",
+    catslug: "body-creams",
     slug: "estrogen-cream",
     description: "Topical cream to help alleviate menopause symptoms like hot flashes and mood swings.",
     benefits: [
@@ -107,6 +110,7 @@ export const products: Product[] = [
     image: "/Images/products/product.png",
     rating: 4.8,
     category: "Bundles",
+    catslug: "bundles",
     slug: "menopause-relief-bundle",
     description: "A comprehensive bundle including progesterone capsules and estrogen cream for holistic menopause support.",
     benefits: [
@@ -137,6 +141,7 @@ export const products: Product[] = [
     image: "/Images/products/product.png",
     rating: 4.2,
     category: "Drops",
+    catslug: "drops",
     slug: "hormone-harmony-drops",
     description: "Liquid drops formulated to help balance hormones and reduce menopause symptoms.",
     benefits: [
@@ -169,6 +174,7 @@ export const products: Product[] = [
     image: "/Images/products/product.png",
     rating: 4.0,
     category: "Teas",
+    catslug: "teas",
     slug: "calm-cool-tea",
     description: "Herbal tea blend designed to promote relaxation and reduce stress during menopause.",
     benefits: [
@@ -200,6 +206,7 @@ export const products: Product[] = [
     image: "/Images/products/product.png",
     rating: 4.7,
     category: "Supplements",
+    catslug: "supplements",
     slug: "vitality-multivitamin",
     description: "Daily multivitamin formulated to support overall health and wellness during menopause.",
     benefits: [
@@ -232,6 +239,7 @@ export const products: Product[] = [
     image: "/Images/products/product.png",
     rating: 4.3,
     category: "Probiotics",
+    catslug: "probiotics",
     slug: "menopause-support-probiotic",
     description: "Probiotic supplement designed to support digestive health and hormonal balance during menopause.",
     benefits: [
@@ -262,7 +270,8 @@ export const products: Product[] = [
     price: "$15/month",
     image: "/Images/products/product.png",
     rating: 4.6,
-    category: "Essential Oils",
+    category: "Supplements",
+    catslug: "supplements",
     slug: "mood-boost-essential-oil-blend",
     description: "A calming essential oil blend to help uplift mood and reduce stress during menopause.",
     benefits: [
@@ -294,6 +303,7 @@ export const products: Product[] = [
     image: "/Images/products/product.png",
     rating: 4.1,
     category: "Supplements",
+    catslug: "supplements",
     slug: "sleep-well-herbal-supplement",
     description: "Herbal supplement designed to promote restful sleep and reduce insomnia during menopause.",
     benefits: [
@@ -324,7 +334,8 @@ export const products: Product[] = [
     price: "$18/month",
     image: "/Images/products/product.png",
     rating: 4.4,
-    category: "Hydration",
+    category: "Supplements",
+    catslug: "supplements",
     slug: "hydration-boost-electrolyte-powder",
     description: "Electrolyte powder to help maintain hydration and energy levels during menopause.",
     benefits: [
@@ -355,7 +366,8 @@ export const products: Product[] = [
     price: "$12/month",
     image: "/Images/products/product.png",
     rating: 4.5,
-    category: "Aromatherapy",
+    category: "Supplements",
+    catslug: "supplements",
     slug: "stress-relief-aromatherapy-roll-on",
     description: "Convenient roll-on blend to help reduce stress and promote relaxation throughout the day.",
     benefits: [
@@ -387,6 +399,7 @@ export const products: Product[] = [
     image: "/Images/products/product.png",
     rating: 4.3,
     category: "Supplements",
+    catslug: "supplements",
     slug: "joint-support-formula",
     description: "Supplement designed to support joint health and mobility during menopause.",
     benefits: [
@@ -417,7 +430,8 @@ export const products: Product[] = [
     price: "$20/month",
     image: "/Images/products/product.png",
     rating: 4.6,
-    category: "Herbal Blends",
+    category: "Supplements",
+    catslug: "supplements",
     slug: "energy-boost-herbal-blend",
     description: "Herbal blend designed to naturally boost energy levels and combat fatigue during menopause.",
     benefits: [

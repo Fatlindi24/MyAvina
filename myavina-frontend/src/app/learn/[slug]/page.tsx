@@ -48,11 +48,22 @@ export default function TopicPage() {
   };
 
   if (!topic) {
-    return <div className="container py-10">Topic not found.</div>;
+    return (
+      <div className="container flex flex-col justify-center items-center gap-20 mx-auto py-10">
+        <h1 className="font-bold text-3xl md:text-7xl">Topic not found.</h1>
+        {/* back to home button */}
+        <Link
+          href="/"
+          className="text-white bg-[#774180] px-10 py-5 md:px-20 md:py-10 rounded-4xl hover:bg-[#5c3164] transition-all text-[20px] font-regular"
+        >
+          Go back to Home
+        </Link>
+      </div>
+    );
   }
 
   return (
-    <div className="container py-10 space-y-10 prompt px-4">
+    <div className="container mx-auto py-10 space-y-10 prompt px-4">
       {/* Breadcrumbs */}
       <nav className="text-[16px] text-gray-500 mb-4 prompt">
         <Link href="/" className="hover:underline">

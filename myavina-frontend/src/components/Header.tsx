@@ -2,10 +2,33 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, Plus, ChevronRight, User } from "lucide-react";
+import { Menu, X, Plus, ChevronRight, User } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { topics } from "@/data/topics";
+import { products } from "@/data/products"; // ✅ pull categories from data
+
+// --- helpers: unique categories (catslug -> category) ---
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+
+const categoryPairs = Array.from(
+  products.reduce((map, p) => {
+    const key = (p as any).catslug ?? slugify(p.category); // ✅ fallback if catslug missing
+    if (!map.has(key)) map.set(key, p.category);
+    return map;
+  }, new Map<string, string>())
+).sort((a, b) => a[1].localeCompare(b[1]));
+
+const treatmentCategoryLinks = categoryPairs.map(([catslug, category]) => ({
+  name: category,
+  href: `/products/${catslug}`, // ✅ legacy /products/<catslug> category URL
+}));
 
 const navItems = [
   {
@@ -13,9 +36,7 @@ const navItems = [
     href: "/treatments",
     dropdownItems: [
       { name: "All Treatments", href: "/treatments" },
-      { name: "Estrogen Cream", href: "/treatments/estrogen-cream" },
-      { name: "Progesterone Capsules", href: "/treatments/progesterone" },
-      { name: "HRT Patch", href: "/treatments/hrt-patch" },
+      ...treatmentCategoryLinks, // ✅ dynamic categories
     ],
   },
   {
@@ -110,7 +131,7 @@ export function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-3xl font-light tracking-[0.2em] text-gray-800"
+            className="text-xl md:text-3xl font-light tracking-[0.2em] text-gray-800"
           >
             MYAVINA
           </Link>
@@ -131,7 +152,7 @@ export function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="flex items-center text-gray-600 hover:text-purple-600 transition-colors duration-200 py-2"
+                    className="flex items-center text-gray-600 hover:text-[#774180] transition-colors duration-200 py-2"
                   >
                     {item.name}
                     {item.dropdownItems && (
@@ -151,7 +172,7 @@ export function Header() {
                             <Link
                               key={subItem.name}
                               href={subItem.href}
-                              className="block text-gray-700 hover:text-purple-600 hover:underline"
+                              className="block text-gray-700 hover:text-[#774180] hover:underline"
                               onClick={() => setOpenDropdown(null)}
                             >
                               {subItem.name}
@@ -208,7 +229,7 @@ export function Header() {
                 </div>
               ) : (
                 <Link href="/login">
-                  <User className="w-6 h-6 text-gray-700 hover:text-purple-600 transition" />
+                  <User className="w-6 h-6 text-gray-700 hover:text-[#774180] transition" />
                 </Link>
               )}
             </div>
@@ -218,7 +239,7 @@ export function Header() {
           <div className="lg:hidden flex items-center space-x-3 propmt">
             <Link
               href="/get-started"
-              className="bg-purple-700 text-white px-4 py-2 rounded-full flex items-center hover:bg-purple-800 transition prompt"
+              className="bg-[#774180] text-white px-4 py-2 rounded-full text-sm flex items-center hover:bg-[#5c3164]  transition prompt"
             >
               Get Started
               <ChevronRight className="ml-2 w-4 h-4" />
@@ -239,7 +260,7 @@ export function Header() {
           <div
             className="fixed inset-0 bg-black bg-opacity-25 z-40"
             onClick={() => setIsMenuOpen(false)}
-          ></div>
+          />
           <div className="fixed top-0 right-0 w-full max-w-sm h-full bg-white shadow-lg z-50 flex flex-col">
             <div className="p-5 flex items-center justify-between border-b">
               <Link
@@ -302,7 +323,7 @@ function MobileNavItem({
               key={subItem.name}
               href={subItem.href}
               onClick={closeMenu}
-              className="block py-2 text-gray-600 hover:text-purple-600"
+              className="block py-2 text-gray-600 hover:text-[#774180]"
             >
               {subItem.name}
             </Link>
