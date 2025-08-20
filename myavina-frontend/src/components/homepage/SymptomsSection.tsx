@@ -50,7 +50,7 @@ const SymptomTag = ({ symptom }) => {
       href="/symptoms"
       className="group flex items-center justify-between py-6 px-4 rounded-xl transition-all duration-300 bg-[#F5ECFF] hover:bg-gradient-to-r min-w-[240px] hover:from-[#F5ECFF] hover:via-[#E4D4FF] hover:to-[#D2BBFF]"
     >
-      <span className="text-[16px] font-normal font-[Prompt]">
+      <span className="text-[16px] font-normal 1">
         <span className="text-black">{firstPart}</span>{" "}
         <span className="text-[#774180]">{secondPart}</span>
       </span>
@@ -68,13 +68,13 @@ const SymptomTag = ({ symptom }) => {
 // --- Main Section ---
 export const SymptomsSection = () => {
   return (
-    <div className="bg-white w-full lg:py-16 py-0 sm:py-24">
+    <div className="bg-white w-full prompt ">
       <div className="container mx-auto px-4">
         <h1 className="symptoms-main-title lg:text-[40px] text-[32px] mt-10 mb-10 w-full">
           Care for the changes you notice
         </h1>
 
-        <div className="overflow-x-auto pb-4 no-scrollbar">
+        <div className="overflow-x-auto pb-4 no-scrollbar prompt">
           <div className="grid grid-rows-2 grid-flow-col gap-4">
             {primarySymptomsData.map((symptom) => (
               <SymptomTag key={symptom.name} symptom={symptom} />
@@ -83,10 +83,10 @@ export const SymptomsSection = () => {
         </div>
 
         <div className="mt-20 text-center">
-          <h3 className="text-xl text-dark text-left mb-6">
+          <h3 className="text-xl text-dark text-left mb-6 prompt">
             and those you might not recognize yet
           </h3>
-          <div className="overflow-x-auto pb-4 no-scrollbar">
+          <div className="overflow-x-auto pb-4 no-scrollbar prompt">
             <div className="grid grid-rows-1 grid-flow-col gap-4">
               {secondarySymptomsData.map((symptom) => (
                 <SymptomTag key={symptom.name} symptom={symptom} />

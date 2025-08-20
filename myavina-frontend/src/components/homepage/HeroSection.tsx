@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
-  Stethoscope,
-  FlaskConical,
   PauseCircle,
-  LockKeyhole,
   MessageSquareMore,
-  Truck,
   ArrowRightCircle,
+  Dna,
+  ClipboardPlus,
+  ShieldCheck,
+  Package,
 } from "lucide-react";
 
 const wordsToCycle = [
@@ -22,10 +22,10 @@ const wordsToCycle = [
 
 const Feature = ({ icon, text }: { icon: React.ReactNode; text: string }) => (
   <div className="flex items-center gap-3">
-    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-purple-50">
+    <span className="inline-flex items-center justify-center w-6 h-6   rounded-full ">
       {icon}
     </span>
-    <span className="text-[15px] leading-6 text-gray-800">{text}</span>
+    <span className="text-[14px] leading-6 text-gray-800">{text}</span>
   </div>
 );
 
@@ -62,10 +62,10 @@ export default function HeroSection() {
       {/* CONTENT CONTAINER — reserve space on the right so text never overlaps img */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Add right padding only on large screens to clear the outside image */}
-        <div className="relative py-10 lg:py-16 lg:pr-[520px]">
+        <div className="relative py-10 lg:py-16 lg:pr-[450px]">
           {/* TEXT BLOCK — capped at 60% width */}
           <div className="">
-            <h1 className="font-extrabold text-gray-900 leading-[1.1] text-4xl sm:text-5xl lg:text-6xl tracking-tight">
+            <h1 className="font-medium text-gray-900 leading-[1.1] text-[32px] md:text-[48px] ">
               Because feeling amazing
               <br />
               shouldn’t stop with{" "}
@@ -80,22 +80,22 @@ export default function HeroSection() {
               </span>
             </h1>
 
-            <p className="mt-5 text-lg text-gray-700 max-w-2xl">
+            <p className="mt-5 text-[20px]  text-gray-700 max-w-xl">
               As hormones shift after 35, so does your wellbeing. Bioidentical
               HRT helps ease the symptoms you see — and the ones you don’t.
             </p>
 
             {/* CTAs */}
-            <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-8">
               <a
                 href="/get-started"
-                className="inline-flex items-center justify-center rounded-full bg-[#774180] text-white px-7 py-3 font-medium shadow hover:bg-purple-700 transition-colors w-full sm:w-auto"
+                className="inline-flex items-center justify-center btn rounded-full bg-[#774180] text-white px-7 py-3 font-regular text-[16px] shadow hover:bg-purple-700 transition-colors w-full sm:w-auto"
               >
                 Restore My Hormones
               </a>
               <a
                 href="/register"
-                className="inline-flex items-center gap-2 text-[#774180] font-medium"
+                className="inline-flex items-center btn gap-2 text-[#774180] font-medium"
               >
                 Take The Quiz
                 <ArrowRightCircle className="w-5 h-5 -rotate-45" />
@@ -103,31 +103,29 @@ export default function HeroSection() {
             </div>
 
             {/* Features */}
-            <div className="mt-10 lg:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5">
+            <div className="mt-10 lg:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 max-w-[520px] text-[14px] font-medium">
               <Feature
-                icon={<Stethoscope className="w-4.5 h-4.5 text-purple-700" />}
+                icon={<ClipboardPlus className=" text-black" />}
                 text="Board certified doctors"
               />
               <Feature
-                icon={<FlaskConical className="w-4.5 h-4.5 text-purple-700" />}
+                icon={<Dna className=" text-black" />}
                 text="Custom-made for your body"
               />
               <Feature
-                icon={<PauseCircle className="w-4.5 h-4.5 text-purple-700" />}
+                icon={<PauseCircle className=" text-black" />}
                 text="Pause or cancel anytime"
               />
               <Feature
-                icon={<LockKeyhole className="w-4.5 h-4.5 text-purple-700" />}
+                icon={<ShieldCheck className=" text-black" />}
                 text="Discreet, secure delivery"
               />
               <Feature
-                icon={
-                  <MessageSquareMore className="w-4.5 h-4.5 text-purple-700" />
-                }
+                icon={<MessageSquareMore className=" text-black" />}
                 text="Unlimited free follow‑ups"
               />
               <Feature
-                icon={<Truck className="w-4.5 h-4.5 text-purple-700" />}
+                icon={<Package className=" text-black" />}
                 text="Free shipping"
               />
             </div>

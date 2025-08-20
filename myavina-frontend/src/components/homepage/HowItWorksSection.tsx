@@ -1,111 +1,173 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
-// --- Placeholder Data ---
-// In a real application, you might fetch this from a CMS.
+// ---- Data (swap image paths as needed) ----
 const stepsData = [
   {
-    stepNumber: '1',
-    title: 'Your easiest visit ever',
-    description: "We'll gather your medical information and connect you with Myavina physician for personalized recommendations.",
-    imageUrl: '/Images/homepage/step1.png', // IMPORTANT: Replace with your image path
+    stepNumber: "1",
+    title: "Your easiest visit ever",
+    description:
+      "We’ll gather your medical information and connect you with Myavina physician for personalized recommendations.",
+    imageUrl: "/Images/homepage/step1.png",
+    highlightImage: true, // shows the blue border (like your mobile mock)
   },
   {
-    stepNumber: '2',
-    title: 'Your easiest visit ever',
-    description: "We'll gather your medical information and connect you with Myavina physician for personalized recommendations.",
-    imageUrl: '/Images/homepage/step2.png', // IMPORTANT: Replace with your image path
+    stepNumber: "2",
+    title: "Your easiest visit ever",
+    description:
+      "We’ll gather your medical information and connect you with Myavina physician for personalized recommendations.",
+    imageUrl: "/Images/homepage/step2.png",
   },
   {
-    stepNumber: '3',
-    title: 'Your easiest visit ever',
-    description: "We'll gather your medical information and connect you with Myavina physician for personalized recommendations.",
-    imageUrl: '/Images/homepage/step3.png', // IMPORTANT: Replace with your image path
+    stepNumber: "3",
+    title: "Your easiest visit ever",
+    description:
+      "We’ll gather your medical information and connect you with Myavina physician for personalized recommendations.",
+    imageUrl: "/Images/homepage/step3.png",
   },
 ];
 
-// --- Reusable Step Card Component ---
-interface StepCardProps {
-  step: typeof stepsData[0];
-  layout: 'image-top' | 'text-top';
-  className?: string;
+// ---- Reusable blocks ----
+function TextCard({
+  stepNumber,
+  title,
+  description,
+}: {
+  stepNumber: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="bg-white rounded-xl md:rounded-2xl border border-black/[0.06] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.06)] p-4 md:p-6">
+      <div className="flex items-start">
+        {/* Number */}
+        <span className="block leading-none text-[24px]  font-light text-gray-800">
+          {stepNumber}
+        </span>
+
+        {/* Divider */}
+        <span className="mx-3 md:mx-4 mt-[2px] h-[100] w-px bg-gray-300/80" />
+
+        {/* Content */}
+        <div className="flex-1">
+          <h3 className="text-[16px]  font-normal text-gray-900">{title}</h3>
+          <p className="mt-2 text-[14px] font-light leading-relaxed text-[#828282]">
+            {description}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-const StepCard: React.FC<StepCardProps> = ({ step, layout, className = '' }) => {
-  const isImageTop = layout === 'image-top';
-
-  const TextContent = () => (
-    <div className="bg-white rounded-[8px] p-4">
-      <p className="text-5xl font-bold text-gray-300">{step.stepNumber}</p>
-      <h3 className="text-xl font-bold text-gray-900 mt-4">{step.title}</h3>
-      <p className="text-gray-600 mt-2">{step.description}</p>
-    </div>
-  );
-
-  const ImageContent = () => (
-    <div className="rounded-lg overflow-hidden shadow-lg">
-      <Image
-        src={step.imageUrl}
-        alt={`${step.title} - Step ${step.stepNumber}`}
-        width={384}
-        height={256}
-        className="w-full h-full object-cover"
-      />
-    </div>
-  );
-
+function ImageCard({
+  src,
+  alt,
+  highlight = false,
+}: {
+  src: string;
+  alt: string;
+  highlight?: boolean;
+}) {
   return (
     <div
-      className={`flex flex-col ${
-        isImageTop ? 'lg:flex-col' : 'lg:flex-col-reverse'
-      } ${className}`}
+      className={[
+        "rounded-xl md:rounded-2xl overflow-hidden bg-white shadow-[0_10px_28px_rgba(0,0,0,0.18)]",
+      ].join(" ")}
     >
-      {/* Add responsive margins to each block */}
-      <div className="mb-2 mb-4 ">
-        <TextContent />
-      </div>
-      <div className="mt-2 mb-4 ">
-        <ImageContent />
+      <div className="relative aspect-[16/10] w-full">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover"
+          sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+          priority
+        />
       </div>
     </div>
   );
-};
+}
 
-
-
-// --- Main Section Component ---
-export const HowItWorksSection = () => {
+// ---- Main Section ----
+export const HowItWorksSection: React.FC = () => {
   return (
-    <section className="bg-[#F6F6F6] ">
-      <div className=" mx-auto px-4">
-        
+    <section className="bg-[#F6F6F6] py-10 md:pt-14 md:pb-20">
+      <div className="container  mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl sm:pt-20">
+        <div className="text-center max-w-2xl mx-auto ">
+          <h2 className="text-[32px] md:text-[40px] font-medium text-gray-900">
             How It Works
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
-            Myavina provides fast, easy and convenient care for your menopause symptoms.
+          <p className="mt-3 md:mt-4 text-[16px] md:text-[18px] text-gray-600">
+            Myavina provides fast, easy and convenient care for your menopause
+            symptoms.
           </p>
         </div>
 
-        {/* Steps Grid */}
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-end">
-          <StepCard 
-            step={stepsData[0]} 
-            layout="image-top"
-          />
-          <StepCard 
-            step={stepsData[1]} 
-            layout="text-top" 
-            className="mb-4"
-          />
-          <StepCard 
-            step={stepsData[2]} 
-            layout="image-top"
-          />
+        {/* ===== Mobile (<lg): stacked EXACTLY like your mock ===== */}
+        <div className="lg:hidden mt-6 space-y-5">
+          {stepsData.map((s, idx) => (
+            <div key={idx} className="space-y-4">
+              {/* Text first */}
+              <TextCard
+                stepNumber={s.stepNumber}
+                title={s.title}
+                description={s.description}
+              />
+              {/* Image after */}
+              <ImageCard
+                src={s.imageUrl}
+                alt={`${s.title} - Step ${s.stepNumber}`}
+                highlight={!!s.highlightImage}
+              />
+            </div>
+          ))}
+          <div className="h-6" />
         </div>
 
+        {/* ===== Desktop (>=lg): 3 columns (image-top, text-top, image-top) ===== */}
+        <div className="hidden lg:grid mt-14 grid-cols-3 gap-8 items-end">
+          {/* Col 1: Image top */}
+          <div className="flex flex-col gap-5">
+            <ImageCard
+              src={stepsData[0].imageUrl}
+              alt={`${stepsData[0].title} - Step ${stepsData[0].stepNumber}`}
+              highlight={!!stepsData[0].highlightImage}
+            />
+            <TextCard
+              stepNumber={stepsData[0].stepNumber}
+              title={stepsData[0].title}
+              description={stepsData[0].description}
+            />
+          </div>
+
+          {/* Col 2: Text top */}
+          <div className="flex flex-col gap-5">
+            <TextCard
+              stepNumber={stepsData[1].stepNumber}
+              title={stepsData[1].title}
+              description={stepsData[1].description}
+            />
+            <ImageCard
+              src={stepsData[1].imageUrl}
+              alt={`${stepsData[1].title} - Step ${stepsData[1].stepNumber}`}
+            />
+          </div>
+
+          {/* Col 3: Image top */}
+          <div className="flex flex-col gap-5">
+            <ImageCard
+              src={stepsData[2].imageUrl}
+              alt={`${stepsData[2].title} - Step ${stepsData[2].stepNumber}`}
+            />
+            <TextCard
+              stepNumber={stepsData[2].stepNumber}
+              title={stepsData[2].title}
+              description={stepsData[2].description}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

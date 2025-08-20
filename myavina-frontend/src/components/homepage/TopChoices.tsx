@@ -9,6 +9,8 @@ import {
   FlaskConical,
   Leaf,
   Salad,
+  HandHeart,
+  Sprout,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -29,16 +31,16 @@ const choicesData: Choice[] = [
   {
     Icon: Bandage,
     title: "Patch",
-    description: "Hormones delivered through the skin.",
+    description: "Hormones delivered the skin.",
   },
 ];
 
 type Feature = { Icon: LucideIcon; text: string };
 const featuresData: Feature[] = [
   { Icon: ShieldCheck, text: "FDA-Approved Pills" },
-  { Icon: FlaskConical, text: "Compounded with Care" },
+  { Icon: HandHeart, text: "Compounded with Care" },
   { Icon: Salad, text: "Made Using Traditional Pestle and Mortar Methods" },
-  { Icon: Leaf, text: "Plant-Based and Plant-Derived Ingredients" },
+  { Icon: Sprout, text: "Plant-Based and Plant-Derived Ingredients" },
 ];
 
 /* --- Sub-Components --- */
@@ -49,13 +51,13 @@ type ChoiceCardProps = {
 };
 function ChoiceCard({ Icon, title, description }: ChoiceCardProps) {
   return (
-    <div className="bg-[#F5ECFF] text-gray-900 p-6 rounded-2xl flex items-center gap-5 border border-transparent hover:border-purple-300 transition-all duration-300">
-      <div className="bg-white rounded-full p-5 flex-shrink-0 flex items-center justify-center shadow-sm">
-        <Icon size={40} strokeWidth={1.75} />
+    <div className="bg-[#F5ECFF] text-gray-900 px-6 py-4 rounded-2xl flex items-center gap-5 border border-transparent  transition-all duration-300">
+      <div className="bg-white rounded-full p-4.5 flex-shrink-0 flex text-[#774180] items-center justify-center ">
+        <Icon size={42} strokeWidth={1.75} />
       </div>
       <div>
-        <h3 className="text-[18px] font-normal leading-tight">{title}</h3>
-        <p className="text-[16px] font-normal leading-snug text-gray-700 mt-1">
+        <h3 className="text-[18px] font-medium btn leading-tight">{title}</h3>
+        <p className="text-[16px] font-normal btn leading-snug text-gray-700 mt-1">
           {description}
         </p>
       </div>
@@ -67,11 +69,11 @@ function ChoiceCard({ Icon, title, description }: ChoiceCardProps) {
 export default function TopChoices() {
   return (
     <section className="bg-white text-gray-900">
-      <div className="mx-auto container py-16 sm:py-24 px-6 lg:px-8">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-[100px] lg:items-center">
+      <div className="mx-auto container py-16 sm:pb-24 px-4 ">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-5 lg:items-center">
           {/* Left column */}
           <div>
-            <h2 className="text-[28px] leading-[1.15] font-semibold sm:text-[32px]">
+            <h2 className="text-[24px] md:text-[32px] leading-[1.15] font-medium sm:text-[32px]">
               The Top Choice Among
               <br />
               Physicians for Menopause Care
@@ -93,15 +95,6 @@ export default function TopChoices() {
               effective solution for managing symptoms of perimenopause and
               menopause.
             </p>
-
-            <div className="mt-8">
-              <a
-                href="#"
-                className="inline-block bg-black text-white text-[16px] px-6 py-3 rounded-full hover:bg-gray-800 transition-colors"
-              >
-                Explore All Treatments
-              </a>
-            </div>
           </div>
 
           {/* Right column */}
@@ -115,6 +108,14 @@ export default function TopChoices() {
                   description={description}
                 />
               ))}
+            </div>
+            <div className="mt-8">
+              <a
+                href="#"
+                className="inline-block bg-black text-white text-[16px] px-6 py-2 rounded-full hover:bg-gray-800 transition-colors btn font-normal"
+              >
+                Explore All Treatments
+              </a>
             </div>
           </div>
         </div>

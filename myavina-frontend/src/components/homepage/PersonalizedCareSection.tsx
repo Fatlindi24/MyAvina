@@ -3,132 +3,47 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-// ---- Small corner card
-function InfoCard({
-  title,
-  lines = [],
-  className = "",
-}: {
-  title: string;
-  lines: string[];
-  className?: string;
-}) {
-  return (
-    <div
-      className={`rounded-xl bg-white/10 backdrop-blur-md border border-white/15 shadow-lg px-4 py-3 text-left text-white ${className}`}
-    >
-      <p className="text-xs text-purple-200">{title}</p>
-      <div className="mt-1 text-sm leading-5">
-        {lines.map((l, i) => (
-          <div key={i}>{l}</div>
-        ))}
-      </div>
-    </div>
-  );
-}
+type PanelProps = {
+  // These props are still accepted, but the slider content comes from the slides[] below.
+  title?: string;
+  subtitle?: string;
+  centerImageDesktop?: string; // e.g. "/Images/woman-s-desk.png"
+  centerImageMobile?: string; // e.g. "/Images/woman-s-mobile.png"
+  buttonText?: string;
+  onButtonClick?: () => void;
+};
 
-// ---- One slide (panel)
-function Slide({
+export default function SimpleThreePartPanel({
+  // defaults kept for compatibility if you want to reuse later
   title,
   subtitle,
-  image,
-  className = "",
-}: {
-  title: string;
-  subtitle: string;
-  image: string;
-  className?: string;
-}) {
-  return (
-    <div className={`w-full shrink-0 ${className}`}>
-      {/* Title + subtitle */}
-
-      {/* Panel */}
-
-      <div className="relative rounded-[28px] bg-gradient-to-b from-[#6f3a89] to-[#5e2f7a] p-5 md:p-8 lg:p-10 overflow-hidden">
-        <div className="text-center mb-8">
-          <h2 className="text-[28px] md:text-[36px] lg:text-[44px] font-semibold text-white">
-            {title}
-          </h2>
-          <p className="mt-2 text-[15px] md:text-[16px] text-purple-100">
-            {subtitle}
-          </p>
-        </div>
-        {/* Corner cards grid (kept inside container) */}
-        <div className="grid grid-cols-2 gap-y-28 md:gap-y-32 ">
-          {/* Left column */}
-          <div className="flex flex-col gap-2 ">
-            <InfoCard
-              title="Name"
-              lines={["Sarah"]}
-              className="w-[140px] lg:w-[350px] md:w-[220px] flex flex-row items-center justify-between"
-            />
-            <InfoCard
-              title="Age"
-              lines={["55"]}
-              className="w-[140px] lg:w-[350px] md:w-[220px] flex flex-row items-center justify-between text-[6px] md:text-[12px] lg:text-[14px]"
-            />
-          </div>
-
-          {/* Right column */}
-          <div className="flex flex-col items-end gap-2">
-            <InfoCard
-              title="History"
-              lines={["Hot flashes"]}
-              className="w-[140px] lg:w-[350px] md:w-[220px] flex md:flex-row flex-col items-center justify-between"
-            />
-            <InfoCard
-              title="Goal"
-              lines={["Sleep better"]}
-              className="w-[140px] lg:w-[350px] md:w-[220px] flex md:flex-row flex-col items-center justify-between"
-            />
-          </div>
-        </div>
-
-        {/* Center image card */}
-        <div className="pointer-events-none select-none absolute inset-0 flex items-center justify-center">
-          <div className="relative w-[82%] md:w-[70%] lg:w-[60%] aspect-[16/8] rounded-3xl bg-black/35 shadow-2xl">
-            <div className="absolute inset-0">
-              <Image
-                src={image}
-                alt="Person"
-                fill
-                className="object-contain"
-                sizes="(min-width:1024px) 60vw, 90vw"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* CTA (center bottom) */}
-        <div className="mt-[120px] md:mt-[210px] lg:mt-[280px] flex justify-center">
-          <button className="rounded-full bg-white/20 hover:bg-white/30 text-white px-7 py-3 text-[15px] font-medium transition">
-            See Your Plan
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ---- Slider wrapper
-export default function PersonalizedCareCarousel() {
+  centerImageDesktop = "/Images/woman-s-desk.png",
+  centerImageMobile = "/Images/woman-s-mobile.png",
+  buttonText = "See Your Plan",
+  onButtonClick,
+}: PanelProps) {
+  // --- Slides data (edit text/images here) ---
   const slides = [
     {
       title: "Menopause Care Made Personal",
       subtitle: "Your menopause journey, supported every step by MyAvina",
-      image: "/Images/homepage/menopause.png",
+      centerImageDesktop: "/Images/woman-s-desk.png",
+      centerImageMobile: "/Images/woman-s-mobile.png",
+      buttonText: "See Your Plan",
     },
     {
       title: "Tailored Plans, Real Results",
       subtitle: "Personalized HRT designed around your symptoms and goals",
-      image: "/Images/homepage/menopause.png",
+      centerImageDesktop: "/Images/woman-s-desk.png",
+      centerImageMobile: "/Images/woman-s-mobile.png",
+      buttonText: "Start Assessment",
     },
     {
       title: "Feel Like Yourself Again",
       subtitle: "Clinically guided care you can trust",
-      image: "/Images/homepage/menopause.png",
+      centerImageDesktop: "/Images/woman-s-desk.png",
+      centerImageMobile: "/Images/woman-s-mobile.png",
+      buttonText: "Get Started",
     },
   ];
 
@@ -139,14 +54,17 @@ export default function PersonalizedCareCarousel() {
   const next = () => setIndex((i) => (i + 1) % count);
   const prev = () => setIndex((i) => (i - 1 + count) % count);
 
-  // optional: swipe
+  // Optional: swipe support
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
+
     let startX: number | null = null;
 
-    const down = (e: TouchEvent) => (startX = e.touches[0].clientX);
-    const up = (e: TouchEvent) => {
+    const onTouchStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
       if (startX == null) return;
       const dx = e.changedTouches[0].clientX - startX;
       if (dx > 50) prev();
@@ -154,67 +72,130 @@ export default function PersonalizedCareCarousel() {
       startX = null;
     };
 
-    el.addEventListener("touchstart", down, { passive: true });
-    el.addEventListener("touchend", up, { passive: true });
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
     return () => {
-      el.removeEventListener("touchstart", down);
-      el.removeEventListener("touchend", up);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchend", onTouchEnd);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   return (
-    <section className="w-full  py-12 md:py-16 lg:py-20">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Slider viewport */}
-        <div className="relative overflow-hidden rounded-[32px]">
-          {/* Track */}
-          <div
-            ref={trackRef}
-            className="flex transition-transform duration-500 ease-out"
-            style={{ transform: `translateX(-${index * 100}%)` }}
+    <section className="container mx-auto py-10">
+      {/* Slider viewport with background image */}
+      <div className="relative overflow-hidden rounded-[28px]">
+        {/* Background image (covers entire slider) */}
+        <Image
+          src="/Images/background-s.png"
+          alt="" // decorative
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="(min-width:1024px) 1200px, 100vw"
+        />
+        {/* Optional overlay for contrast */}
+
+        {/* Track */}
+        <div
+          ref={trackRef}
+          className="relative flex transition-transform duration-500 ease-out"
+          style={{ transform: `translateX(-${index * 100}%)` }}
+        >
+          {slides.map((s, i) => (
+            <div key={i} className="w-full shrink-0">
+              {/* Slide content: 3 vertical parts */}
+              <div className="relative grid grid-rows-[auto,1fr,auto] items-center text-center px-5 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-14 min-h-[520px] md:min-h-[640px]">
+                {/* 1) Title + subtitle */}
+                <div>
+                  <h2 className="text-white text-[28px] md:text-[36px] lg:text-[44px] font-semibold leading-tight">
+                    {s.title ?? title}
+                  </h2>
+                  {(s.subtitle ?? subtitle) && (
+                    <p className="mt-2 text-white/80 text-[15px] md:text-[16px]">
+                      {s.subtitle ?? subtitle}
+                    </p>
+                  )}
+                </div>
+
+                {/* 2) Center image */}
+                <div className="flex items-center justify-center">
+                  <div className="relative w-[90%] sm:aspect-[16/7] aspect-[1/1] rounded-3xl ">
+                    {/* Mobile image */}
+                    <div className="absolute inset-0 sm:hidden">
+                      <Image
+                        src={s.centerImageMobile ?? centerImageMobile}
+                        alt="Center image (mobile)"
+                        fill
+                        className="object-contain"
+                        sizes="100vw"
+                        priority
+                      />
+                    </div>
+
+                    {/* Desktop image */}
+                    <div className="absolute inset-0 hidden sm:block">
+                      <Image
+                        src={s.centerImageDesktop ?? centerImageDesktop}
+                        alt="Center image (desktop)"
+                        fill
+                        className="object-contain"
+                        sizes="(min-width:1024px) 60vw, 70vw"
+                        priority
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3) Button */}
+                <div className="flex justify-center">
+                  <button
+                    type="button"
+                    onClick={onButtonClick}
+                    className=" rounded-full bg-white/50 hover:bg-white text-white btn px-7 py-3 text-[16px] font-normal transition"
+                  >
+                    {s.buttonText ?? buttonText}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Controls + Dots */}
+      </div>
+      <div className="relative z-10 mt-4 sm:mt-6 mb-2 flex flex-col items-center gap-3">
+        {/* Arrows */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={prev}
+            aria-label="Previous"
+            className="w-10 h-10 rounded-full border border-[#774180]/40 text-[#774180]/90 hover:bg-[#774180]/15 transition"
           >
-            {slides.map((s, i) => (
-              <Slide
+            ‹
+          </button>
+
+          {/* Dots */}
+          <div className="flex items-center gap-2">
+            {slides.map((_, i) => (
+              <button
                 key={i}
-                title={s.title}
-                subtitle={s.subtitle}
-                image={s.image}
-                className="px-2 sm:px-3 lg:px-4"
+                onClick={() => setIndex(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-2 rounded-full transition-all ${
+                  i === index ? "w-6 bg-[#774180]" : "w-2 bg-[#774180]/50"
+                }`}
               />
             ))}
           </div>
 
-          {/* Controls */}
-          <div className="mt-6 flex items-center justify-center gap-3">
-            <button
-              onClick={prev}
-              aria-label="Previous"
-              className="w-10 h-10 rounded-full border border-[#774180]/30 text-[#774180]/90 hover:bg-[#774180]/10 transition"
-            >
-              ‹
-            </button>
-            <div className="mt-3 flex justify-center gap-2">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setIndex(i)}
-                  className={`h-2 rounded-full transition-all ${
-                    i === index ? "w-6 bg-[#774180]" : "w-2 bg-[#774180]/40"
-                  }`}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
-            </div>
-            <button
-              onClick={next}
-              aria-label="Next"
-              className="w-10 h-10 rounded-full bg-[#774180]/20 text-[#774180] hover:bg-[#774180]/30 transition"
-            >
-              ›
-            </button>
-          </div>
-
-          {/* Dots */}
+          <button
+            onClick={next}
+            aria-label="Next"
+            className="w-10 h-10 rounded-full border border-[#774180]/40 text-[#774180]/90 hover:bg-[#774180]/15 transition"
+          >
+            ›
+          </button>
         </div>
       </div>
     </section>

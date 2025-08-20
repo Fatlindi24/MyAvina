@@ -125,7 +125,7 @@ export function Header() {
   };
 
   return (
-    <header className="bg-white w-full shadow-sm sticky top-0 z-50 prompt">
+    <header className="bg-white w-full sticky top-0 z-50 prompt">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}

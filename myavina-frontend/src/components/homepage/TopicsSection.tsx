@@ -1,78 +1,89 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
-// Import Swiper React components and styles
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-
-// --- Placeholder Data for the Articles ---
+// --- Data ---
 const articlesData = [
   {
-    category: 'HRT',
-    date: 'July 2025',
-    title: '5 Myths About HRT Debunked',
-    imageUrl: '/Images/homepage/topic1.png', // IMPORTANT: Replace with your image paths
-    isFeatured: true, // This will make its button black
+    category: "HRT",
+    date: "July 2025",
+    title: "5 Myths About HRT Debunked",
+    imageUrl: "/Images/homepage/topic1.png",
+    isFeatured: true,
   },
   {
-    category: 'Sleep',
-    date: 'July 2025',
-    title: 'How to Sleep Better During Menopause',
-    imageUrl: '/Images/homepage/topic2.png',
+    category: "Sleep",
+    date: "July 2025",
+    title: "How to Sleep Better During Menopause",
+    imageUrl: "/Images/homepage/topic2.png",
     isFeatured: false,
   },
   {
-    category: 'Mood',
-    date: 'July 2025',
-    title: "What's Causing Your Mood Swings?",
-    imageUrl: '/Images/homepage/topic3.png',
+    category: "Mood",
+    date: "July 2025",
+    title: "What’s Causing Your Mood Swings?",
+    imageUrl: "/Images/homepage/topic3.png",
     isFeatured: false,
   },
   {
-    category: 'Hot flashes',
-    date: 'July 2025',
-    title: 'How to Sleep Better During Menopause',
-    imageUrl: '/Images/homepage/topic4.png',
+    category: "Hotflashes",
+    date: "July 2025",
+    title: "How to Sleep Better During Menopause",
+    imageUrl: "/Images/homepage/topic4.png",
     isFeatured: false,
   },
   {
-    category: 'HRT',
-    date: 'July 2025',
-    title: "What's Causing Your Mood Swings?",
-    imageUrl: '/Images/homepage/topic5.jpg',
+    category: "HRT",
+    date: "July 2025",
+    title: "What’s Causing Your Mood Swings?",
+    imageUrl: "/Images/homepage/topic5.jpg",
     isFeatured: false,
   },
 ];
 
-// --- Reusable Article Card Component ---
-const ArticleCard = ({ article }) => {
-  const buttonClasses = article.isFeatured
-    ? 'bg-black text-white hover:bg-gray-800'
-    : 'bg-white text-black border border-gray-300 hover:bg-gray-100';
+// --- Card ---
+const ArticleCard = ({
+  article,
+}: {
+  article: (typeof articlesData)[number];
+}) => {
+  // --- Button base style ---
+  const buttonClasses =
+    "btn bg-white border border-black text-black hover:bg-black hover:text-white hover:border-black transition-colors duration-300";
 
   return (
-    <div className="bg-white rounded-xl shadow-sm overflow-hidden h-full flex flex-col group">
-      <div className="relative">
-        <Image 
-          src={article.imageUrl} 
-          alt={article.title} 
-          width={400} 
-          height={250} 
-          className="w-full object-cover aspect-[4/3]"
-        />
-        <div className="absolute top-3 left-3 bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">
-          {article.category}
+    <div className="h-full">
+      {/* Image block */}
+      <div className="relative rounded-xl overflow-hidden">
+        <div className="relative w-full aspect-[16/9]">
+          <Image
+            src={article.imageUrl}
+            alt={article.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            priority={article.isFeatured}
+          />
         </div>
+        <span className="absolute top-3 left-3 rounded-full bg-black/45 text-white backdrop-blur-sm px-3 py-1 text-xs font-semibold">
+          {article.category}
+        </span>
       </div>
-      <div className="p-6 flex flex-col flex-grow">
-        <p className="text-sm text-gray-500 font-normal text-[18px] leading-[130%] tracking-normal">{article.date}</p>
-        <h3 className="tfont-normal text-[20px] leading-[130%] tracking-normal mt-2 flex-grow group-hover:text-purple-700 transition-colors">
+
+      {/* Text block */}
+      <div className="px-1">
+        <p className="mt-3 text-sm text-gray-500">{article.date}</p>
+        <h3 className="mt-1 text-[20px] leading-[1.3] tracking-normal">
           {article.title}
         </h3>
+
         <div className="mt-4">
-          <a href="#" className={`font-normal text-[16px] leading-[100%] tracking-normal inline-block px-6 py-2.5 rounded-full transition-colors ${buttonClasses}`}>
+          <a
+            href="#"
+            className={`inline-block rounded-full px-5 py-3 text-[15px] leading-none transition-colors ${buttonClasses}`}
+          >
             Read more
           </a>
         </div>
@@ -81,44 +92,42 @@ const ArticleCard = ({ article }) => {
   );
 };
 
-// --- Main Section Component ---
+// --- Section ---
 export const TopicsSection = () => {
   return (
-    <section className="bg-[#F6F6F6] py-16 sm:py-24">
+    <section className="bg-[#F6F6F6] pt-10 pb-16">
       <div className="container mx-auto">
-        
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto my-10 px-4">
-          <h2 className="pt-10 lg:pt-0 font-medium lg:text-[32px] text-[24px;] leading-[130%] tracking-normal text-center">
+        <div className="text-center max-w-3xl mx-auto px-4">
+          <h2 className="font-medium text-[28px] lg:text-[32px] leading-[1.3]">
             Explore Topics That Matter to You
           </h2>
-          <p className="font-normal lg:text-[18px] text-[16px;] mt-5 leading-[130%] tracking-normal text-center">
-            From hormone therapy tips, discover expert advice for every stage of your menopause journey.
+          <p className="mt-4 text-[16px] lg:text-[18px] text-gray-700">
+            From hormone therapy tips, discover expert advice for every stage of
+            your menopause journey.
           </p>
         </div>
 
-        {/* Articles Carousel */}
-        <div className="mt-16">
+        {/* Carousel */}
+        <div className="mt-12">
           <Swiper
             spaceBetween={24}
-            slidesPerView={1.25}
+            slidesPerView={4.2}
             centeredSlides={false}
-            // Add left padding by using the wrapper class
-            className="!pl-4 sm:!pl-6 lg:!pl-8" 
+            className="!pl-4 sm:!pl-6 lg:!pl-8"
             breakpoints={{
-              640: { slidesPerView: 2.5 },
-              1024: { slidesPerView: 3.5 },
-              1280: { slidesPerView: 4.25 },
+              640: { slidesPerView: 2.2, spaceBetween: 24 },
+              1024: { slidesPerView: 3.2, spaceBetween: 24 },
+              1280: { slidesPerView: 4.2, spaceBetween: 24 },
             }}
           >
-            {articlesData.map((article, index) => (
-              <SwiperSlide key={index} className="h-auto !pr-4 sm:!pr-6 lg:!pr-8 mb-10">
+            {articlesData.map((article, i) => (
+              <SwiperSlide key={i} className=" group h-auto">
                 <ArticleCard article={article} />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-        
       </div>
     </section>
   );

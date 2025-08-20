@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { topics } from "@/data/topics";
 import { articles } from "@/data/articles";
-import { ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import TopicsMenu from "@/components/TopicsMenu";
 
 export default function LearnLandingPage() {
@@ -40,7 +40,7 @@ export default function LearnLandingPage() {
   };
 
   return (
-    <div className="container mx-auto py-10 space-y-10 prompt px-4">
+    <div className="container mx-auto py-10  space-y-10 prompt px-4">
       {/* Breadcrumbs */}
       <nav className="text-[16px] text-gray-500 mb-4 prompt">
         <Link href="/" className="hover:underline">
@@ -92,7 +92,7 @@ export default function LearnLandingPage() {
 
       {/* Articles Section */}
       <div>
-        <h2 className="mb-6 text-gray-500 uppercase tracking-wide text-sm">
+        <h2 className="mb-6 text-[#828282] uppercase tracking-wide text-[20px] prompt-extralight">
           All Articles
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -109,19 +109,21 @@ export default function LearnLandingPage() {
               </div>
 
               {/* Text content */}
-              <div className="py-4">
+              <div className="py-4 prompt-light">
                 <div className="flex justify-between">
-                  <p className="text-xs text-gray-500 uppercase">
+                  <p className="text-[14px] text-gray-500 uppercase">
                     Journal / {article.category}
                   </p>
-                  <p className="text-xs text-gray-500 uppercase">
+                  <p className="text-[14px] text-gray-500 uppercase">
                     {article.date} | {article.readTime}
                   </p>
                 </div>
-                <h3 className="mt-2 font-semibold text-lg text-black">
+                <h3 className="mt-2  text-[18px] text-black prompt ">
                   {article.title}
                 </h3>
-                <p className="mt-1 text-gray-800 text-sm">{article.excerpt}</p>
+                <p className="mt-1 text-gray-800 text-[14px]">
+                  {article.excerpt}
+                </p>
                 <Link
                   href={`/articles/${article.slug}`}
                   className="inline-flex items-center mt-4 px-4 py-2 text-white bg-black rounded-full hover:bg-gray-800 transition"
@@ -136,39 +138,44 @@ export default function LearnLandingPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center items-center gap-4 mt-8">
+            {/* Prev */}
             <button
               onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
               disabled={currentPage === 1}
-              className="px-3 py-1 rounded-full bg-gray-200 text-black  disabled:opacity-50"
+              className="disabled:opacity-30 cursor-pointer"
             >
-              ‹
+              <ChevronLeft className="w-6 h-6" />
             </button>
+
+            {/* Page Numbers */}
             {getPageNumbers().map((page, i) =>
               typeof page === "number" ? (
                 <button
                   key={i}
                   onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-1 rounded-full ${
+                  className={`px-4 py-2 flex items-center justify-center rounded-full transition ${
                     currentPage === page
-                      ? "bg-purple-600 text-white  font-bold"
-                      : "text-gray-400 hover:bg-gray-300"
+                      ? "bg-[#774180] text-white font-light "
+                      : "text-black hover:text-[#774180] cursor-pointer"
                   }`}
                 >
                   {page}
                 </button>
               ) : (
-                <span key={i} className="px-3 py-1">
+                <span key={i} className="px-2 text-black">
                   {page}
                 </span>
               )
             )}
+
+            {/* Next */}
             <button
               onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 rounded-full bg-gray-200 text-black  disabled:opacity-50"
+              className="disabled:opacity-30 cursor-pointer"
             >
-              ›
+              <ChevronRight className="w-6 h-6" />
             </button>
           </div>
         )}

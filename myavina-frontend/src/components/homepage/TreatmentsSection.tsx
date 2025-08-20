@@ -62,7 +62,7 @@ const ProductCard = ({ product }) => (
     {/* Part 1: The Image Container */}
     <div className="bg-[#F8F1FF] rounded-[15px] p-4 flex items-center justify-center relative aspect-square">
       {product.isOrganic && (
-        <div className="absolute top-4 left-4 bg-[#FFDBC5] text-[12px] text-gray-700 font-semibold px-3 py-1 rounded-full z-10">
+        <div className="absolute top-4 left-4 bg-[#FFDBC5] text-[12px] text-gray-700 font-normal px-3 py-1 rounded-full z-10">
           100% Organic
         </div>
       )}
@@ -80,13 +80,15 @@ const ProductCard = ({ product }) => (
     {/* Part 2: The Text Details Container (Now separate) */}
     <div className="mt-4 bg-[#F8F1FF] p-4 rounded-[15px]">
       <div className="flex justify-between items-center">
-        <h3 className="text-[16px] font-medium text-gray-900">
+        <h3 className="text-[16px] font-normal text-gray-900">
           {product.name}
         </h3>
-        <p className="text-[14px] text-[#828282]">${product.price}/month</p>
+        <p className="text-[14px] font-light text-[#828282]">
+          ${product.price}/month
+        </p>
       </div>
       <div className="flex justify-between items-center mt-2 text-sm">
-        <span className="text-[12px] text-[#828282]">
+        <span className="text-[12px] font-light text-[#828282]">
           {product.rating} ({product.reviews.toLocaleString()})
         </span>
         <div className="flex text-black">
@@ -123,7 +125,7 @@ const SwiperNavButtons = () => {
 // --- Main Section Component ---
 export const TreatmentsSection = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-white pb-10">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-10">
           <h2 className="lg:text-[40px] text-[32px] ">
@@ -132,7 +134,7 @@ export const TreatmentsSection = () => {
           </h2>
           <a
             href="#"
-            className="hidden text-[16px] text-400 sm:inline-block bg-black text-white  px-5 py-3 rounded-full hover:bg-gray-800 transition-colors"
+            className="hidden text-[16px] text-normal sm:inline-block bg-black text-white btn px-4.5 py-2 rounded-full hover:bg-gray-800 transition-colors"
           >
             Shop All Treatments
           </a>
@@ -160,7 +162,7 @@ export const TreatmentsSection = () => {
         </Swiper>
         <a
           href="#"
-          className="mb-10 block w-full text-center lg:hidden text-[16px] font-normal bg-black text-white px-5 py-3 rounded-full hover:bg-gray-800 transition-colors"
+          className="mb-10 block w-full text-center lg:hidden text-[16px] font-normal bg-black text-white px-4.5 py-2 rounded-full hover:bg-gray-800 transition-colors"
         >
           Shop All Treatments
         </a>

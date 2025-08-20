@@ -44,7 +44,7 @@ export default function ArticlePage() {
   }, [article.sections]);
 
   return (
-    <div className="container px-4 py-10 space-y-12 prompt">
+    <div className="container px-4 py-10 mx-auto space-y-12 prompt">
       {/* Breadcrumbs */}
       <nav className="text-[16px] text-gray-500 mb-4 prompt">
         <Link href="/" className="hover:underline">
