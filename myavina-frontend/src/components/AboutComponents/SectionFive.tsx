@@ -25,18 +25,18 @@ const SectionFive = () => {
   const triple = [...logos, ...logos, ...logos, ...logos, ...logos];
 
   return (
-    <div className="h-auto mb-0 ">
+    <div className="h-[65px] md:h-[110px]  ">
       <Marquee
         gradient={false}
         speed={50} // adjust to taste
-        pauseOnHover={true} // optional
+        pauseOnHover={false} // optional
       >
         {logos.map((src, i) => (
           <img
             key={i}
             src={src}
             alt={`logo ${i + 1}`}
-            className="h-8 mx-8 object-contain my-12"
+            className="h-8 mx-8 object-contain md:my-12 my-4"
           />
         ))}
       </Marquee>

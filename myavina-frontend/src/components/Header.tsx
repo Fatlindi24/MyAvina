@@ -125,13 +125,13 @@ export function Header() {
   };
 
   return (
-    <header className="bg-white w-full sticky top-0 z-50 prompt">
-      <div className="container mx-auto px-4">
+    <header className="bg-white w-full sticky top-0 z-50 ">
+      <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link
             href="/"
-            className="text-xl md:text-3xl font-light tracking-[0.2em] text-gray-800"
+            className="text-xl md:text-3xl font-bold tracking-[0.1em] text-gray-800"
           >
             MYAVINA
           </Link>

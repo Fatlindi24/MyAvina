@@ -112,7 +112,7 @@ export const TopicsSection = () => {
         <div className="mt-12">
           <Swiper
             spaceBetween={24}
-            slidesPerView={4.2}
+            slidesPerView={1.2}
             centeredSlides={false}
             className="!pl-4 sm:!pl-6 lg:!pl-8"
             breakpoints={{

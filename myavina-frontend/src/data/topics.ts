@@ -19,7 +19,7 @@ export interface Topic {
       slug: "hot-flashes",
       description: "Explore tips to manage hot flashes and stay comfortable.",
       image: "/images/learn/learn-1.png",
-      longDescription: "Hot flashes are sudden sensations of warmth, often accompanied by sweating. Discover their triggers and management strategies."
+      longDescription: "A hot flash feels like a sudden wave of heat that spreads through the body, often bringing a flushed face and sweating. They can also cause a racing heartbeat, dizziness, or anxiety for some women. The good news? There are simple ways to ease hot flashes — like wearing light clothing, avoiding triggers such as spicy foods or alcohol, and practicing stress-relieving habits like deep breathing. Hormone replacement therapy (HRT) can also help reduce hot flashes and protect your overall health if they’re severe. Knowing what to expect and how to manage them can make a real difference in your day-to-day comfort"
     },
     {
       name: "Lifestyle",

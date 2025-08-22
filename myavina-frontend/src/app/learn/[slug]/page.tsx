@@ -63,7 +63,7 @@ export default function TopicPage() {
   }
 
   return (
-    <div className="container mx-auto py-10 space-y-10 prompt px-4">
+    <div className="container mx-auto py-10 space-y-10 prompt px-6">
       {/* Breadcrumbs */}
       <nav className="text-[16px] text-gray-500 mb-4 prompt">
         <Link href="/" className="hover:underline">
@@ -77,38 +77,42 @@ export default function TopicPage() {
       </nav>
 
       {/* Hero Section */}
-      <div className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-[450px_1fr] gap-8 items-start">
         <TopicsMenu />
 
         <div>
-          <h1 className="text-5xl font-bold  text-black">{topic.name}</h1>
-          <p className="mt-2 text-[20px] text-gray-800">{topic.description}</p>
-          <div className="mt-6 text-[16px] relative w-full h-96">
+          <h1 className="text-[32px] md:text-5xl font-medium  text-black">
+            {topic.name}
+          </h1>
+          <p className="mt-2 text-[16px] md:text-[20px] text-gray-800">
+            {topic.description}
+          </p>
+          <div className="mt-6 text-[14px] md:text-[16px] relative w-full h-48 md:h-96">
             <Image
               src={topic.image}
               alt={topic.name}
               fill
-              className="rounded-lg object-cover"
+              className="rounded-lg object-cover "
             />
           </div>
-          <p className="mt-4 text-gray-700 leading-relaxed">
+          <p className="mt-4 text-gray-700 font-normal leading-relaxed">
             {topic.longDescription}
           </p>
         </div>
       </div>
 
-      <div className="border-b border-gray-300"></div>
+      <div className="border-b mb-5 border-[#DD33DD]/20"></div>
 
       {/* Articles */}
       <div>
-        <h2 className="mb-6 text-gray-500 uppercase tracking-wide text-[20px] prompt-extralight">
+        <h2 className="mb-6 text-gray-500 uppercase tracking-wide text-[20px] font-extralight">
           All Articles for "{topic.name}"
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {paginatedArticles.map((article) => (
             <div key={article.slug} className="rounded-lg overflow-hidden">
               {/* Image full width + fixed height */}
-              <div className="relative w-full h-[400px]">
+              <div className="relative  border border-[#D3D3D3] rounded-lg w-full h-48 md:h-96">
                 <Image
                   src={article.image}
                   alt={article.title}
@@ -120,22 +124,22 @@ export default function TopicPage() {
               {/* Text content */}
               <div className="py-4">
                 <div className="flex justify-between">
-                  <p className="text-[14px] prompt-light text-gray-500 uppercase">
+                  <p className="text-[12px] md:text-[14px] font-light text-black uppercase">
                     Journal / {article.category}
                   </p>
-                  <p className="text-[14px] prompt-light text-gray-500 uppercase">
+                  <p className="text-[12px] md:text-[14px] font-light text-black uppercase">
                     {article.date} | {article.readTime}
                   </p>
                 </div>
-                <h3 className="mt-2 font-regular text-[20px] text-black">
+                <h3 className="mt-2 font-regular text-[16px] md:text-[18px] text-black">
                   {article.title}
                 </h3>
-                <p className="mt-1 text-gray-600 prompt text-[14px]">
+                <p className="mt-1 text-black  text-[14px]">
                   {article.excerpt}
                 </p>
                 <Link
                   href={`/articles/${article.slug}`}
-                  className="inline-flex items-center mt-4 px-4 py-2 text-white bg-black rounded-full hover:bg-gray-800 transition"
+                  className="inline-flex btn items-center mt-4 px-4 py-2 text-[16px] text-white bg-black rounded-full hover:bg-gray-800 transition"
                 >
                   Read More
                   <ChevronRight className="ml-2 w-4 h-4" />

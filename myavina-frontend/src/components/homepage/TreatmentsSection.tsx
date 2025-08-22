@@ -148,7 +148,7 @@ export const TreatmentsSection = () => {
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          className="!pb-16 " // Add padding-bottom for navigation
+          className="!pb-5 md:!pb-16 " // Add padding-bottom for navigation
         >
           {treatmentsData.map((product, index) => (
             <SwiperSlide key={index} className="h-auto">
@@ -162,7 +162,7 @@ export const TreatmentsSection = () => {
         </Swiper>
         <a
           href="#"
-          className="mb-10 block w-full text-center lg:hidden text-[16px] font-normal bg-black text-white px-4.5 py-2 rounded-full hover:bg-gray-800 transition-colors"
+          className="mb-0 md:mb-10 block w-full text-center lg:hidden text-[16px] font-normal bg-black text-white px-4.5 py-2 rounded-full hover:bg-gray-800 transition-colors"
         >
           Shop All Treatments
         </a>

@@ -109,10 +109,11 @@ export const TestimonialsSection = () => {
     // Changed background to white to match your screenshot
     <section className="bg-white pt-16 ">
       <div className="container mx-auto px-4">
-        <h2 className="text-center lg:text-[32px] text-[20px;] font-500 tracking-widest mb-12">
+        <h2 className="text-center lg:text-[32px] text-[20px] font-medium  mb-12">
           Thousands of women trust{" "}
-          <span className="text-[#774180]">MyAvina</span> for the <br /> relief,
-          support, and community they deserve.
+          <span className="text-[#774180] uppercase">MyAvina</span> for the{" "}
+          <br className="hidden md:block" /> relief, support, and community they
+          deserve.
         </h2>
 
         <Swiper

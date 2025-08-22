@@ -17,7 +17,7 @@ export const articles: Article[] = [
   {
     slug: "drynes-article-1",
     category: "Drynes",
-    title: "Drynes: Understanding the Basics",
+    title: "Understanding the Basics",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -45,7 +45,7 @@ export const articles: Article[] = [
   {
     slug: "drynes-article-2",
     category: "Drynes",
-    title: "Drynes: Key Causes Explained",
+    title: "Key Causes Explained",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -73,7 +73,7 @@ export const articles: Article[] = [
   {
     slug: "drynes-article-3",
     category: "Drynes",
-    title: "Drynes: Symptoms You Should Know",
+    title: "Symptoms You Should Know",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -101,7 +101,7 @@ export const articles: Article[] = [
   {
     slug: "drynes-article-4",
     category: "Drynes",
-    title: "Drynes: Effective Treatments",
+    title: "Effective Treatments",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -129,7 +129,7 @@ export const articles: Article[] = [
   {
     slug: "drynes-article-5",
     category: "Drynes",
-    title: "Drynes: Prevention Strategies",
+    title: "Prevention Strategies",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -157,7 +157,7 @@ export const articles: Article[] = [
   {
     slug: "drynes-article-6",
     category: "Drynes",
-    title: "Drynes: Expert Tips",
+    title: "Expert Tips",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -185,7 +185,7 @@ export const articles: Article[] = [
   {
     slug: "drynes-article-7",
     category: "Drynes",
-    title: "Drynes: Common Myths",
+    title: "Common Myths",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -213,7 +213,7 @@ export const articles: Article[] = [
   {
     slug: "drynes-article-8",
     category: "Drynes",
-    title: "Drynes: Latest Research Insights",
+    title: "Latest Research Insights",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -241,7 +241,7 @@ export const articles: Article[] = [
   {
     slug: "hot-flashes-article-1",
     category: "Hot Flashes",
-    title: "Hot Flashes: Understanding the Basics",
+    title: "Understanding the Basics",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -269,7 +269,7 @@ export const articles: Article[] = [
   {
     slug: "hot-flashes-article-2",
     category: "Hot Flashes",
-    title: "Hot Flashes: Key Causes Explained",
+    title: "Key Causes Explained",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -297,7 +297,7 @@ export const articles: Article[] = [
   {
     slug: "hot-flashes-article-3",
     category: "Hot Flashes",
-    title: "Hot Flashes: Symptoms You Should Know",
+    title: "Symptoms You Should Know",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -325,7 +325,7 @@ export const articles: Article[] = [
   {
     slug: "hot-flashes-article-4",
     category: "Hot Flashes",
-    title: "Hot Flashes: Effective Treatments",
+    title: "Effective Treatments",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -353,7 +353,7 @@ export const articles: Article[] = [
   {
     slug: "hot-flashes-article-5",
     category: "Hot Flashes",
-    title: "Hot Flashes: Prevention Strategies",
+    title: "Prevention Strategies",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -381,7 +381,7 @@ export const articles: Article[] = [
   {
     slug: "hot-flashes-article-6",
     category: "Hot Flashes",
-    title: "Hot Flashes: Expert Tips",
+    title: "Expert Tips",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -409,7 +409,7 @@ export const articles: Article[] = [
   {
     slug: "hot-flashes-article-7",
     category: "Hot Flashes",
-    title: "Hot Flashes: Common Myths",
+    title: "Common Myths",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -437,7 +437,7 @@ export const articles: Article[] = [
   {
     slug: "hot-flashes-article-8",
     category: "Hot Flashes",
-    title: "Hot Flashes: Latest Research Insights",
+    title: "Latest Research Insights",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -465,7 +465,7 @@ export const articles: Article[] = [
   {
     slug: "lifestyle-article-1",
     category: "Lifestyle",
-    title: "Lifestyle: Understanding the Basics",
+    title: "Understanding the Basics",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -493,7 +493,7 @@ export const articles: Article[] = [
   {
     slug: "lifestyle-article-2",
     category: "Lifestyle",
-    title: "Lifestyle: Key Causes Explained",
+    title: "Key Causes Explained",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -521,13 +521,13 @@ export const articles: Article[] = [
   {
     slug: "lifestyle-article-3",
     category: "Lifestyle",
-    title: "Lifestyle: Symptoms You Should Know",
+    title: "Symptoms You Should Know",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
     image: "/images/learn/learn-1.png",
     excerpt: "A quick guide to lifestyle and how to manage it effectively.",
-    longDescription: "This article explores lifestyle, offering insights into causes, symptoms, treatments, and prevention strategies to help women navigate this aspect of their health.",
+    longDescription: "This article explores lifestyle, offering insights into causes, symptoms, treatments, and prevention strategies to help women navigate this aspect of their health.This article explores lifestyle, offering insights into causes, symptoms, treatments, and prevention strategies to help women navigate this aspect of their health. This article explores lifestyle, offering insights into causes, symptoms, treatments, and prevention strategies to help women navigate this aspect of their health.This article explores lifestyle, offering insights into causes, symptoms, treatments, and prevention strategies to help women navigate this aspect of their health.This article explores lifestyle, offering insights into causes, symptoms, treatments, and prevention strategies to help women navigate this aspect of their health.",
     author: {
       name: "Dr. Sarah Perman, MD",
       role: "Medically Reviewed By",
@@ -549,7 +549,7 @@ export const articles: Article[] = [
   {
     slug: "lifestyle-article-4",
     category: "Lifestyle",
-    title: "Lifestyle: Effective Treatments",
+    title: "Effective Treatments",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -577,7 +577,7 @@ export const articles: Article[] = [
   {
     slug: "lifestyle-article-5",
     category: "Lifestyle",
-    title: "Lifestyle: Prevention Strategies",
+    title: "Prevention Strategies",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -605,7 +605,7 @@ export const articles: Article[] = [
   {
     slug: "lifestyle-article-6",
     category: "Lifestyle",
-    title: "Lifestyle: Expert Tips",
+    title: "Expert Tips",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -633,7 +633,7 @@ export const articles: Article[] = [
   {
     slug: "lifestyle-article-7",
     category: "Lifestyle",
-    title: "Lifestyle: Common Myths",
+    title: "Common Myths",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -661,7 +661,7 @@ export const articles: Article[] = [
   {
     slug: "lifestyle-article-8",
     category: "Lifestyle",
-    title: "Lifestyle: Latest Research Insights",
+    title: "Latest Research Insights",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -689,7 +689,7 @@ export const articles: Article[] = [
   {
     slug: "menopause-article-1",
     category: "Menopause",
-    title: "Menopause: Understanding the Basics",
+    title: "Understanding the Basics",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -717,7 +717,7 @@ export const articles: Article[] = [
   {
     slug: "menopause-article-2",
     category: "Menopause",
-    title: "Menopause: Key Causes Explained",
+    title: "Key Causes Explained",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -745,7 +745,7 @@ export const articles: Article[] = [
   {
     slug: "menopause-article-3",
     category: "Menopause",
-    title: "Menopause: Symptoms You Should Know",
+    title: "Symptoms You Should Know",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -773,7 +773,7 @@ export const articles: Article[] = [
   {
     slug: "menopause-article-4",
     category: "Menopause",
-    title: "Menopause: Effective Treatments",
+    title: "Effective Treatments",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -801,7 +801,7 @@ export const articles: Article[] = [
   {
     slug: "menopause-article-5",
     category: "Menopause",
-    title: "Menopause: Prevention Strategies",
+    title: "Prevention Strategies",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -829,7 +829,7 @@ export const articles: Article[] = [
   {
     slug: "menopause-article-6",
     category: "Menopause",
-    title: "Menopause: Expert Tips",
+    title: "Expert Tips",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -857,7 +857,7 @@ export const articles: Article[] = [
   {
     slug: "menopause-article-7",
     category: "Menopause",
-    title: "Menopause: Common Myths",
+    title: "Common Myths",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",
@@ -885,7 +885,7 @@ export const articles: Article[] = [
   {
     slug: "menopause-article-8",
     category: "Menopause",
-    title: "Menopause: Latest Research Insights",
+    title: "Latest Research Insights",
     date: "July 08, 2025",
     updatedDate: "July 25, 2025",
     readTime: "5 mins",

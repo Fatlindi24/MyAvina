@@ -10,7 +10,7 @@ const featuresData = {
     subtitle: "Powered by nature.",
     description:
       "Our creams and supplements are made with pure, plant-based ingredients — safe for menopause and carefully chosen to support long-term wellness.",
-    imageUrl: "/Images/homepage/bottle-purple.png",
+    imageUrl: "/Images/naturalprod.png",
   },
   science: {
     title: "Backed by Science",
@@ -30,7 +30,7 @@ const featuresData = {
     title: "Created by Experts",
     subtitle: "By women, for women.",
     description:
-      "Designed with real doctors and women who’ve experienced menopause firsthand.",
+      "Designed with real doctors and women who’ve experienced menopause firsthand. We understand your needs, so we create solutions that work.",
     imageUrl: "/Images/homepage/doctor.png",
   },
 };
@@ -39,13 +39,13 @@ const featuresData = {
 const imagePositions: Record<keyof typeof featuresData, string> = {
   natural:
     // big rounded square at right side
-    "right-6 md:right-10 top-1/2 -translate-y-1/2 w-40 h-40 md:w-48 md:h-48",
+    "right-6 md:right-4 top-1/2 -translate-y-1/2 w-35 h-40 md:w-40 md:h-48",
   science:
     // small illustration at right-bottom
     "right-4 md:right-8 bottom-6 w-36 h-24 md:w-44 md:h-28",
   easy:
     // pill cluster bottom-left
-    "right-2 md:right-8 top-15 md:top-6 w-34 h-28 md:w-56 md:h-32",
+    "right-2 md:right-8 top-14 md:top-6 w-34 h-28 md:w-56 md:h-full",
   experts:
     // portrait on right, vertically centered
     "right-0 md:right-4 bottom-0  w-40 h-48 md:w-48 md:h-56",
@@ -82,12 +82,39 @@ export const FeaturesSection = () => {
             <h3 className="text-[28px] lg:text-[40px] font-normal text-gray-900">
               {featuresData.natural.title}
             </h3>
-            <div className="max-w-[70%]">
-              <p className="text-[18px] md:text-[20px] mt-2">
-                {featuresData.natural.subtitle}
-              </p>
+
+            <p className="text-[18px] md:text-[20px] mt-2">
+              {featuresData.natural.subtitle}
+            </p>
+            <div className="max-w-[50%] md:max-w-[70%]">
               <p className="mt-4 text-[16px] text-gray-600 max-w-[44ch]">
                 {featuresData.natural.description}
+              </p>
+            </div>
+          </article>
+
+          {/* CARD: Easy */}
+          <article className="relative mb-4 break-inside-avoid rounded-2xl bg-[#F5ECFF] p-8 md:p-10 overflow-hidden">
+            <div
+              className={`pointer-events-none absolute ${imagePositions.easy}`}
+              aria-hidden="true"
+            >
+              <Image
+                src={featuresData.easy.imageUrl}
+                alt=""
+                fill
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+            <div className="max-w-[70%]">
+              <h3 className="text-[28px] lg:text-[40px] font-normal text-gray-900">
+                {featuresData.easy.title}
+              </h3>
+              <p className="text-[18px] md:text-[20px] text-gray-800 mt-2">
+                {featuresData.easy.subtitle}
+              </p>
+              <p className="mt-4 text-gray-600 max-w-[50ch]">
+                {featuresData.easy.description}
               </p>
             </div>
           </article>
@@ -115,32 +142,6 @@ export const FeaturesSection = () => {
               </p>
               <p className="mt-4 text-gray-600 max-w-[50ch]">
                 {featuresData.science.description}
-              </p>
-            </div>
-          </article>
-
-          {/* CARD: Easy */}
-          <article className="relative mb-4 break-inside-avoid rounded-2xl bg-[#F5ECFF] p-8 md:p-10 overflow-hidden">
-            <div
-              className={`pointer-events-none absolute ${imagePositions.easy}`}
-              aria-hidden="true"
-            >
-              <Image
-                src={featuresData.easy.imageUrl}
-                alt=""
-                fill
-                style={{ objectFit: "contain" }}
-              />
-            </div>
-            <div className="max-w-[70%]">
-              <h3 className="text-[28px] lg:text-[40px] font-normal text-gray-900">
-                {featuresData.easy.title}
-              </h3>
-              <p className="text-[18px] md:text-[20px] text-gray-800 mt-2">
-                {featuresData.easy.subtitle}
-              </p>
-              <p className="mt-4 text-gray-600 max-w-[50ch]">
-                {featuresData.easy.description}
               </p>
             </div>
           </article>

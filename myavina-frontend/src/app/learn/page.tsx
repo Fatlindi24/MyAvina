@@ -40,7 +40,7 @@ export default function LearnLandingPage() {
   };
 
   return (
-    <div className="container mx-auto py-10  space-y-10 prompt px-4">
+    <div className="container mx-auto py-10  space-y-10 prompt px-6">
       {/* Breadcrumbs */}
       <nav className="text-[16px] text-gray-500 mb-4 prompt">
         <Link href="/" className="hover:underline">
@@ -50,7 +50,7 @@ export default function LearnLandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <div className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-[450px_1fr] gap-8 items-start">
         {/* Left: Topics Menu */}
         <TopicsMenu />
 
@@ -88,18 +88,18 @@ export default function LearnLandingPage() {
       </div>
 
       {/* Divider */}
-      <div className="border-b border-gray-300"></div>
+      <div className="border-b mb-5 border-[#DD33DD]/20"></div>
 
       {/* Articles Section */}
       <div>
-        <h2 className="mb-6 text-[#828282] uppercase tracking-wide text-[20px] prompt-extralight">
+        <h2 className="mb-6 text-[#828282] uppercase tracking-wide text-[20px] font-extralight">
           All Articles
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {paginatedArticles.map((article) => (
             <div key={article.slug} className="rounded-lg overflow-hidden">
               {/* Image full width + fixed height */}
-              <div className="relative w-full h-[400px]">
+              <div className="relative  border border-[#D3D3D3] rounded-lg w-full h-48 md:h-96">
                 <Image
                   src={article.image}
                   alt={article.title}
@@ -126,7 +126,7 @@ export default function LearnLandingPage() {
                 </p>
                 <Link
                   href={`/articles/${article.slug}`}
-                  className="inline-flex items-center mt-4 px-4 py-2 text-white bg-black rounded-full hover:bg-gray-800 transition"
+                  className="inline-flex items-center mt-4 btn px-4 py-2 text-white bg-black rounded-full hover:bg-gray-800 transition"
                 >
                   Read More
                   <ChevronRight className="ml-2 w-4 h-4" />

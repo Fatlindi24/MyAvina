@@ -1,203 +1,145 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, A11y } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-type PanelProps = {
-  // These props are still accepted, but the slider content comes from the slides[] below.
-  title?: string;
-  subtitle?: string;
-  centerImageDesktop?: string; // e.g. "/Images/woman-s-desk.png"
-  centerImageMobile?: string; // e.g. "/Images/woman-s-mobile.png"
-  buttonText?: string;
-  onButtonClick?: () => void;
-};
+/* Small helper for the translucent cards */
+function Badge({
+  labelLeft,
+  value,
+  align = "left",
+}: {
+  labelLeft: string;
+  value: string;
+  align?: "left" | "right";
+}) {
+  return (
+    <div
+      className={[
+        "backdrop-blur-md rounded-xl",
+        "bg-white/18 ring-1 ring-white/25 shadow-[0_6px_18px_rgba(0,0,0,0.25)]",
+        "px-3 py-2 sm:px-4 sm:py-2.5",
+        "flex items-center gap-3",
+        align === "right" ? "justify-between" : "",
+      ].join(" ")}
+    >
+      <span className="text-[11px] sm:text-[12px] text-white/85">
+        {labelLeft}
+      </span>
+      <span className="text-[12px] sm:text-[13px] text-white font-medium">
+        {value}
+      </span>
+    </div>
+  );
+}
 
-export default function SimpleThreePartPanel({
-  // defaults kept for compatibility if you want to reuse later
-  title,
-  subtitle,
-  centerImageDesktop = "/Images/woman-s-desk.png",
-  centerImageMobile = "/Images/woman-s-mobile.png",
-  buttonText = "See Your Plan",
-  onButtonClick,
-}: PanelProps) {
-  // --- Slides data (edit text/images here) ---
-  const slides = [
-    {
-      title: "Menopause Care Made Personal",
-      subtitle: "Your menopause journey, supported every step by MyAvina",
-      centerImageDesktop: "/Images/woman-s-desk.png",
-      centerImageMobile: "/Images/woman-s-mobile.png",
-      buttonText: "See Your Plan",
-    },
-    {
-      title: "Tailored Plans, Real Results",
-      subtitle: "Personalized HRT designed around your symptoms and goals",
-      centerImageDesktop: "/Images/woman-s-desk.png",
-      centerImageMobile: "/Images/woman-s-mobile.png",
-      buttonText: "Start Assessment",
-    },
-    {
-      title: "Feel Like Yourself Again",
-      subtitle: "Clinically guided care you can trust",
-      centerImageDesktop: "/Images/woman-s-desk.png",
-      centerImageMobile: "/Images/woman-s-mobile.png",
-      buttonText: "Get Started",
-    },
-  ];
+/* The slide content (your designed panel) */
+/* === Replace MenopauseCareSlide with this version === */
+function MenopauseCareSlide({ priority = false }: { priority?: boolean }) {
+  return (
+    <div className="relative mx-auto max-w-[1200px] overflow-hidden rounded-[28px]">
+      {/* Background image */}
+      <Image
+        src="/Images/background-s.png"
+        alt=""
+        fill
+        priority={priority}
+        className="object-cover"
+        sizes="(min-width:1280px) 1200px, 100vw"
+      />
 
-  const [index, setIndex] = useState(0);
-  const count = slides.length;
-  const trackRef = useRef<HTMLDivElement>(null);
+      {/* Content wrapper */}
+      <div className="relative z-10 flex flex-col items-center text-center px-5 sm:px-24 py-8 sm:py-10 lg:py-12">
+        {/* Title + subtitle */}
+        <div className="max-w-3xl">
+          <h2 className="text-white font-semibold leading-tight text-[28px] sm:text-[36px] lg:text-[44px]">
+            Menopause Care Made Personal
+          </h2>
+          <p className="mt-2 text-white/85 text-[15px] sm:text-[16px]">
+            Your menopause journey, supported every step by MyAvina
+          </p>
+        </div>
 
-  const next = () => setIndex((i) => (i + 1) % count);
-  const prev = () => setIndex((i) => (i - 1 + count) % count);
+        {/* Gradient panel (smaller) */}
+        <div className="relative mt-6 sm:mt-8 w-full max-w-[720px] aspect-[16/14]  md:aspect-[16/8] rounded-[22px] overflow-hidden">
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(100% 80% at 50% 55%, #774180 0%, #202020 100%)",
+            }}
+          />
+          {/* Woman image – bottom center */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[62%] sm:w-[54%] lg:w-[48%]">
+            <Image
+              src="/images/homepage/menopause.png"
+              alt="Woman"
+              width={700}
+              height={900}
+              className="w-full h-auto object-contain"
+              priority={priority}
+              sizes="(min-width:1024px) 35vw, 55vw"
+            />
+          </div>
+        </div>
 
-  // Optional: swipe support
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
+        {/* CTA Button */}
+        <div className="mt-6 sm:mt-8">
+          <button className="rounded-full px-6 sm:px-8 py-2.5 sm:py-3 bg-white/60 hover:bg-white text-[#3C2C57] text-[15px] sm:text-[16px] transition">
+            See Your Plan
+          </button>
+        </div>
+      </div>
 
-    let startX: number | null = null;
+      {/* === Floating cards OUTSIDE the gradient panel === */}
+      {/* Left cards */}
+      <div className="pointer-events-none absolute z-20 left-3 sm:left-10 md:left-20 lg:left-32 xl:left-40 top-[45%] -translate-y-1/2 space-y-3 sm:space-y-4">
+        <Badge labelLeft="Name" value="Sarah" />
+        <Badge labelLeft="Age" value="55" />
+      </div>
 
-    const onTouchStart = (e: TouchEvent) => {
-      startX = e.touches[0].clientX;
-    };
-    const onTouchEnd = (e: TouchEvent) => {
-      if (startX == null) return;
-      const dx = e.changedTouches[0].clientX - startX;
-      if (dx > 50) prev();
-      else if (dx < -50) next();
-      startX = null;
-    };
+      {/* Right cards */}
+      <div className="pointer-events-none absolute z-20 right-3 sm:right-8 bottom-[20%] sm:bottom-[30%] space-y-3 sm:space-y-4 text-left">
+        <Badge
+          labelLeft="History"
+          value="Hot flashes · Poor sleep"
+          align="right"
+        />
+        <Badge
+          labelLeft="Goal"
+          value="Sleep better · Feel balanced"
+          align="right"
+        />
+      </div>
+    </div>
+  );
+}
 
-    el.addEventListener("touchstart", onTouchStart, { passive: true });
-    el.addEventListener("touchend", onTouchEnd, { passive: true });
-    return () => {
-      el.removeEventListener("touchstart", onTouchStart);
-      el.removeEventListener("touchend", onTouchEnd);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count]);
+/* ===== Slider wrapper with 3 identical slides ===== */
+export default function MenopauseCareSlider() {
+  // create 3 identical slides
+  const slides = [0, 1, 2];
 
   return (
-    <section className="container mx-auto py-10">
-      {/* Slider viewport with background image */}
-      <div className="relative overflow-hidden rounded-[28px]">
-        {/* Background image (covers entire slider) */}
-        <Image
-          src="/Images/background-s.png"
-          alt="" // decorative
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="(min-width:1024px) 1200px, 100vw"
-        />
-        {/* Optional overlay for contrast */}
-
-        {/* Track */}
-        <div
-          ref={trackRef}
-          className="relative flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${index * 100}%)` }}
-        >
-          {slides.map((s, i) => (
-            <div key={i} className="w-full shrink-0">
-              {/* Slide content: 3 vertical parts */}
-              <div className="relative grid grid-rows-[auto,1fr,auto] items-center text-center px-5 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-14 min-h-[520px] md:min-h-[640px]">
-                {/* 1) Title + subtitle */}
-                <div>
-                  <h2 className="text-white text-[28px] md:text-[36px] lg:text-[44px] font-semibold leading-tight">
-                    {s.title ?? title}
-                  </h2>
-                  {(s.subtitle ?? subtitle) && (
-                    <p className="mt-2 text-white/80 text-[15px] md:text-[16px]">
-                      {s.subtitle ?? subtitle}
-                    </p>
-                  )}
-                </div>
-
-                {/* 2) Center image */}
-                <div className="flex items-center justify-center">
-                  <div className="relative w-[90%] sm:aspect-[16/7] aspect-[1/1] rounded-3xl ">
-                    {/* Mobile image */}
-                    <div className="absolute inset-0 sm:hidden">
-                      <Image
-                        src={s.centerImageMobile ?? centerImageMobile}
-                        alt="Center image (mobile)"
-                        fill
-                        className="object-contain"
-                        sizes="100vw"
-                        priority
-                      />
-                    </div>
-
-                    {/* Desktop image */}
-                    <div className="absolute inset-0 hidden sm:block">
-                      <Image
-                        src={s.centerImageDesktop ?? centerImageDesktop}
-                        alt="Center image (desktop)"
-                        fill
-                        className="object-contain"
-                        sizes="(min-width:1024px) 60vw, 70vw"
-                        priority
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* 3) Button */}
-                <div className="flex justify-center">
-                  <button
-                    type="button"
-                    onClick={onButtonClick}
-                    className=" rounded-full bg-white/50 hover:bg-white text-white btn px-7 py-3 text-[16px] font-normal transition"
-                  >
-                    {s.buttonText ?? buttonText}
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Controls + Dots */}
-      </div>
-      <div className="relative z-10 mt-4 sm:mt-6 mb-2 flex flex-col items-center gap-3">
-        {/* Arrows */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={prev}
-            aria-label="Previous"
-            className="w-10 h-10 rounded-full border border-[#774180]/40 text-[#774180]/90 hover:bg-[#774180]/15 transition"
-          >
-            ‹
-          </button>
-
-          {/* Dots */}
-          <div className="flex items-center gap-2">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIndex(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className={`h-2 rounded-full transition-all ${
-                  i === index ? "w-6 bg-[#774180]" : "w-2 bg-[#774180]/50"
-                }`}
-              />
-            ))}
-          </div>
-
-          <button
-            onClick={next}
-            aria-label="Next"
-            className="w-10 h-10 rounded-full border border-[#774180]/40 text-[#774180]/90 hover:bg-[#774180]/15 transition"
-          >
-            ›
-          </button>
-        </div>
-      </div>
+    <section className="px-4">
+      <Swiper
+        modules={[Navigation, Pagination, A11y]}
+        slidesPerView={1}
+        spaceBetween={16}
+        loop={true}
+        className="!py-10"
+      >
+        {slides.map((i) => (
+          <SwiperSlide key={i} className="h-auto">
+            <MenopauseCareSlide priority={i === 0} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
   );
 }

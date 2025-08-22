@@ -11,13 +11,18 @@ import {
 const SectionTwo = () => {
   return (
     <section className="py-16 bg-[#F6F6F6] my-10">
-      <div className="container mx-auto p-2 md:px-4 space-y-24">
+      <div className="container mx-auto px-6 space-y-18">
         {/* Row 1: Our Story (text 65% → image 35%) */}
-        <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="space-y-4 w-full md:w-[60%]">
             <Leaf className="text-[#774180] w-8 h-8" strokeWidth={2} />
-            <h3 className="text-3xl font-semibold text-gray-900">Our Story</h3>
-            <p className="text-lg text-gray-700">
+            <h3 className="text-[32px] md:text-[40px] font-medium">
+              Our Story
+            </h3>
+            <h4 className="text-[20px] md:text-[24px] max-w-md font-normal">
+              We started MyAvina to change the menopause experience.
+            </h4>
+            <p className="text-[14px] md:text-lg text-black">
               Too many women navigate this powerful transition alone — confused
               by symptoms, dismissed by doctors, and left without support. At
               MyAvina, we believe women deserve more. That’s why we built a
@@ -39,7 +44,7 @@ const SectionTwo = () => {
         </div>
 
         {/* Row 2: Our Mission (image 35% → text 65%) */}
-        <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="flex flex-col-reverse md:flex-row items-center gap-12 mb-10">
           <div className="w-full md:w-[40%]">
             <Image
               src="/aboutpage/aboutimage.png"
@@ -51,10 +56,11 @@ const SectionTwo = () => {
           </div>
           <div className="space-y-4 w-full md:w-[60%]">
             <Leaf className="text-[#774180] w-8 h-8" strokeWidth={2} />
-            <h3 className="text-3xl font-semibold text-gray-900">
+            <h3 className="text-[32px] md:text-[40px] font-medium">
               Our Mission
             </h3>
-            <p className="text-lg text-gray-700">
+
+            <p className="text-lg text-black">
               We’re on a mission to make menopause support accessible,
               personalized, and stigma-free. Through evidence-based treatments,
               education, and community, MyAvina helps women take control of
@@ -65,7 +71,7 @@ const SectionTwo = () => {
                 <Stethoscope
                   className="text-[#774180]  bg-white rounded-full p-2"
                   strokeWidth={2}
-                  size={40}
+                  size={42}
                 />
                 <span className="text-gray-800">Expert Care</span>
               </li>
@@ -73,7 +79,7 @@ const SectionTwo = () => {
                 <BriefcaseMedical
                   className="text-[#774180]  bg-white rounded-full p-2"
                   strokeWidth={2}
-                  size={40}
+                  size={42}
                 />
                 <span className="text-gray-800">Personalized Support</span>
               </li>
@@ -81,7 +87,7 @@ const SectionTwo = () => {
                 <Brain
                   className="text-[#774180] bg-white rounded-full p-2"
                   strokeWidth={2}
-                  size={40}
+                  size={42}
                 />
                 <span className="text-gray-800">Empowered Women</span>
               </li>
@@ -91,7 +97,7 @@ const SectionTwo = () => {
 
         {/* CTA */}
         <div className="text-center">
-          <button className="bg-black text-white px-8 py-4 rounded-full hover:opacity-90 transition">
+          <button className="bg-black text-white px-4 py-3 rounded-full btn font-normal hover:opacity-90 transition">
             Start My Free Visit
           </button>
         </div>

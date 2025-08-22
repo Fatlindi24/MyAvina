@@ -199,11 +199,11 @@ const FooterLinkSection: FC<{
 export function Footer() {
   return (
     <footer className="bg-[#1E1E1E] text-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         {/* DESKTOP (md+): Newsletter + divider */}
         <div className="hidden md:block pt-16 pb-10">
           <Newsletter />
-          <hr className="mt-8 border-white/90" />
+          <hr className="mt-8 md:border-white/50" />
         </div>
 
         {/* Top content row */}
@@ -289,7 +289,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 md:mt-14 border-t border-white/90">
+        <div className="mt-10 md:mt-14 border-t border-white/50">
           <p className="text-center font-thin text-sm text-white/70 py-4">
             © 2025 MyAvina — All Rights Reserved
           </p>

@@ -134,7 +134,7 @@ export default function HeroSection() {
           {/* MOBILE/TABLET image (inside flow) */}
           <div className="mt-10 flex justify-center lg:hidden">
             <Image
-              src="/Images/homepage/hero-woman-v1.png"
+              src="/Images/about-mobile.png"
               alt="Confident woman"
               width={520}
               height={720}
