@@ -14,30 +14,38 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="bg-purple-50 rounded-xl p-4 shadow-sm flex flex-col justify-between text-center transition hover:shadow-md h-full">
-      {/* Top Content */}
-      <div>
-        <Image
-          src={product.image}
-          alt={product.name}
-          width={160}
-          height={160}
-          className="mb-4 object-contain h-[160px] mx-auto"
-        />
-
-        <h3 className="font-semibold text-base">{product.name}</h3>
-        <p className="text-sm text-gray-500 mb-1">{product.price}</p>
-
-        <div className="text-yellow-500 text-sm mb-4">
-          {"★".repeat(product.rating)}
+    <div
+      className="bg-[#F8F1FF] rounded-xl p-4 shadow-sm transition hover:shadow-md h-full
+                    grid grid-rows-[auto_1fr_auto] text-center"
+    >
+      {/* Header (title + price/rating) */}
+      <div className="flex  items-stretch justify-between text-left px">
+        <h3 className="font-semibold flex-1 max-w-1/2">{product.name}</h3>
+        <div className="flex flex-col items-end max-w-1/2 justify-between">
+          <p className="text-sm text-gray-500">{product.price}</p>
+          <div className="text-black text-sm leading-none">
+            {"★".repeat(product.rating)}
+          </div>
         </div>
       </div>
 
-      {/* Bottom Button */}
+      {/* Image area with consistent aspect ratio (no px) */}
+      <div className="relative w-full aspect-[4/3] my-4">
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          className="object-contain"
+          sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 90vw"
+        />
+      </div>
+
+      {/* Button */}
       <div>
         <Link
           href={`/products/${product.slug}`}
-          className="inline-block px-4 py-1.5 border border-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition"
+          className="inline-block w-full px-4 py-2 border border-black rounded-full text-sm font-medium
+                     hover:bg-black hover:text-white transition"
         >
           Learn More
         </Link>
