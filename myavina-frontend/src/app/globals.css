@@ -18,6 +18,10 @@
   --font-sans: var(--font-prompt);
 }
 
+.container{
+  max-width: 1300px !important;
+}
+
 /* 4) Optional: ensure body uses font-sans (Prompt) */
 @layer base {
   html, body {

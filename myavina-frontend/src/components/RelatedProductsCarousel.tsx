@@ -57,7 +57,7 @@ const ProductCard: React.FC<{ product: Product; badgeText?: string }> = ({
       </div>
 
       {/* Bottom (Details) */}
-      <div className="mt-4 bg-[#F8F1FF] rounded-[15px] px-4 py-3 text-left shadow-sm">
+      <div className="mt-4 bg-[#F8F1FF] rounded-[15px] px-4 py-3 text-left ">
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-[16px] font-medium text-gray-900 line-clamp-1">
             {product.name}
@@ -110,8 +110,8 @@ const SwiperNavButtons: React.FC = () => {
 
 /* ---------- Main Component ---------- */
 const RelatedProductsCarousel: React.FC<Props> = ({
-  title = "Explore Menopause",
-  subtitleBreakTitle = "Treatments with MYAVINA",
+  title = "Explore More Support for Your Menopause Journey",
+
   ctaHref = "/shop",
   ctaLabel = "Shop All Treatments",
   category,
@@ -144,13 +144,10 @@ const RelatedProductsCarousel: React.FC<Props> = ({
     <section className={`bg-white ${className}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-10">
-          <h2 className="lg:text-[40px] text-[32px]">
-            {title} <br />
-            <span className="text-[#774180]">{subtitleBreakTitle}</span>
-          </h2>
+          <h2 className="lg:text-[40px] text-[32px] md:max-w-xl">{title}</h2>
           <Link
             href={ctaHref}
-            className="hidden text-[16px] sm:inline-block bg-black text-white px-5 py-3 rounded-full hover:bg-gray-800 transition-colors"
+            className="hidden text-[16px] btn font-light sm:inline-block bg-black text-white px-5 py-3 rounded-full hover:bg-gray-800 transition-colors"
           >
             {ctaLabel}
           </Link>
@@ -163,10 +160,9 @@ const RelatedProductsCarousel: React.FC<Props> = ({
             slidesPerView={1.15} // subtle peek on mobile
             breakpoints={{
               640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 }, // ✅ exactly 4 on desktop
-              1280: { slidesPerView: 4 },
+              1024: { slidesPerView: 4 }, // ✅ exactly 4 on desktop
             }}
-            className="!pb-16"
+            className="!pb-6 md:!pb-16"
           >
             {data.map((product) => (
               <SwiperSlide key={product.id} className="h-auto">
@@ -189,7 +185,7 @@ const RelatedProductsCarousel: React.FC<Props> = ({
         {/* Mobile CTA */}
         <Link
           href={ctaHref}
-          className="mb-10 block w-full text-center lg:hidden text-[16px] font-normal bg-black text-white px-5 py-3 rounded-full hover:bg-gray-800 transition-colors"
+          className="mb-16 block w-full text-center btn lg:hidden text-[16px] font-normal bg-black text-white px-5 py-3 rounded-full hover:bg-gray-800 transition-colors"
         >
           {ctaLabel}
         </Link>

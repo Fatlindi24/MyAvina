@@ -166,7 +166,7 @@ export const products: Product[] = [
       }
     ],
   }
- ,
+  ,
   {
     id: "5",
     name: "Calm & Cool Tea",

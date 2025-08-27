@@ -847,6 +847,8 @@ export const articles: Article[] = [
       { heading: "Symptoms", content: "Identifying key symptoms of menopause to recognize it early." },
       { heading: "Treatment", content: "Popular treatment options for managing menopause effectively." },
       { heading: "Prevention", content: "Simple prevention tips to reduce the impact of menopause." },
+      { heading: "FAtlind", content: "Simple prevention tips to reduce the impact of menopause." },
+      { heading: "Ermal", content: "Simple prevention tips to reduce the impact of menopause." },
     ],
     relatedArticles: [
       "menopause-article-1",

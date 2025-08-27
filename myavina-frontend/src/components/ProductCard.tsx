@@ -6,46 +6,53 @@ interface ProductCardProps {
     id: string;
     slug: string;
     name: string;
-    price: string;
+    price: string; // e.g., "$39/month"
     image: string;
-    rating: number;
+    rating: number; // 0..5
+    category?: string;
   };
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div
-      className="bg-[#F8F1FF] rounded-xl p-4 shadow-sm transition hover:shadow-md h-full
-                    grid grid-rows-[auto_1fr_auto] text-center"
-    >
-      {/* Header (title + price/rating) */}
-      <div className="flex  items-stretch justify-between text-left px">
-        <h3 className="font-semibold flex-1 max-w-1/2">{product.name}</h3>
-        <div className="flex flex-col items-end max-w-1/2 justify-between">
-          <p className="text-sm text-gray-500">{product.price}</p>
-          <div className="text-black text-sm leading-none">
+    <div className="bg-[#F6ECFF] rounded-xl p-4 shadow-sm hover:shadow-md transition h-full">
+      {/* Top row: title + price/rating */}
+      <div className="flex items-start justify-between w-full gap-5">
+        <div className="min-w-0">
+          {/* <p className="text-[12px] leading-tight text-gray-500 truncate">
+            {product.category || ""}
+          </p> */}
+          <h3 className="font-regular text-[16px] md:text-[20px] leading-tight mt-1 truncate">
+            {product.name}
+          </h3>
+        </div>
+
+        <div className="text-right shrink-0 ">
+          <p className="text-[18px] text-[#9f9f9f]">{product.price}</p>
+          <div className="text-black text-[12px] leading-none mt-1">
             {"★".repeat(product.rating)}
+            {"☆".repeat(Math.max(0, 5 - product.rating))}
           </div>
         </div>
       </div>
 
-      {/* Image area with consistent aspect ratio (no px) */}
-      <div className="relative w-full aspect-[4/3] my-4">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          className="object-contain"
-          sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 90vw"
-        />
+      {/* Image */}
+      <div className="flex items-center justify-center py-4">
+        <div className="relative w-full h-60 md:w-full md:h-75">
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-contain"
+          />
+        </div>
       </div>
 
-      {/* Button */}
-      <div>
+      {/* CTA */}
+      <div className="flex justify-center">
         <Link
           href={`/products/${product.slug}`}
-          className="inline-block w-full px-4 py-2 border border-black rounded-full text-sm font-medium
-                     hover:bg-black hover:text-white transition"
+          className="inline-flex items-center justify-center h-9 px-6 rounded-full border border-black text-[12px] hover:bg-black w-full hover:text-white transition"
         >
           Learn More
         </Link>

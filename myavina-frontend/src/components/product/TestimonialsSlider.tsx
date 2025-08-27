@@ -84,11 +84,11 @@ export default function TestimonialsSlider({
 
   return (
     <section className="container mx-auto mt-16 mb-16 px-4 sm:px-6 lg:px-8 max-w-7xl">
-      <h3 className="text-4xl md:text-5xl font-bold text-center text-gray-900 leading-tight">
+      <h3 className="text-[20px] md:text-[40px] font-medium text-center text-gray-900 leading-tight">
         What Women Are Saying
       </h3>
-      <p className="text-center text-gray-900 font-bold mt-1 mb-10">
-        About <span className="text-purple-600">MYAVINA</span>
+      <p className="text-[20px] md:text-[40px] font-medium text-center text-gray-900 leading-tight mb-10">
+        About <span className="text-[#774180]">MYAVINA</span>
       </p>
 
       {/* Viewport */}
@@ -174,8 +174,8 @@ export default function TestimonialsSlider({
               className={`flex w-10 h-10 rounded-full text-white items-center justify-center transition
                 ${
                   canGoPrev
-                    ? "bg-purple-700 hover:bg-purple-800"
-                    : "bg-purple-700 opacity-50 cursor-not-allowed"
+                    ? "bg-[#774180] hover:bg-[#774180]/90"
+                    : "bg-[#774180] opacity-50 cursor-not-allowed"
                 }`}
             >
               <ChevronLeft className="w-5 h-5" />
@@ -187,8 +187,8 @@ export default function TestimonialsSlider({
               className={`flex w-10 h-10 rounded-full text-white items-center justify-center transition
                 ${
                   canGoNext
-                    ? "bg-purple-700 hover:bg-purple-800"
-                    : "bg-purple-700 opacity-50 cursor-not-allowed"
+                    ? "bg-[#774180] hover:bg-[#774180]/90"
+                    : "bg-[#774180] opacity-50 cursor-not-allowed"
                 }`}
             >
               <ChevronRight className="w-5 h-5" />
@@ -205,7 +205,7 @@ export default function TestimonialsSlider({
                 aria-label={`Go to slide ${i + 1}`}
                 onClick={() => setIndex(i)}
                 className={`h-2 rounded-full transition-all ${
-                  i === index ? "w-6 bg-purple-600" : "w-2 bg-gray-300"
+                  i === index ? "w-6 bg-[#774180]" : "w-2 bg-gray-300"
                 }`}
               />
             ))}

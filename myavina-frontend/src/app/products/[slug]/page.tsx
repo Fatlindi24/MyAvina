@@ -22,6 +22,8 @@ import {
   Zap,
   ChevronLeft,
   ShieldCheck,
+  TicketPercent,
+  Headset,
 } from "lucide-react";
 import { products } from "@/data/products";
 import { testimonials } from "@/data/testimonials";
@@ -30,6 +32,7 @@ import TestimonialsSlider from "@/components/product/TestimonialsSlider";
 import RelatedProductsCarousel from "@/components/RelatedProductsCarousel";
 import ProductFAQ from "@/components/product/ProductFAQ";
 import React from "react";
+import SectionSix from "@/components/AboutComponents/SectionSix";
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const product = products.find((p) => p.slug === params.slug);
@@ -42,7 +45,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   return (
     <div className=" min-h-screen bg-white ">
       {/* HERO */}
-      <section className="grid grid-cols-1 lg:grid-cols-[560px_1fr] gap-10 lg:gap-12 mb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <section className="grid grid-cols-1 lg:grid-cols-[560px_1fr] gap-10 lg:gap-12 mb-24 container mx-auto px-6  pt-10">
         {/* LEFT: Sticky Product Image + Functional Carousel */}
         <div className="lg:sticky lg:top-24 lg:self-start">
           {(() => {
@@ -150,7 +153,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                         src={src}
                         alt={`${product.name} thumb ${i + 1}`}
                         fill
-                        className="object-cover"
+                        className="object-contain"
                       />
                     </button>
                   ))}
@@ -164,7 +167,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         <div className="space-y-8">
           {/* Title + rating + badges + desc */}
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+            <h1 className="text-[20px] md:text-[48px] font-normal text-gray-900 mb-3">
               {product.name}
             </h1>
 
@@ -191,31 +194,30 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 <span className="ml-1 text-gray-400">Stars</span>
               </div>
 
-              <span className="inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs text-gray-800">
+              <span className="inline-flex items-center gap-1 rounded-full  px-2.5 py-1 text-xs text-gray-800">
                 <ShieldCheck className="w-3.5 h-3.5 text-purple-700" />
                 FDA‑approved medication
               </span>
             </div>
 
-            <p className="text-gray-700 leading-relaxed max-w-prose">
+            <p className="text-gray-700 md:text-[16px] text-[14px] leading-relaxed max-w-prose">
               {product.description}
             </p>
           </div>
 
           {/* CTAs */}
           <div className="space-y-3">
-            <button className="w-full bg-black text-white py-3 rounded-full font-medium hover:bg-gray-900 transition">
+            <button className=" text-[16px] w-full bg-black text-white py-3 rounded-full font-light hover:bg-gray-900 transition">
               Start Your Free Assessment
             </button>
-            <button className="w-full border border-[#D9C8FF] py-3 rounded-full font-medium hover:bg-purple-50/40 transition">
-              1‑Month Supply:{" "}
-              <span className="font-semibold ml-1">{product.price}</span>
+            <button className="w-full text-[16px] border border-[#774180]  text-[#774180] py-3 rounded-full font-light hover:bg-[#774180] hover:text-white transition">
+              1‑Month Supply: <span className=" ml-1">{product.price}</span>
             </button>
 
             {/* Promo chip */}
-            <div className="flex items-center gap-2 text-xs text-gray-600">
-              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-yellow-100">
-                <Zap className="w-3 h-3 text-yellow-600" />
+            <div className="flex items-center gap-2 text-sm font-light text-[#828282]">
+              <span className="inline-flex items-center justify-center ">
+                <TicketPercent className=" text-yellow-600" />
               </span>
               $5 off your first order
             </div>
@@ -223,10 +225,10 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
           {/* Symptoms (two columns) */}
           <div>
-            <h3 className="text-[15px] font-semibold text-gray-900 mb-2">
+            <h3 className="text-[20px] font-normal text-gray-900 mb-5">
               Target 100+ menopause symptoms:
             </h3>
-            <div className="grid grid-cols-2 gap-y-2 gap-x-6 text-sm">
+            <div className="grid grid-cols-2 gap-y-2 gap-x-6 text-lg font-light">
               {[
                 "Night sweats & hot flashes",
                 "Hormonal weight gain",
@@ -257,25 +259,29 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 sub: "Your questions answered by a licensed specialist, anytime.",
               },
               {
-                icon: Users,
+                icon: Headset,
                 title: "Community & care, 24/7",
                 sub: "Join live events, share stories, and find answers day or night.",
               },
             ].map(({ icon: Icon, title, sub }) => (
               <div key={title} className="flex items-start gap-3">
-                <span className="mt-0.5 inline-flex w-7 h-7 rounded-full bg-purple-100 items-center justify-center">
-                  <Icon className="w-4 h-4 text-purple-700" />
+                <span className="mt-0.5 inline-flex w-9 h-9 rounded-full bg-purple-100 items-center justify-center">
+                  <Icon className="w-5 h-5 text-purple-700" strokeWidth="1.5" />
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{title}</p>
-                  <p className="text-xs text-gray-500">{sub}</p>
+                  <p className="text-lg md:text-xl font-normal text-black-900">
+                    {title}
+                  </p>
+                  <p className="text-sm md:text-md font-light text-black-500">
+                    {sub}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Divider + Treatment details */}
-          <div className="border-b mt-4" />
+
           <TreatmentInformation product={product} />
         </div>
       </section>
@@ -284,15 +290,15 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       <section className="bg-[#f6f6f6] py-12 mb-16 w-full mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Icons Row */}
         <div className="container mx-auto ">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 px-15 md:px-0">
             {/* Body */}
             <div className="flex items-center gap-4">
               <div className="p-5 rounded-full bg-white flex items-center justify-center">
-                <Venus className="text-purple-600 w-6 h-6" />
+                <Venus className="text-[#774180] w-10 h-10" strokeWidth={1.6} />
               </div>
               <div>
-                <p className="font-bold">Body</p>
-                <p className="text-sm text-gray-600">
+                <p className="font-medium btn text-lg">Body</p>
+                <p className="text-md btn font-normal text-gray-600">
                   Supports overall hormone balance.
                 </p>
               </div>
@@ -301,11 +307,14 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {/* Vaginal */}
             <div className="flex items-center gap-4">
               <div className="p-5 rounded-full bg-white flex items-center justify-center">
-                <Flower2 className="text-purple-600 w-6 h-6" />
+                <Flower2
+                  className="text-[#774180] w-10 h-10"
+                  strokeWidth={1.6}
+                />
               </div>
               <div>
-                <p className="font-bold">Vaginal</p>
-                <p className="text-sm text-gray-600">
+                <p className="font-medium btn text-lg">Vaginal</p>
+                <p className="text-md btn font-normal text-gray-600">
                   Relieves vaginal discomfort.
                 </p>
               </div>
@@ -314,11 +323,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {/* Oral */}
             <div className="flex items-center gap-4">
               <div className="p-5 rounded-full bg-white flex items-center justify-center">
-                <Pill className="text-purple-600 w-6 h-6" />
+                <Pill className="text-[#774180] w-10 h-10" strokeWidth={1.6} />
               </div>
               <div>
-                <p className="font-bold">Oral</p>
-                <p className="text-sm text-gray-600">
+                <p className="font-medium btn text-lg">Oral</p>
+                <p className="text-md btn font-normal text-gray-600">
                   Easy hormone therapy by mouth.
                 </p>
               </div>
@@ -327,11 +336,14 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {/* Patch */}
             <div className="flex items-center gap-4">
               <div className="p-5 rounded-full bg-white flex items-center justify-center">
-                <Bandage className="text-purple-600 w-6 h-6" />
+                <Bandage
+                  className="text-[#774180] w-10 h-10"
+                  strokeWidth={1.6}
+                />
               </div>
               <div>
-                <p className="font-bold">Patch</p>
-                <p className="text-sm text-gray-600">
+                <p className="font-medium btn text-lg">Patch</p>
+                <p className="text-md btn font-normal text-gray-600">
                   Hormones delivered through the skin.
                 </p>
               </div>
@@ -340,7 +352,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         </div>
 
         {/* Bottom Two-Part Flex Layout */}
-        <div className="flex flex-col mx-auto lg:flex-row items-center justify-between gap-12 container">
+        <div className="flex flex-col mx-auto lg:flex-row items-center justify-between gap-5 md:gap-12 container">
           {/* Left - Image */}
           <div className="flex-shrink-0 w-full lg:w-1/2">
             <div className="relative w-full h-100 rounded-2xl overflow-hidden">
@@ -357,7 +369,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           {/* Right - Content */}
           <div className="w-full lg:w-1/2">
             <div className="flex items-center ">
-              <span className="text-[128px] font-bold text-gray-900">90%</span>
+              <span className="text-[70px] md:text-[128px] font-medium text-gray-900">
+                90%
+              </span>
               <div className="ml-4 relative w-[160px] h-[120px]">
                 <Image
                   src="/Images/pill.png"
@@ -368,16 +382,16 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 />
               </div>
             </div>
-            <p className="text-lg text-gray-600 mb-6">
+            <p className="text-xl font-normal text-black mb-6">
               of women report better sleep and more energy within weeks of
               starting treatment.
             </p>
-            <p className="text-lg text-gray-600 mb-6">
+            <p className="text-xl font-normal text-black mb-6">
               Bioidentical estrogen and progesterone can help stabilize hormone
               levels naturally — so you can sleep deeper, wake refreshed, and
               feel more like yourself again.
             </p>
-            <button className="bg-black text-white w-full lg:w-[70%] px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">
+            <button className="bg-black text-white w-full lg:w-[70%] px-6 py-3 rounded-full font-normal btn hover:bg-gray-800 transition">
               See if it&apos;s right for you
             </button>
           </div>
@@ -389,37 +403,41 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12">
           {/* Left - Text (4/7) */}
           <div className="w-full lg:w-4/7">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
+            <h2 className="text-[32px] md:text-[40px]  font-medium text-black mb-6 leading-tight">
               What Are {product.name}?
             </h2>
-            <p className="text-gray-600 mb-8 leading-relaxed text-lg">
+            <p className="text-black mb-8 leading-relaxed text-lg md:text-[20px]">
               {product.name} are a type of hormone replacement therapy (HRT)
               used to relieve menopause symptoms like hot flashes, vaginal
               dryness, and mood changes. They help restore estrogen levels in
               the body, which naturally decline during menopause.
             </p>
 
-            <p className="font-semibold mb-4">Key Benefits:</p>
+            <p className="text-lg md:text-[20px] font-light mb-4">
+              Key Benefits:
+            </p>
             <div className="space-y-4 mb-8">
               <div className="flex items-center">
-                <ThermometerIcon className="w-5 h-5 text-purple-600 mr-3" />
-                <span className="text-gray-700">
+                <ThermometerIcon className="w-5 h-5 text-[#774180] mr-3" />
+                <span className="text-black font-light text-[16px]">
                   Reduces hot flashes and night sweats
                 </span>
               </div>
               <div className="flex items-center">
-                <Bed className="w-5 h-5 text-purple-600 mr-3" />
-                <span className="text-gray-700">Improves sleep and mood</span>
+                <Bed className="w-5 h-5 text-[#774180] mr-3" />
+                <span className="text-black font-light text-[16px]">
+                  Improves sleep and mood
+                </span>
               </div>
               <div className="flex items-center">
-                <Droplet className="w-5 h-5 text-purple-600 mr-3" />
-                <span className="text-gray-700">
+                <Droplet className="w-5 h-5 text-[#774180] mr-3" />
+                <span className="text-black font-light text-[16px]">
                   Supports vaginal and urinary health
                 </span>
               </div>
             </div>
 
-            <button className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">
+            <button className="bg-black text-white px-6 py-3 rounded-full font-normal btn hover:bg-gray-800 transition">
               Get Started Today
             </button>
           </div>
@@ -448,6 +466,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       <ProductFAQ title={`${product.name} FAQs`} faq={product.faqs || []} />
 
       {/* CTA Banner */}
+      <SectionSix />
     </div>
   );
 }

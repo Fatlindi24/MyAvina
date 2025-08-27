@@ -41,7 +41,7 @@ export default function TreatmentInformation({
   if (!items.length) return null;
 
   return (
-    <section className="container mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+    <section className="container mx-auto mb-16">
       <div className="flex flex-col">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">
           Treatment Information
