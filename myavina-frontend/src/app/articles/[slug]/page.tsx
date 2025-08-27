@@ -237,7 +237,6 @@ export default function ArticlePage() {
       {related.length > 0 && (
         <div className="relative">
           {/* Nav buttons */}
-          <RelatedNav />
 
           <Swiper
             loop={false}
