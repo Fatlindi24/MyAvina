@@ -1,87 +1,91 @@
 "use client";
 
-import { useMemo } from "react";
-import { symptoms } from "@/data/symptoms";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { ChevronDown } from "lucide-react";
+import { symptoms } from "@/data/symptoms";
+
+type Item = { name: string; slug: string };
+
+function uniqBySlug(items: Item[]) {
+  const seen = new Set<string>();
+  return items.filter((i) =>
+    seen.has(i.slug) ? false : (seen.add(i.slug), true)
+  );
+}
 
 export default function SymptomsMenu({
-  active,
-  onSelect,
+  basePath = "/symptoms",
   className = "",
 }: {
-  active: string; // e.g., "ALL" or symptom name
-  onSelect: (name: string) => void; // called when user clicks a symptom
+  basePath?: string;
   className?: string;
 }) {
-  const names = useMemo(
-    () =>
-      Array.from(new Set(symptoms.map((s) => s.name)))
-        .filter(Boolean)
-        .sort((a, b) => a.localeCompare(b)),
-    []
-  );
+  const params = useParams<{ slug?: string }>();
+  const activeSlug = (params?.slug as string) ?? ""; // empty = All
+
+  const items = uniqBySlug(
+    symptoms.map((s) => ({ name: s.name, slug: s.slug }))
+  ).sort((a, b) => a.name.localeCompare(b.name));
+
+  const linkCls = (slug?: string) =>
+    `block px-2 pb-4 pt-6 hover:bg-gray-300 text-[18px] ${
+      (slug ?? "") === activeSlug
+        ? "border-b border-gray-300"
+        : " border-b border-gray-300"
+    }`;
 
   return (
     <div className={className}>
       {/* Mobile collapsible */}
-      <details className="mb-4 lg:hidden bg-white rounded-xl border border-gray-200">
-        <summary className="cursor-pointer list-none px-4 py-3 font-semibold flex items-center justify-between">
+      <details className="mb-4 lg:hidden bg-[#f6f6f6] rounded-lg text-black border border-gray-200">
+        <summary className="cursor-pointer list-none px-4 py-3 font-normal flex items-center text-[20px] justify-between">
           SYMPTOMS
           <ChevronDown className="w-4 h-4" />
         </summary>
-        <ul className="divide-y border-t">
-          <li>
-            <button
-              onClick={() => onSelect("ALL")}
-              className={`w-full text-left px-4 py-2 text-sm ${
-                active === "ALL" ? "bg-black text-white" : "hover:bg-gray-50"
-              }`}
+        <nav className="divide-y border-t">
+          <Link
+            href={basePath}
+            className={linkCls("")}
+            aria-current={activeSlug === "" ? "page" : undefined}
+          >
+            All
+          </Link>
+          {items.map(({ name, slug }) => (
+            <Link
+              key={slug}
+              href={`${basePath}/${slug}`}
+              className={linkCls(slug)}
+              aria-current={activeSlug === slug ? "page" : undefined}
             >
-              All
-            </button>
-          </li>
-          {names.map((n) => (
-            <li key={n}>
-              <button
-                onClick={() => onSelect(n)}
-                className={`w-full text-left px-4 py-2 text-sm ${
-                  active === n ? "bg-black text-white" : "hover:bg-gray-50"
-                }`}
-              >
-                {n.toUpperCase()}
-              </button>
-            </li>
+              {name.toUpperCase()}
+            </Link>
           ))}
-        </ul>
+        </nav>
       </details>
 
       {/* Desktop sticky aside */}
-      <aside className="hidden lg:block bg-white rounded-xl border border-gray-200 sticky top-24 h-fit">
-        <div className="px-4 py-3 font-semibold">SYMPTOMS</div>
-        <ul className="divide-y">
-          <li>
-            <button
-              onClick={() => onSelect("ALL")}
-              className={`w-full text-left px-4 py-2 text-sm ${
-                active === "ALL" ? "bg-black text-white" : "hover:bg-gray-50"
-              }`}
+      <aside className="hidden lg:block  bg-[#f6f6f6] rounded-lg text-black border border-gray-200 p-4 sticky top-24 h-fit">
+        <div className="font-normal text-[32px] mb-4">SYMPTOMS</div>
+        <nav className="divide-y">
+          <Link
+            href={basePath}
+            className={linkCls("")}
+            aria-current={activeSlug === "" ? "page" : undefined}
+          >
+            All
+          </Link>
+          {items.map(({ name, slug }) => (
+            <Link
+              key={slug}
+              href={`${basePath}/${slug}`}
+              className={linkCls(slug)}
+              aria-current={activeSlug === slug ? "page" : undefined}
             >
-              All
-            </button>
-          </li>
-          {names.map((n) => (
-            <li key={n}>
-              <button
-                onClick={() => onSelect(n)}
-                className={`w-full text-left px-4 py-2 text-sm ${
-                  active === n ? "bg-black text-white" : "hover:bg-gray-50"
-                }`}
-              >
-                {n.toUpperCase()}
-              </button>
-            </li>
+              {name.toUpperCase()}
+            </Link>
           ))}
-        </ul>
+        </nav>
       </aside>
     </div>
   );

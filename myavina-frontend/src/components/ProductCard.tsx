@@ -52,7 +52,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="flex justify-center">
         <Link
           href={`/products/${product.slug}`}
-          className="inline-flex items-center justify-center h-9 px-6 rounded-full border border-black text-[12px] hover:bg-black w-full hover:text-white transition"
+          className="inline-flex items-center justify-center  px-6 py-2.5 rounded-full border border-black text-[16px] hover:bg-black w-full hover:text-white transition"
         >
           Learn More
         </Link>

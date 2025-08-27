@@ -10,7 +10,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import SectionSix from "@/components/AboutComponents/SectionSix";
+import SectionSixEdit from "@/components/SectionSixEdit";
 
 function slugify(input: string) {
   return input.toLowerCase().replace(/\s+/g, "-");
@@ -26,8 +26,8 @@ export default function ShopPage() {
     <div>
       <div className="container mx-auto px-4 py-8">
         {/* Heading row */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <h1 className="text-[32px] md:text-[48px] font-medium leading-tight text-black max-w-xl">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mt-20 mb-10 ">
+          <h1 className="text-[32px] md:text-[48px] font-normal leading-tight text-black max-w-xl">
             Explore Our Menopause Solutions
           </h1>
           <p className="text-[16px] md:text-[20px] max-w-md">
@@ -43,7 +43,7 @@ export default function ShopPage() {
           const items = products.filter((p) => p.category === category);
 
           return (
-            <section key={category} className="my-12">
+            <section key={category} className="mt-5 mb-12">
               <h2 className="text-xl md:text-2xl font-normal mb-4 uppercase tracking-wide">
                 {category}
               </h2>
@@ -112,7 +112,7 @@ export default function ShopPage() {
       </div>
 
       {/* optional extra section */}
-      <SectionSix />
+      <SectionSixEdit />
 
       {/* Swiper bullets style to match the mock */}
       {/* <style jsx global>{`

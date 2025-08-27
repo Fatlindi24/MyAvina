@@ -195,22 +195,6 @@ export default function TestimonialsSlider({
             </button>
           </div>
         )}
-
-        {/* Dots */}
-        {showNavigation && (
-          <div className="mt-4 flex justify-center gap-2">
-            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Go to slide ${i + 1}`}
-                onClick={() => setIndex(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === index ? "w-6 bg-[#774180]" : "w-2 bg-gray-300"
-                }`}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );

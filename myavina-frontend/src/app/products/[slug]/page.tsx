@@ -2,14 +2,11 @@
 // app/products/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
+
 import {
-  Check,
   ChevronRight,
   Star,
-  Plus,
   Venus,
-  Flower2,
   Pill,
   Bandage,
   Bed,
@@ -18,12 +15,11 @@ import {
   CheckCircle2,
   Truck,
   Stethoscope,
-  Users,
-  Zap,
   ChevronLeft,
   ShieldCheck,
   TicketPercent,
   Headset,
+  Flower,
 } from "lucide-react";
 import { products } from "@/data/products";
 import { testimonials } from "@/data/testimonials";
@@ -45,19 +41,49 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   return (
     <div className=" min-h-screen bg-white ">
       {/* HERO */}
-      <section className="grid grid-cols-1 lg:grid-cols-[560px_1fr] gap-10 lg:gap-12 mb-24 container mx-auto px-6  pt-10">
-        {/* LEFT: Sticky Product Image + Functional Carousel */}
-        <div className="lg:sticky lg:top-24 lg:self-start">
+      <section className="grid grid-cols-1 lg:grid-cols-[500px_1fr] gap-6 lg:gap-7 mb-24 container mx-auto px-6 pt-10">
+        {/* MOBILE Title + Rating + FDA */}
+        <div className="block lg:hidden order-1">
+          <h1 className="text-[20px] font-normal text-gray-900 mb-3">
+            {product.name}
+          </h1>
+          <div className="flex flex-wrap items-center gap-3 text-sm mb-4">
+            <div className="flex items-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`w-4 h-4 ${
+                    i < Math.round(product.rating)
+                      ? "text-black fill-current"
+                      : "text-gray-300"
+                  }`}
+                  fill={
+                    i < Math.round(product.rating) ? "currentColor" : "none"
+                  }
+                  stroke={
+                    i < Math.round(product.rating) ? "none" : "currentColor"
+                  }
+                />
+              ))}
+              <span className="ml-1 text-gray-700">{product.rating}</span>
+              <span className="ml-1 text-gray-400">Stars</span>
+            </div>
+            <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs text-gray-800">
+              <ShieldCheck className="w-3.5 h-3.5 text-purple-700" />
+              FDA-approved medication
+            </span>
+          </div>
+        </div>
+
+        {/* LEFT: Sticky Product Image + Carousel */}
+        <div className="order-2 lg:order-1 lg:sticky lg:top-24 lg:self-start">
           {(() => {
-            // 1) Images for the gallery (first is the main product image)
             const gallery = [
               product.image,
               "/Images/learn/learn1.png",
               "/Images/products/product.png",
               "/Images/learn/learn1.png",
             ];
-
-            // 2) State + handlers
             const [active, setActive] = React.useState(0);
 
             const prev = () =>
@@ -66,17 +92,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               setActive((i) => (i === gallery.length - 1 ? 0 : i + 1));
             const goto = (i: number) => setActive(i);
 
-            // 3) Keyboard arrows
-            React.useEffect(() => {
-              const onKey = (e: KeyboardEvent) => {
-                if (e.key === "ArrowLeft") prev();
-                if (e.key === "ArrowRight") next();
-              };
-              window.addEventListener("keydown", onKey);
-              return () => window.removeEventListener("keydown", onKey);
-            }, []);
-
-            // 4) Simple swipe (touch / mouse)
             const startX = React.useRef<number | null>(null);
             const onPointerDown = (e: React.PointerEvent) => {
               (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
@@ -85,7 +100,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             const onPointerUp = (e: React.PointerEvent) => {
               if (startX.current == null) return;
               const delta = e.clientX - startX.current;
-              // threshold ~ 40px
               if (delta > 40) prev();
               else if (delta < -40) next();
               startX.current = null;
@@ -99,7 +113,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                   onPointerDown={onPointerDown}
                   onPointerUp={onPointerUp}
                 >
-                  {/* track */}
                   <div
                     className="absolute inset-0 flex transition-transform duration-500 ease-out"
                     style={{ transform: `translateX(-${active * 100}%)` }}
@@ -119,18 +132,14 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
                   {/* Nav arrows */}
                   <button
-                    type="button"
-                    aria-label="Previous image"
                     onClick={prev}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow flex items-center justify-center hover:bg-white transition"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow flex items-center justify-center"
                   >
                     <ChevronLeft className="w-4 h-4 text-gray-700" />
                   </button>
                   <button
-                    type="button"
-                    aria-label="Next image"
                     onClick={next}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow flex items-center justify-center hover:bg-white transition"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow flex items-center justify-center"
                   >
                     <ChevronRight className="w-4 h-4 text-gray-700" />
                   </button>
@@ -142,7 +151,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                     <button
                       key={i}
                       onClick={() => goto(i)}
-                      aria-label={`Select image ${i + 1}`}
                       className={`relative h-20 rounded-xl overflow-hidden border transition ${
                         i === active
                           ? "border-black"
@@ -164,71 +172,39 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         </div>
 
         {/* RIGHT: Content */}
-        <div className="space-y-8">
-          {/* Title + rating + badges + desc */}
-          <div>
-            <h1 className="text-[20px] md:text-[48px] font-normal text-gray-900 mb-3">
+        <div className="space-y-8 order-3 lg:order-2">
+          {/* Title + rating (desktop only) */}
+          <div className="hidden lg:block">
+            <h1 className="text-[48px] font-normal text-gray-900 mb-3">
               {product.name}
             </h1>
-
-            {/* Rating row */}
             <div className="flex flex-wrap items-center gap-3 text-sm mb-4">
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`w-4 h-4 ${
-                      i < Math.round(product.rating)
-                        ? "text-black fill-current"
-                        : "text-gray-300"
-                    }`}
-                    fill={
-                      i < Math.round(product.rating) ? "currentColor" : "none"
-                    }
-                    stroke={
-                      i < Math.round(product.rating) ? "none" : "currentColor"
-                    }
-                  />
-                ))}
-                <span className="ml-1 text-gray-700">{product.rating}</span>
-                <span className="ml-1 text-gray-400">Stars</span>
-              </div>
-
-              <span className="inline-flex items-center gap-1 rounded-full  px-2.5 py-1 text-xs text-gray-800">
-                <ShieldCheck className="w-3.5 h-3.5 text-purple-700" />
-                FDA‑approved medication
-              </span>
+              {/* stars + FDA same as above */}
             </div>
-
-            <p className="text-gray-700 md:text-[16px] text-[14px] leading-relaxed max-w-prose">
-              {product.description}
-            </p>
           </div>
-
+          {/* Description */}
+          <p className="text-gray-700 md:text-[16px] text-[14px] leading-relaxed max-w-prose">
+            {product.description}
+          </p>
           {/* CTAs */}
           <div className="space-y-3">
-            <button className=" text-[16px] w-full bg-black text-white py-3 rounded-full font-light hover:bg-gray-900 transition">
+            <button className="text-[16px] w-full bg-black text-white py-3 rounded-full font-light hover:bg-gray-900 transition">
               Start Your Free Assessment
             </button>
-            <button className="w-full text-[16px] border border-[#774180]  text-[#774180] py-3 rounded-full font-light hover:bg-[#774180] hover:text-white transition">
-              1‑Month Supply: <span className=" ml-1">{product.price}</span>
+            <button className="w-full text-[16px] border border-[#774180] text-[#774180] py-3 rounded-full font-light hover:bg-[#774180] hover:text-white transition">
+              1-Month Supply: <span className="ml-1">{product.price}</span>
             </button>
-
-            {/* Promo chip */}
             <div className="flex items-center gap-2 text-sm font-light text-[#828282]">
-              <span className="inline-flex items-center justify-center ">
-                <TicketPercent className=" text-yellow-600" />
-              </span>
+              <TicketPercent className="text-white w-10 h-10" fill="gold" />
               $5 off your first order
             </div>
           </div>
-
           {/* Symptoms (two columns) */}
           <div>
             <h3 className="text-[20px] font-normal text-gray-900 mb-5">
               Target 100+ menopause symptoms:
             </h3>
-            <div className="grid grid-cols-2 gap-y-2 gap-x-6 text-lg font-light">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-2 gap-x-6 md:text-lg  font-light">
               {[
                 "Night sweats & hot flashes",
                 "Hormonal weight gain",
@@ -244,7 +220,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               ))}
             </div>
           </div>
-
           {/* Benefits / service rows */}
           <div className="space-y-4">
             {[
@@ -264,9 +239,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 sub: "Join live events, share stories, and find answers day or night.",
               },
             ].map(({ icon: Icon, title, sub }) => (
-              <div key={title} className="flex items-start gap-3">
-                <span className="mt-0.5 inline-flex w-9 h-9 rounded-full bg-purple-100 items-center justify-center">
-                  <Icon className="w-5 h-5 text-purple-700" strokeWidth="1.5" />
+              <div key={title} className="flex items-center gap-3">
+                <span className="mt-0.5 inline-flex p-2 lg:p-4 rounded-full bg-gray-100 items-center justify-center">
+                  <Icon className="w-7 h-7 text-[#774180]" strokeWidth="1.5" />
                 </span>
                 <div>
                   <p className="text-lg md:text-xl font-normal text-black-900">
@@ -279,9 +254,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               </div>
             ))}
           </div>
-
-          {/* Divider + Treatment details */}
-
+          {/* Rest: symptoms, benefits, treatment info */}
           <TreatmentInformation product={product} />
         </div>
       </section>
@@ -290,7 +263,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       <section className="bg-[#f6f6f6] py-12 mb-16 w-full mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Icons Row */}
         <div className="container mx-auto ">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 px-15 md:px-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 px-4 md:px-0">
             {/* Body */}
             <div className="flex items-center gap-4">
               <div className="p-5 rounded-full bg-white flex items-center justify-center">
@@ -307,7 +280,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {/* Vaginal */}
             <div className="flex items-center gap-4">
               <div className="p-5 rounded-full bg-white flex items-center justify-center">
-                <Flower2
+                <Flower
                   className="text-[#774180] w-10 h-10"
                   strokeWidth={1.6}
                 />
@@ -418,19 +391,19 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </p>
             <div className="space-y-4 mb-8">
               <div className="flex items-center">
-                <ThermometerIcon className="w-5 h-5 text-[#774180] mr-3" />
+                <ThermometerIcon className="w-7 h-7 text-[#774180] mr-3" />
                 <span className="text-black font-light text-[16px]">
                   Reduces hot flashes and night sweats
                 </span>
               </div>
               <div className="flex items-center">
-                <Bed className="w-5 h-5 text-[#774180] mr-3" />
+                <Bed className="w-7 h-7 text-[#774180] mr-3" />
                 <span className="text-black font-light text-[16px]">
                   Improves sleep and mood
                 </span>
               </div>
               <div className="flex items-center">
-                <Droplet className="w-5 h-5 text-[#774180] mr-3" />
+                <Droplet className="w-7 h-7 text-[#774180] mr-3" />
                 <span className="text-black font-light text-[16px]">
                   Supports vaginal and urinary health
                 </span>

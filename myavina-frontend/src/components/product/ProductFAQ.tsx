@@ -21,9 +21,12 @@ export default function ProductFAQ({ title, faq }: ProductFAQProps) {
       <div className="space-y-4">
         {faq.map((item, idx) => (
           <details key={idx} className="border-b border-gray-200 ">
-            <summary className="px-6 py-4 cursor-pointer font-light text-[16px] md:text-[32px] flex items-center gap-5 justify-between">
+            <summary className="lg:px-6 py-4 cursor-pointer font-light text-[16px] md:text-[32px] flex items-center gap-5 justify-between">
               {item.q}
-              <PlusCircle className="w-4 h-4 md:w-8 md:h-8" strokeWidth={1.5} />
+              <PlusCircle
+                className="w-5 h-5 md:w-8 md:h-8 min-w-5"
+                strokeWidth={1.5}
+              />
             </summary>
             <div className="px-6 pb-4 text-gray-600">
               <p>{item.a}</p>
