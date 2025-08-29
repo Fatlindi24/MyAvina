@@ -26,7 +26,7 @@ export default function ShopPage() {
     <div>
       <div className="container mx-auto px-4 py-8">
         {/* Heading row */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mt-20 mb-10 ">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:mt-20 mb-10 ">
           <h1 className="text-[32px] md:text-[48px] font-normal leading-tight text-black max-w-xl">
             Explore Our Menopause Solutions
           </h1>

@@ -41,7 +41,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   return (
     <div className=" min-h-screen bg-white ">
       {/* HERO */}
-      <section className="grid grid-cols-1 lg:grid-cols-[500px_1fr] gap-6 lg:gap-7 mb-24 container mx-auto px-6 pt-10">
+      <section className="grid grid-cols-1 lg:grid-cols-[500px_1fr] gap-6 lg:gap-7  container mx-auto px-6 pt-10">
         {/* MOBILE Title + Rating + FDA */}
         <div className="block lg:hidden order-1">
           <h1 className="text-[20px] font-normal text-gray-900 mb-3">

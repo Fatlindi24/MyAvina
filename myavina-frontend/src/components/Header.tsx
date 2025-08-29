@@ -152,7 +152,7 @@ export function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="flex items-center text-gray-600 hover:text-[#774180] transition-colors duration-200 py-2"
+                    className="flex items-center text-gray-600 hover:text-[#774180] btn transition-colors duration-200 py-2"
                   >
                     {item.name}
                     {item.dropdownItems && (
@@ -190,7 +190,7 @@ export function Header() {
             <div className="flex items-center space-x-4">
               <Link
                 href="/get-started"
-                className="bg-[#774180] text-white px-5 py-2 rounded-full flex items-center hover:bg-[#62346b] transition"
+                className="bg-[#774180] text-white px-5 py-2 rounded-full flex items-center btn hover:bg-[#62346b] transition"
               >
                 Get Started
                 <ChevronRight className="ml-2 w-4 h-4" />
@@ -255,39 +255,49 @@ export function Header() {
       </div>
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="lg:hidden">
-          <div
-            className="fixed inset-0 bg-black bg-opacity-25 z-40"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          <div className="fixed top-0 right-0 w-full max-w-sm h-full bg-white shadow-lg z-50 flex flex-col">
-            <div className="p-5 flex items-center justify-between border-b">
-              <Link
-                href="/"
-                className="text-2xl font-light tracking-[0.2em] text-gray-800"
-              >
-                MYAVINA
-              </Link>
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="p-2 -mr-2"
-              >
-                <X className="h-6 w-6 text-gray-600" />
-              </button>
-            </div>
-            <nav className="mt-6 flex-grow px-5 space-y-1">
-              {navItems.map((item) => (
-                <MobileNavItem
-                  key={item.name}
-                  item={item}
-                  closeMenu={() => setIsMenuOpen(false)}
-                />
-              ))}
-            </nav>
+      <div
+        className={`sm:hidden fixed inset-0 z-50 transition-all duration-300 ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        {/* Backdrop */}
+        <div
+          className={`absolute inset-0 bg-white transition-opacity duration-300 ${
+            isMenuOpen ? "bg-opacity-50" : "bg-opacity-0 pointer-events-none"
+          }`}
+          onClick={() => setIsMenuOpen(false)}
+        />
+
+        {/* Sidebar (full width on sm only) */}
+        <div
+          className={`absolute top-0 right-0 w-full h-full bg-white shadow-lg flex flex-col transition-transform duration-300 ${
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="p-5 flex items-center justify-between border-b">
+            <Link
+              href="/"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-2xl font-light tracking-[0.2em] text-gray-800"
+            >
+              MYAVINA
+            </Link>
+            <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2">
+              <X className="h-6 w-6 text-gray-600" />
+            </button>
           </div>
+
+          <nav className="mt-6 flex-grow px-5 space-y-1 overflow-y-auto">
+            {navItems.map((item) => (
+              <MobileNavItem
+                key={item.name}
+                item={item}
+                closeMenu={() => setIsMenuOpen(false)}
+              />
+            ))}
+          </nav>
         </div>
-      )}
+      </div>
     </header>
   );
 }
@@ -302,23 +312,40 @@ function MobileNavItem({
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
 
   return (
-    <div>
-      <button
-        onClick={() => setIsSubmenuOpen(!isSubmenuOpen)}
-        className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+    <div className="border-b last:border-none">
+      <div className="flex justify-between items-center px-3 py-2">
+        {/* Name links directly to main page */}
+        <Link
+          href={item.href}
+          onClick={closeMenu}
+          className="text-base font-medium text-gray-700 hover:text-[#774180] flex-1"
+        >
+          {item.name}
+        </Link>
+
+        {/* Show plus only if dropdown items exist */}
+        {item.dropdownItems && (
+          <button
+            onClick={() => setIsSubmenuOpen(!isSubmenuOpen)}
+            className="p-1 text-gray-600 hover:bg-gray-100 rounded transition"
+          >
+            <Plus
+              className={`w-5 h-5 transition-transform duration-300 ${
+                isSubmenuOpen ? "rotate-45" : ""
+              }`}
+            />
+          </button>
+        )}
+      </div>
+
+      {/* Submenu with transition */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          isSubmenuOpen ? "max-h-[999px] opacity-100" : "max-h-0 opacity-0"
+        }`}
       >
-        <span>{item.name}</span>
-        {item.dropdownItems ? (
-          <Plus
-            className={`w-5 h-5 transition-transform duration-300 ${
-              isSubmenuOpen ? "rotate-45" : ""
-            }`}
-          />
-        ) : null}
-      </button>
-      {isSubmenuOpen && item.dropdownItems && (
-        <div className="pl-6 pt-2 pb-1 space-y-1 transition-all duration-300">
-          {item.dropdownItems.map((subItem) => (
+        <div className="pl-6 pb-2 space-y-1">
+          {item.dropdownItems?.map((subItem) => (
             <Link
               key={subItem.name}
               href={subItem.href}
@@ -329,7 +356,7 @@ function MobileNavItem({
             </Link>
           ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
