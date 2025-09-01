@@ -28,7 +28,7 @@ export default function ReviewCard({ review }: { review: Review }) {
             />
             {/* Icon overlay */}
             <BadgeCheck
-              className="absolute -bottom-2 -right-3 w-6 h-6 text-white"
+              className="absolute -bottom-2 -right-1 w-6 h-6 text-white"
               fill="green"
             />
           </div>

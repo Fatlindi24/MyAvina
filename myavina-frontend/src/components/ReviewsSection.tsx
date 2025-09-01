@@ -48,7 +48,9 @@ export default function ReviewsSection() {
 
   return (
     <section className="container mx-auto px-6 py-12">
-      <h2 className="text-[32px] md:text-[48px] font-medium mb-6">Reviews</h2>
+      <h2 className="text-[32px] md:text-[48px] font-medium md:mb-12 mb-6">
+        Reviews
+      </h2>
 
       <div className="grid md:grid-cols-[360px_1fr] gap-8">
         {/* Left Filters (desktop only) */}

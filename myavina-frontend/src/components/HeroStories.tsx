@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { women } from "@/data/woman";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -8,6 +8,8 @@ import "swiper/css";
 
 export default function HeroStories() {
   const swiperRef = useRef<any>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   return (
     <>
@@ -17,9 +19,8 @@ export default function HeroStories() {
           Reviews
         </p>
         <div className="flex flex-col gap-8 items-start md:items-center">
-          {/* Left Text */}
           <div className="flex flex-col md:flex-row justify-between md:items-center w-full px-6">
-            <h1 className="text-[32px] md:text-[48px] font-medium md:font-normal mb-4">
+            <h1 className="text-[32px] md:text-[48px] leading-tight font-medium md:font-normal mb-4">
               Real Stories. <br /> Real Relief.
             </h1>
             <p className="text-black md:max-w-1/2 text-md md:text-xl">
@@ -28,12 +29,20 @@ export default function HeroStories() {
             </p>
           </div>
 
-          {/* Right Image */}
-          <div>
+          {/* ✅ Images swap based on screen size */}
+          <div className="w-full">
+            {/* Mobile image */}
+            <img
+              src="/aboutpage/mobile-about.png"
+              alt="MyAvina Reviews Banner Mobile"
+              className="px-0 md:px-6 rounded-lg w-full object-contain h-full block md:hidden"
+            />
+
+            {/* Desktop image */}
             <img
               src="/images/reviews/hero-banner.png"
-              alt="MyAvina Reviews Banner"
-              className="px-0 md:px-6 rounded-lg w-full object-cover md:h-full"
+              alt="MyAvina Reviews Banner Desktop"
+              className="px-0 md:px-6 rounded-lg w-full object-cover md:h-full hidden md:block"
             />
           </div>
         </div>
@@ -42,7 +51,7 @@ export default function HeroStories() {
       {/* --- Stories + Swiper --- */}
       <section className="bg-[#F6F6F6]">
         <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row gap-1 md:gap-20">
-          {/* Left Side Text */}
+          {/* Left Side */}
           <div className="md:w-1/3 flex flex-col justify-between">
             <div>
               <h2 className="text-[32px] md:text-[40px] font-medium mb-6">
@@ -56,15 +65,30 @@ export default function HeroStories() {
 
             {/* Desktop Arrows */}
             <div className="hidden md:flex gap-4 mt-4">
+              {/* Prev */}
               <button
                 onClick={() => swiperRef.current?.slidePrev()}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow hover:bg-purple-600 hover:text-white transition"
+                disabled={isBeginning}
+                className={`w-10 h-10 flex items-center justify-center rounded-full transition
+                  ${
+                    isBeginning
+                      ? "opacity-50 cursor-not-allowed border-2 border-[#774180] text-[#774180] bg-white"
+                      : "border-2 border-[#774180] text-[#774180] bg-white hover:bg-[#774180] hover:text-[#F6F6F6] cursor-pointer"
+                  }`}
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
+
+              {/* Next */}
               <button
                 onClick={() => swiperRef.current?.slideNext()}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow hover:bg-purple-600 hover:text-white transition"
+                disabled={isEnd}
+                className={`w-10 h-10 flex items-center justify-center rounded-full transition
+                  ${
+                    isEnd
+                      ? "opacity-50 cursor-not-allowed border-2 border-[#774180] text-[#774180] bg-white"
+                      : "border-2 border-[#774180] text-[#774180] bg-white hover:bg-[#774180] hover:text-[#F6F6F6] cursor-pointer"
+                  }`}
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -82,6 +106,12 @@ export default function HeroStories() {
               }}
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
+                setIsBeginning(swiper.isBeginning);
+                setIsEnd(swiper.isEnd);
+              }}
+              onSlideChange={(swiper) => {
+                setIsBeginning(swiper.isBeginning);
+                setIsEnd(swiper.isEnd);
               }}
             >
               {women.map((woman) => (
@@ -93,7 +123,7 @@ export default function HeroStories() {
                       className="w-full h-auto rounded-lg object-contain"
                     />
                     <div className="pt-4">
-                      <h3 className="font-medium text-lg">
+                      <h3 className="font-medium md:text-xl text-lg">
                         Meet, {woman.name}
                       </h3>
                       <p className="text-md font-light text-[#828282]">
@@ -107,15 +137,30 @@ export default function HeroStories() {
 
             {/* Mobile Arrows */}
             <div className="flex md:hidden gap-4 mt-6 justify-center">
+              {/* Prev */}
               <button
                 onClick={() => swiperRef.current?.slidePrev()}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white hover:bg-purple-600 hover:text-white transition"
+                disabled={isBeginning}
+                className={`w-10 h-10 flex items-center justify-center rounded-full transition
+                  ${
+                    isBeginning
+                      ? "opacity-50 cursor-not-allowed border-2 border-[#774180] text-[#774180] bg-white"
+                      : "border-2 border-[#774180] text-[#774180] bg-white hover:bg-[#774180] hover:text-[#F6F6F6] cursor-pointer"
+                  }`}
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
+
+              {/* Next */}
               <button
                 onClick={() => swiperRef.current?.slideNext()}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white hover:bg-purple-600 hover:text-white transition"
+                disabled={isEnd}
+                className={`w-10 h-10 flex items-center justify-center rounded-full transition
+                  ${
+                    isEnd
+                      ? "opacity-50 cursor-not-allowed border-2 border-[#774180] text-[#774180] bg-white"
+                      : "border-2 border-[#774180] text-[#774180] bg-white hover:bg-[#774180] hover:text-[#F6F6F6] cursor-pointer"
+                  }`}
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
