@@ -45,7 +45,7 @@ const footerSectionsData = [
     title: "Support",
     links: [
       { name: "FAQ", href: "#" },
-      { name: "Help Center", href: "#" },
+
       { name: "Contact Us", href: "#" },
     ],
   },
@@ -181,7 +181,7 @@ const FooterLinkSection: FC<{
               <li key={link.name}>
                 <Link
                   href={link.href}
-                  className="text-base text-white/80 hover:text-white hover:underline"
+                  className="text-base font-light text-[16px] text-white/80 hover:text-white hover:font-medium"
                 >
                   {link.name}
                 </Link>

@@ -18,22 +18,26 @@ function Badge({
   value: string;
   align?: "left" | "right";
 }) {
+  const parts = value.split(/·|,/).map((p) => p.trim()); // split on "·" or ","
+
   return (
     <div
       className={[
         "backdrop-blur-md rounded-xl",
         "bg-white/18 ring-1 ring-white/25 shadow-[0_6px_18px_rgba(0,0,0,0.25)]",
         "px-3 py-2 sm:px-4 sm:py-2.5",
-        "flex items-center gap-3",
+        "flex items-start gap-3",
         align === "right" ? "justify-between" : "",
       ].join(" ")}
     >
-      <span className="text-[11px] sm:text-[12px] text-white/85">
+      <span className="text-[11px] sm:text-[12px] text-white/85 whitespace-nowrap">
         {labelLeft}
       </span>
-      <span className="text-[12px] sm:text-[13px] text-white font-medium">
-        {value}
-      </span>
+      <div className="flex flex-col text-[12px] sm:text-[13px] text-white font-medium">
+        {parts.map((line, i) => (
+          <span key={i}>{line}</span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -104,7 +108,7 @@ function MenopauseCareSlide({ priority = false }: { priority?: boolean }) {
       </div>
 
       {/* Right cards */}
-      <div className="pointer-events-none absolute z-20 right-3 sm:right-8 bottom-[20%] sm:bottom-[30%] space-y-3 sm:space-y-4 text-left">
+      <div className="pointer-events-none absolute z-20 right-3 sm:right-38 bottom-[20%] sm:bottom-[30%] space-y-3 sm:space-y-4 text-left">
         <Badge
           labelLeft="History"
           value="Hot flashes · Poor sleep"
