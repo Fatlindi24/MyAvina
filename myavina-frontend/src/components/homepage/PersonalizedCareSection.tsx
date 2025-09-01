@@ -94,7 +94,7 @@ function MenopauseCareSlide({ priority = false }: { priority?: boolean }) {
 
         {/* CTA Button */}
         <div className="mt-6 sm:mt-8">
-          <button className="rounded-full px-6 sm:px-8 py-2.5 sm:py-3 bg-white/60 hover:bg-white text-[#3C2C57] text-[15px] sm:text-[16px] transition">
+          <button className="rounded-full px-6 sm:px-8 py-2.5 sm:py-3 bg-white/60 hover:bg-white text-white hover:text-[#774180] text-[15px] sm:text-[16px] transition">
             See Your Plan
           </button>
         </div>

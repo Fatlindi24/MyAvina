@@ -44,7 +44,7 @@ const footerSectionsData = [
   {
     title: "Support",
     links: [
-      { name: "FAQ", href: "#" },
+      { name: "FAQ", href: "/faq" },
 
       { name: "Contact Us", href: "#" },
     ],
