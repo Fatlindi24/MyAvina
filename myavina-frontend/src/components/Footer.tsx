@@ -10,6 +10,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { useState, type FC } from "react";
+import { topics } from "@/data/topics";
 
 /* ---------------- DATA ---------------- */
 
@@ -65,20 +66,13 @@ const footerSectionsData = [
       { name: "Telehealth Consent", href: "telehealth-consent" },
     ],
   },
+
   {
     title: "Medical Topics",
-    links: [
-      { name: "Dryness", href: "#" },
-      { name: "Hot Flashes", href: "#" },
-      { name: "Hormone Replacement Therapy", href: "#" },
-      { name: "Lifestyle", href: "#" },
-      { name: "Mood & Anxiety", href: "#" },
-      { name: "Preventive Care", href: "#" },
-      { name: "Testosterone for Women", href: "#" },
-      { name: "Acne", href: "#" },
-      { name: "Bloating", href: "#" },
-      { name: "More Symptoms", href: "#" },
-    ],
+    links: topics.map((topic) => ({
+      name: topic.name,
+      href: `/learn/${topic.slug}`,
+    })),
   },
 ];
 
