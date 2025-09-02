@@ -26,8 +26,8 @@ const footerSectionsData = [
   {
     title: "Company",
     links: [
-      { name: "About MYAVINA", href: "#" },
-      { name: "Reviews", href: "#" },
+      { name: "About MYAVINA", href: "/about" },
+      { name: "Reviews", href: "/reviews" },
       { name: "Ways We Care", href: "#" },
       { name: "Affiliate Program", href: "#" },
       { name: "Corporate Wellness", href: "#" },
@@ -38,7 +38,7 @@ const footerSectionsData = [
     title: "Education",
     links: [
       { name: "Menopause Symptoms", href: "#" },
-      { name: "All Articles", href: "#" },
+      { name: "All Articles", href: "/learn" },
     ],
   },
   {
@@ -46,7 +46,7 @@ const footerSectionsData = [
     links: [
       { name: "FAQ", href: "/faq" },
 
-      { name: "Contact Us", href: "#" },
+      { name: "Contact Us", href: "/contact" },
     ],
   },
   {
@@ -59,10 +59,10 @@ const footerSectionsData = [
   {
     title: "Legal",
     links: [
-      { name: "Privacy Policy", href: "#" },
-      { name: "Terms & Conditions", href: "#" },
-      { name: "Consumer Health Privacy Policy", href: "#" },
-      { name: "Telehealth Consent", href: "#" },
+      { name: "Privacy Policy", href: "/privacy-policy" },
+      { name: "Terms & Conditions", href: "/terms" },
+      { name: "Consumer Health Privacy Policy", href: "/consumer-health" },
+      { name: "Telehealth Consent", href: "telehealth-consent" },
     ],
   },
   {
