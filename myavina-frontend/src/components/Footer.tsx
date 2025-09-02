@@ -20,7 +20,7 @@ const footerSectionsData = [
     links: [
       { name: "Start My Free Visit", href: "#" },
       { name: "Check My Symptoms", href: "#" },
-      { name: "Shop Treatments", href: "#" },
+      { name: "Shop Treatments", href: "/treatments" },
       { name: "Bioidentical HRT", href: "#" },
     ],
   },
@@ -29,16 +29,16 @@ const footerSectionsData = [
     links: [
       { name: "About MYAVINA", href: "/about" },
       { name: "Reviews", href: "/reviews" },
-      { name: "Ways We Care", href: "#" },
-      { name: "Affiliate Program", href: "#" },
-      { name: "Corporate Wellness", href: "#" },
-      { name: "Careers", href: "#" },
+      // { name: "Ways We Care", href: "#" },
+      // { name: "Affiliate Program", href: "#" },
+      // { name: "Corporate Wellness", href: "#" },
+      // { name: "Careers", href: "#" },
     ],
   },
   {
     title: "Education",
     links: [
-      { name: "Menopause Symptoms", href: "#" },
+      { name: "Menopause Symptoms", href: "/symptoms" },
       { name: "All Articles", href: "/learn" },
     ],
   },
@@ -53,8 +53,8 @@ const footerSectionsData = [
   {
     title: "Resources",
     links: [
-      { name: "Medical Journal", href: "#" },
-      { name: "States We Serve", href: "#" },
+      { name: "Medical Journal", href: "/symptoms" },
+      // { name: "States We Serve", href: "#" },
     ],
   },
   {
@@ -259,11 +259,11 @@ export function Footer() {
                 <FooterLinkSection
                   {...footerSectionsData.find((s) => s.title === "Legal")!}
                 />
-              </div>
-              <div className="space-y-8">
                 <FooterLinkSection
                   {...footerSectionsData.find((s) => s.title === "Education")!}
                 />
+              </div>
+              <div className="space-y-8">
                 <FooterLinkSection
                   {...footerSectionsData.find(
                     (s) => s.title === "Medical Topics"
