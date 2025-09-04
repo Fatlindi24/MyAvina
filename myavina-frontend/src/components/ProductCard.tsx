@@ -15,7 +15,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="bg-[#F6ECFF] rounded-xl p-4 shadow-sm hover:shadow-md transition h-full">
+    <div className="bg-[#F6ECFF] rounded-xl p-4  transition h-full">
       {/* Top row: title + price/rating */}
       <div className="flex items-start justify-between w-full gap-5">
         <div className="min-w-0">

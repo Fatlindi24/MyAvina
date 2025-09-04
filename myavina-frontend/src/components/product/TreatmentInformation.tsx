@@ -1,5 +1,60 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { Plus } from "lucide-react";
 import type { Product } from "@/data/products";
+
+function AccordionRow({
+  title,
+  content,
+}: {
+  title: string;
+  content: React.ReactNode;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (ref.current) {
+      setHeight(ref.current.scrollHeight);
+    }
+  }, [content]);
+
+  return (
+    <div className="border-b border-gray-200 py-4">
+      {/* Header */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex w-full items-center gap-4 cursor-pointer font-medium text-left"
+        aria-expanded={isOpen}
+      >
+        <Plus
+          className={`w-4 h-4 text-purple-600 transition-transform duration-200 ${
+            isOpen ? "rotate-225" : "rotate-0"
+          }`}
+          aria-hidden="true"
+        />
+        {title}
+      </button>
+
+      {/* Animated content */}
+      <div
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{ maxHeight: isOpen ? height : 0 }}
+      >
+        <div
+          ref={ref}
+          className={`pt-1 text-gray-600 transition-all duration-300 ${
+            isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
+          }`}
+        >
+          {content}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function TreatmentInformation({
   product,
@@ -42,37 +97,13 @@ export default function TreatmentInformation({
 
   return (
     <section className="container mx-auto mb-16">
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">
+        Treatment Information
+      </h2>
       <div className="flex flex-col">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          Treatment Information
-        </h2>
-
-        <div className="flex flex-col divide-y divide-gray-200">
-          {items.map(({ title, content }) => (
-            <details key={title} className="group py-4">
-              {/* Header */}
-              <summary className="flex items-center gap-4 cursor-pointer font-medium list-none">
-                <Plus
-                  className="w-4 h-4 text-purple-600 transition-transform duration-200 group-open:rotate-45"
-                  aria-hidden="true"
-                />
-                {title}
-              </summary>
-
-              {/* Smooth animated content */}
-              <div
-                className="
-                  overflow-hidden 
-                  transition-all duration-300 ease-in-out 
-                  max-h-0 opacity-0 translate-y-1
-                  group-open:max-h-96 group-open:opacity-100 group-open:translate-y-0
-                "
-              >
-                <div className="mt-3 text-gray-600">{content}</div>
-              </div>
-            </details>
-          ))}
-        </div>
+        {items.map(({ title, content }) => (
+          <AccordionRow key={title} title={title} content={content} />
+        ))}
       </div>
     </section>
   );

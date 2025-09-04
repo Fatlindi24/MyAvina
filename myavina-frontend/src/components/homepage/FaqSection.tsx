@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, PlusCircle } from "lucide-react";
 
 // --- Data for the FAQ items ---
 // In a real application, this would come from a CMS or API.
@@ -64,12 +64,12 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         <span className="font-normal lg:text-[32px] text-[16px] leading-[130%] tracking-normal">
           {faq.question}
         </span>
-        <span className="flex-shrink-0 ml-4 p-1 rounded-full border border-dark">
-          {isOpen ? (
-            <Minus className="h-4 w-4 text-gray-700" />
-          ) : (
-            <Plus className="h-4 w-4 text-gray-700" />
-          )}
+        <span
+          className={`inline-flex h-6 w-6  md:w-8 items-center justify-center rounded-full text-blacks transition-transform duration-300 ${
+            isOpen ? "rotate-225" : "rotate-0"
+          }`}
+        >
+          <PlusCircle className="md:h-18 md:w-18   h-10 w-10" strokeWidth={2} />
         </span>
       </button>
 

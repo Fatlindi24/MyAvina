@@ -206,7 +206,9 @@ export default function TelehealthConsentPage() {
             If you have questions about this policy or your information, contact
             us at:
           </p>
-          <p className="mt-2 font-medium">privacy@myavina.com</p>
+          <a href="mailto:support@myavina.com" className="mt-2 font-normal">
+            support@myavina.com
+          </a>
         </Section>
       </main>
     </div>

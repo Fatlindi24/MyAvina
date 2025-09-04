@@ -31,7 +31,7 @@ export default function CategoryPage({
   if (categoryProducts.length === 0) return notFound();
 
   return (
-    <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <section className="container mx-auto px-6  py-12">
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-3xl font-bold text-gray-800 capitalize">
           {categoryName}
@@ -48,7 +48,7 @@ export default function CategoryPage({
         {categoryProducts.map((product) => (
           <div
             key={product.id}
-            className="bg-[#f8f6fc] rounded-xl p-4 shadow-sm flex flex-col justify-between transition hover:shadow-md"
+            className="bg-[#f8f6fc] rounded-xl p-4  flex flex-col justify-between transition hover:shadow-md"
           >
             {/* Top content */}
             <div className="text-center">

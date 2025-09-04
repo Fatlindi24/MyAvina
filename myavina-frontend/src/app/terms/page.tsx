@@ -142,7 +142,9 @@ export default function TermsPage() {
 
         <Section title="Contact Us">
           <p>If you have questions about these Terms, contact us at:</p>
-          <p className="mt-2 font-medium">support@myavina.com</p>
+          <a href="mailto:support@myavina.com" className="mt-2 font-normal">
+            support@myavina.com
+          </a>
         </Section>
       </main>
     </div>

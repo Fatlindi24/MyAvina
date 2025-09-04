@@ -41,7 +41,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   return (
     <div className=" min-h-screen bg-white ">
       {/* HERO */}
-      <section className="grid grid-cols-1 lg:grid-cols-[500px_1fr] gap-6 lg:gap-7  container mx-auto px-6 pt-10">
+      <section className="grid grid-cols-1 lg:grid-cols-[500px_1fr] gap-6 lg:gap-7  container mx-auto px-6 py-10">
         {/* MOBILE Title + Rating + FDA */}
         <div className="block lg:hidden order-1">
           <h1 className="text-[20px] font-normal text-gray-900 mb-3">
@@ -188,10 +188,10 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           </p>
           {/* CTAs */}
           <div className="space-y-3">
-            <button className="text-[16px] w-full bg-black text-white py-3 rounded-full font-light hover:bg-gray-900 transition">
+            <button className="text-[16px] w-full bg-black text-white py-3 rounded-full font-light hover:bg-gray-900 transition cursor-pointer">
               Start Your Free Assessment
             </button>
-            <button className="w-full text-[16px] border border-[#774180] text-[#774180] py-3 rounded-full font-light hover:bg-[#774180] hover:text-white transition">
+            <button className="w-full text-[16px] border border-[#774180] text-[#774180] py-3 rounded-full font-light hover:bg-[#774180] hover:text-white transition cursor-pointer">
               1-Month Supply: <span className="ml-1">{product.price}</span>
             </button>
             <div className="flex items-center gap-2 text-sm font-light text-[#828282]">

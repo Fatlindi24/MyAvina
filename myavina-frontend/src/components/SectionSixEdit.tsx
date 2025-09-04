@@ -9,7 +9,7 @@ const SectionSix = () => {
       <div className="lg:hidden">
         {/* Purple panel with diagonal bottom */}
         <div className="relative z-10 bg-[#774180] text-white h-96 [clip-path:polygon(0_0,100%_0,100%_85%,0_100%)]">
-          <div className="container mx-auto px-4 py-12">
+          <div className="container mx-auto px-4 py-12 flex justify-center">
             <div className="max-w-md">
               <h2 className="text-[26px] font-medium leading-tight">
                 Take Back Your Balance
