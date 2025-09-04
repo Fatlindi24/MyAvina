@@ -25,14 +25,14 @@ export default function TelehealthConsentPage() {
     <div className="container mx-auto px-6 py-10 md:py-16">
       {/* Header */}
       <header>
-        <h1 className="text-[32px] md:text-[48px] font-medium text-black">
+        <h1 className="text-[32px] md:text-[48px] font-medium text-black uppercase">
           Telehealth Consent & Terms of Care
         </h1>
-        <p className="mt-2 text-md text-black font-light">
+        <p className="mt-2 text-md text-[#828282]  font-light">
           Last Updated: August 31, 2025
         </p>
 
-        <div className="mt-6 max-w-[820px] text-[14px] md:text-[15px] leading-7 text-black/80">
+        <div className="mt-6 max-w-[820px] text-[16px] md:text-[20px] leading-7 text-black ">
           <p>Provider Entity: MyAvina-affiliated physician practice(s)</p>
           <p className="mt-1">
             Emergency: If you are having a medical emergency, call 911 or go to

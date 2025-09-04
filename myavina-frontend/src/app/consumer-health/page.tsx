@@ -25,24 +25,11 @@ export default function ConsumerHealthPolicyPage() {
     <div className="container mx-auto px-6 py-10 md:py-16">
       {/* Header */}
       <header>
-        <h1 className="text-[32px] md:text-[48px] font-medium text-black">
+        <h1 className="text-[32px] md:text-[48px] font-medium uppercase text-black">
           Consumer Health Data Privacy Policy
         </h1>
-        <p className="mt-2 text-md text-[#828282] font-light">
+        <p className="mt-2 mb-20 text-md text-[#828282] font-light">
           Last Updated: August 31, 2025
-        </p>
-
-        <p className="mt-6 max-w-[820px] text-[14px] md:text-[15px] leading-7 text-black/80">
-          Thank you for using MyAvina, Inc. (“MyAvina”) via our website and
-          mobile/online applications and services (the “Services”). This policy
-          explains how we collect, use, disclose, and protect Consumer Health
-          Data as defined by applicable laws (including Washington’s My Health
-          My Data Act and Nevada’s CHDP law). It applies to Consumer Health Data
-          we handle about individuals who visit the Site, use the Services, or
-          otherwise interact with us. Health information handled by independent
-          physicians or pharmacies during medical care is governed by their own
-          legal obligations (e.g., HIPAA); this policy does not replace those
-          duties.
         </p>
 
         <hr className="mt-8 border-t border-black/10" />
@@ -51,6 +38,18 @@ export default function ConsumerHealthPolicyPage() {
       {/* Content */}
       <main className="max-w-[820px]">
         <Section title="Introduction">
+          <p className="mt-6">
+            Thank you for using MyAvina, Inc. (“MyAvina”) via our website and
+            mobile/online applications and services (the “Services”). This
+            policy explains how we collect, use, disclose, and protect Consumer
+            Health Data as defined by applicable laws (including Washington’s My
+            Health My Data Act and Nevada’s CHDP law). It applies to Consumer
+            Health Data we handle about individuals who visit the Site, use the
+            Services, or otherwise interact with us. Health information handled
+            by independent physicians or pharmacies during medical care is
+            governed by their own legal obligations (e.g., HIPAA); this policy
+            does not replace those duties.
+          </p>
           <p>
             If you interact with us on behalf of someone else (e.g., referring a
             friend), you must have authority or consent to share their Consumer

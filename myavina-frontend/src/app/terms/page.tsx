@@ -25,14 +25,14 @@ export default function TermsPage() {
     <div className="container mx-auto px-6 py-10 md:py-16">
       {/* Header */}
       <header>
-        <h1 className="text-[32px] md:text-[48px] font-medium text-black">
+        <h1 className="text-[32px] md:text-[48px] font-medium uppercase text-black">
           Terms of Service
         </h1>
         <p className="mt-2 text-md text-[#828282]  font-light">
           Last Updated: August 31, 2025
         </p>
 
-        <p className="mt-6 max-w-[820px] text-[14px] md:text-[15px] leading-7 text-black/80">
+        <p className="mt-6 max-w-[820px] text-[16px] md:text-[20px] leading-7 text-black font-normal">
           DO NOT USE THE SERVICES IF YOU ARE EXPERIENCING A MEDICAL EMERGENCY:
           Call 911 or go to the nearest emergency room immediately.
         </p>

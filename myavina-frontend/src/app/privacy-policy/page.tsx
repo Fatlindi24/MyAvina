@@ -32,7 +32,7 @@ export default function PrivacyPolicyPage() {
           Last Updated: August 31, 2025
         </p>
 
-        <p className="mt-6 max-w-[820px] text-[14px] md:text-[15px] leading-7 text-black/80">
+        <p className="mt-6 max-w-[820px] text-[16px] md:text-[20px] leading-7 font-normal text-black/">
           At MyAvina, your privacy is our priority. We are committed to
           protecting your personal and health information and being transparent
           about how we collect, use, and safeguard it.
