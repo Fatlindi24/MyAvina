@@ -149,9 +149,7 @@ export default function PrivacyPolicyPage() {
             If you have questions about this policy or your information, contact
             us at:
           </p>
-          <p className="mt-2 font-medium">
-            privacy@myavina.com, +1&nbsp;234&nbsp;567&nbsp;890
-          </p>
+          <p className="mt-2 font-medium">privacy@myavina.com</p>
         </Section>
       </main>
     </div>

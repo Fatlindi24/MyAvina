@@ -33,13 +33,10 @@ export default function TelehealthConsentPage() {
         </p>
 
         <div className="mt-6 max-w-[820px] text-[14px] md:text-[15px] leading-7 text-black/80">
-          <p>
-            <b>Provider Entity:</b> MyAvina-affiliated physician practice(s)
-          </p>
+          <p>Provider Entity: MyAvina-affiliated physician practice(s)</p>
           <p className="mt-1">
-            <b>Emergency:</b> If you are having a medical emergency, call 911 or
-            go to the nearest emergency room. Do not use the Services for
-            emergencies.
+            Emergency: If you are having a medical emergency, call 911 or go to
+            the nearest emergency room. Do not use the Services for emergencies.
           </p>
         </div>
 
@@ -91,17 +88,17 @@ export default function TelehealthConsentPage() {
               data transmission, or a need for in-person care.
             </li>
             <li>
-              <b>Alternatives:</b> You can seek in-person care at any time.
-              Either you or your clinician may end a telehealth visit if
-              technology is inadequate.
+              Alternatives: You can seek in-person care at any time. Either you
+              or your clinician may end a telehealth visit if technology is
+              inadequate.
             </li>
             <li>
-              <b>No recording:</b> You may not record or capture visits without
-              written consent.
+              No recording: You may not record or capture visits without written
+              consent.
             </li>
             <li>
-              <b>Prescriptions:</b> Controlled substances will not be
-              prescribed. A prescription is not guaranteed.
+              Prescriptions: Controlled substances will not be prescribed. A
+              prescription is not guaranteed.
             </li>
           </ul>
           <p className="mt-3">
@@ -167,8 +164,8 @@ export default function TelehealthConsentPage() {
         <Section title="Dispute Resolution & Arbitration (Class Action Waiver)">
           <ul className="ml-4 md:ml-5 list-disc marker:text-black/40 space-y-1.5">
             <li>
-              Before filing a claim, please email <b>legal@myavina.com</b> so we
-              can try to resolve it within 30 days.
+              Before filing a claim, please email legal@myavina.com so we can
+              try to resolve it within 30 days.
             </li>
             <li>
               Except for small-claims matters and IP/injunctive relief, all
@@ -177,13 +174,12 @@ export default function TelehealthConsentPage() {
               Federal Arbitration Act applies.
             </li>
             <li>
-              <b>No class actions:</b> You and MyAvina may bring claims only
+              No class actions: You and MyAvina may bring claims only
               individually.
             </li>
             <li>
-              <b>Opt-out:</b> You may opt out of arbitration by emailing
-              <b> legal@myavina.com</b> within 30 days of first accepting these
-              Terms.
+              Opt-out: You may opt out of arbitration by emailing
+              legal@myavina.com within 30 days of first accepting these Terms.
             </li>
           </ul>
         </Section>
@@ -191,16 +187,16 @@ export default function TelehealthConsentPage() {
         <Section title="Miscellaneous">
           <ul className="ml-4 md:ml-5 list-disc marker:text-black/40 space-y-1.5">
             <li>
-              <b>Governing Law & Venue:</b> [Choose one U.S. state]; exclusive
-              courts in [County, State] for any non-arbitrable claims.
+              Governing Law & Venue: [Choose one U.S. state]; exclusive courts
+              in [County, State] for any non-arbitrable claims.
             </li>
             <li>
-              <b>Severability/Survival:</b> If a provision is unenforceable, the
-              rest remains in effect; provisions that logically survive do so.
+              Severability/Survival: If a provision is unenforceable, the rest
+              remains in effect; provisions that logically survive do so.
             </li>
             <li>
-              <b>Changes:</b> We may update these Terms; continued use means you
-              accept the updated version.
+              Changes: We may update these Terms; continued use means you accept
+              the updated version.
             </li>
           </ul>
         </Section>
@@ -210,9 +206,7 @@ export default function TelehealthConsentPage() {
             If you have questions about this policy or your information, contact
             us at:
           </p>
-          <p className="mt-2 font-medium">
-            privacy@myavina.com, +1&nbsp;234&nbsp;567&nbsp;890
-          </p>
+          <p className="mt-2 font-medium">privacy@myavina.com</p>
         </Section>
       </main>
     </div>

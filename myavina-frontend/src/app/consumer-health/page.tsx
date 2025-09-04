@@ -62,23 +62,22 @@ export default function ConsumerHealthPolicyPage() {
         <Section title="Sources of Consumer Health Data">
           <ul className="ml-4 md:ml-5 list-disc marker:text-black/40 space-y-1.5">
             <li>
-              <b>You directly</b> – when you create an account, complete health
+              You directly – when you create an account, complete health
               quizzes, place or customize orders, contact support, sign up for
               newsletters, or participate in webinars/surveys.
             </li>
             <li>
-              <b>Automatically</b> – via cookies, pixels, SDKs, session replay
-              tools, and similar technologies when you use the Services (see
-              “Cookies &amp; Tracking”).
+              Automatically – via cookies, pixels, SDKs, session replay tools,
+              and similar technologies when you use the Services (see “Cookies
+              &amp; Tracking”).
             </li>
             <li>
-              <b>Third parties</b> – such as service providers, analytics and
-              payment partners, affiliated companies, pharmacies, and social
-              media platforms.
+              Third parties – such as service providers, analytics and payment
+              partners, affiliated companies, pharmacies, and social media
+              platforms.
             </li>
             <li>
-              <b>Public sources</b> – such as publicly available websites and
-              profiles.
+              Public sources – such as publicly available websites and profiles.
             </li>
           </ul>
           <p className="mt-3">
@@ -93,18 +92,18 @@ export default function ConsumerHealthPolicyPage() {
           </p>
           <ul className="ml-4 md:ml-5 list-disc marker:text-black/40 space-y-1.5">
             <li>
-              <b>Symptoms, conditions, treatments, diagnoses,</b> and care
-              preferences you share with us through forms, quizzes, or
-              communications with MyAvina.
+              Symptoms, conditions, treatments, diagnoses, and care preferences
+              you share with us through forms, quizzes, or communications with
+              MyAvina.
             </li>
             <li>
-              <b>Inferences about health</b> derived from interactions with the
+              Inferences about health derived from interactions with the
               Services.
             </li>
             <li>
-              <b>Related identifiers and device/usage data</b> (e.g., IP
-              address, device ID, cookie ID) to the extent they indicate
-              health-related interest or activity.
+              Related identifiers and device/usage data (e.g., IP address,
+              device ID, cookie ID) to the extent they indicate health-related
+              interest or activity.
             </li>
           </ul>
         </Section>
@@ -112,31 +111,31 @@ export default function ConsumerHealthPolicyPage() {
         <Section title="How We Use Consumer Health Data">
           <ul className="ml-4 md:ml-5 list-disc marker:text-black/40 space-y-1.5">
             <li>
-              <b>Provide and operate the Services</b> – register/verify your
-              account, fulfill and ship orders, process payments, provide
-              support, and enable secure messaging and reminders.
+              Provide and operate the Services – register/verify your account,
+              fulfill and ship orders, process payments, provide support, and
+              enable secure messaging and reminders.
             </li>
             <li>
-              <b>Run our business</b> – operations, accounting, recordkeeping,
+              Run our business – operations, accounting, recordkeeping,
               auditing, reporting, and IT security/administration.
             </li>
             <li>
-              <b>Improve and develop</b> – maintain quality and safety, debug
-              and repair errors, analyze usage, and design new features,
-              products, and experiences.
+              Improve and develop – maintain quality and safety, debug and
+              repair errors, analyze usage, and design new features, products,
+              and experiences.
             </li>
             <li>
-              <b>Protect integrity and security</b> – prevent, detect, and
-              investigate fraud/abuse, or security incidents; manage risk.
+              Protect integrity and security – prevent, detect, and investigate
+              fraud/abuse, or security incidents; manage risk.
             </li>
             <li>
-              <b>Corporate transactions</b> – mergers, acquisitions, financings,
-              or asset transfers.
+              Corporate transactions – mergers, acquisitions, financings, or
+              asset transfers.
             </li>
             <li>
-              <b>Marketing (with required permissions)</b> – personalize content
-              and offers; send newsletters or promotions; measure effectiveness.
-              You may unsubscribe from marketing emails anytime (see “Your
+              Marketing (with required permissions) – personalize content and
+              offers; send newsletters or promotions; measure effectiveness. You
+              may unsubscribe from marketing emails anytime (see “Your
               Choices”).
             </li>
           </ul>
@@ -149,40 +148,34 @@ export default function ConsumerHealthPolicyPage() {
         <Section title="How We Disclose Consumer Health Data">
           <ul className="ml-4 md:ml-5 list-disc marker:text-black/40 space-y-1.5">
             <li>
-              <b>Medical professionals &amp; pharmacies</b> providing services
-              to you through the Services (as necessary to deliver care or
-              fulfill prescriptions).
+              Medical professionals &amp; pharmacies providing services to you
+              through the Services (as necessary to deliver care or fulfill
+              prescriptions).
             </li>
             <li>
-              <b>Service providers</b> performing functions on our behalf (e.g.,
+              Service providers performing functions on our behalf (e.g.,
               hosting, analytics, payment processing, customer support,
               email/SMS, security, session-replay, fulfillment, logistics).
             </li>
+            <li>Professional advisors (e.g., lawyers, auditors).</li>
             <li>
-              <b>Professional advisors</b> (e.g., lawyers, auditors).
+              Transaction parties in connection with a merger, acquisition,
+              financing, or sale/transfer of assets.
             </li>
             <li>
-              <b>Transaction parties</b> in connection with a merger,
-              acquisition, financing, or sale/transfer of assets.
+              Legal, safety, or security recipients (e.g., law enforcement) when
+              required/permitted by law or to protect rights/safety.
             </li>
             <li>
-              <b>Legal, safety, or security recipients</b> (e.g., law
-              enforcement) when required/permitted by law or to protect
-              rights/safety.
+              The public when you choose to make content public (e.g., product
+              reviews, blog comments).
             </li>
-            <li>
-              <b>The public</b> when you choose to make content public (e.g.,
-              product reviews, blog comments).
-            </li>
-            <li>
-              <b>Others with your direction or consent.</b>
-            </li>
+            <li>Others with your direction or consent.</li>
           </ul>
           <p className="mt-3">
-            <b>Sale/targeted advertising:</b> We do not sell Consumer Health
-            Data as defined by WA/NV law, and we do not disclose Consumer Health
-            Data for targeted advertising without your opt-in consent where
-            required.
+            Sale/targeted advertising: We do not sell Consumer Health Data as
+            defined by WA/NV law, and we do not disclose Consumer Health Data
+            for targeted advertising without your opt-in consent where required.
           </p>
         </Section>
 
@@ -198,16 +191,16 @@ export default function ConsumerHealthPolicyPage() {
         <Section title="Your Choices">
           <ul className="ml-4 md:ml-5 list-disc marker:text-black/40 space-y-1.5">
             <li>
-              <b>Marketing emails:</b> You can unsubscribe using the link in our
+              Marketing emails: You can unsubscribe using the link in our
               emails.
             </li>
             <li>
-              <b>Cookies &amp; tracking:</b> Control through your browser
-              settings or device permissions.
+              Cookies &amp; tracking: Control through your browser settings or
+              device permissions.
             </li>
             <li>
-              <b>Access, correction, deletion:</b> Contact us (see below) to
-              exercise your rights under applicable laws.
+              Access, correction, deletion: Contact us (see below) to exercise
+              your rights under applicable laws.
             </li>
           </ul>
         </Section>
@@ -226,9 +219,7 @@ export default function ConsumerHealthPolicyPage() {
             If you have questions about this policy or your information, contact
             us at:
           </p>
-          <p className="mt-2 font-medium">
-            privacy@myavina.com, +1&nbsp;234&nbsp;567&nbsp;890
-          </p>
+          <p className="mt-2 font-medium">privacy@myavina.com</p>
         </Section>
       </main>
     </div>
