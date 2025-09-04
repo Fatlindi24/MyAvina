@@ -6,8 +6,6 @@ import {
   Pill,
   Bandage,
   ShieldCheck,
-  FlaskConical,
-  Leaf,
   Salad,
   HandHeart,
   Sprout,
@@ -111,7 +109,7 @@ export default function TopChoices() {
             </div>
             <div className="mt-8">
               <a
-                href="#"
+                href="/treatments"
                 className="inline-block bg-black text-white text-[16px] px-6 py-2 rounded-full hover:bg-gray-800 transition-colors btn font-normal"
               >
                 Explore All Treatments

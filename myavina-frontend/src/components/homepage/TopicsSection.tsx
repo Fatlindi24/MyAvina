@@ -81,7 +81,7 @@ const ArticleCard = ({
 
         <div className="mt-4">
           <a
-            href="#"
+            href=""
             className={`inline-block rounded-full px-5 py-3 text-[15px] leading-none transition-colors ${buttonClasses}`}
           >
             Read more

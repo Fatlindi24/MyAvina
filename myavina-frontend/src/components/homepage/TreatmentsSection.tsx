@@ -161,7 +161,7 @@ export const TreatmentsSection = () => {
           </div>
         </Swiper>
         <a
-          href="#"
+          href="/treatments"
           className="mb-0 md:mb-10 block w-full text-center lg:hidden text-[16px] font-normal bg-black text-white px-4.5 py-2 rounded-full hover:bg-gray-800 transition-colors"
         >
           Shop All Treatments

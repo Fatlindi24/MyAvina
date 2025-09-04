@@ -24,7 +24,7 @@ export default function Prefooter() {
       </div>
 
       {/* Content */}
-      <div className="relative container mx-auto px-6 pt-5 pb-12 md:py-24 flex flex-col md:flex-row items-start md:items-center">
+      <div className="relative container mx-auto px-6 pt-5 pb-12 md:py-28 flex flex-col md:flex-row items-start md:items-center">
         <div className="max-w-2xl text-white">
           <h2 className="text-[32px] md:text-[64px] font-medium leading-tight mb-4">
             Ready to Write Your Own Success Story?

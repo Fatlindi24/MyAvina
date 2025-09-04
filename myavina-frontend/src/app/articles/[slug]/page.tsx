@@ -161,7 +161,9 @@ export default function ArticlePage() {
                   }`}
                   onClick={() => {
                     const el = document.getElementById(`section-${i}`);
-                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
                   }}
                 >
                   {section.heading}
@@ -191,7 +193,7 @@ export default function ArticlePage() {
         {/* Sections */}
         <div>
           {article.sections.map((section, i) => (
-            <section key={i} id={`section-${i}`} className="">
+            <section key={i} id={`section-${i}`} className="scroll-mt-20">
               {/* Heading */}
               {section.heading && (
                 <h2 className="lg:text-[40px] text-[24px] font-medium text-black mb-3 mt-2 ">
