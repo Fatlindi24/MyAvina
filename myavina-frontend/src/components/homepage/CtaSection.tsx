@@ -2,28 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-// --- Data for the Call-to-Action cards ---
-const ctaData = [
-  {
-    title: "Expert Answers, Live",
-    description:
-      "Connect with MyAvina's menopause specialists and get real-time answers to all your questions.",
-    buttonText: "Shop All Treatments",
-    buttonLink: "/treatments",
-    imageUrl: "/Images/homepage/cta1.png", // IMPORTANT: Replace with your image path
-    buttonVariant: "dark",
-  },
-  {
-    title: "Did you know there are over 100 menopause symptoms?",
-    description:
-      "Learn what's normal and what to expect, so you're never caught off guard.",
-    buttonText: "Explore Symptoms",
-    buttonLink: "/symptoms",
-    imageUrl: "/Images/homepage/cta2.png", // IMPORTANT: Replace with your image path
-    buttonVariant: "light",
-  },
-];
-
 // --- Reusable Card Component ---
 interface CtaCardProps {
   title: string;
@@ -34,6 +12,29 @@ interface CtaCardProps {
   buttonVariant?: "dark" | "light";
 }
 
+// --- Data for the Call-to-Action cards ---
+const ctaData = [
+  {
+    title: "Expert Answers, Live",
+    description:
+      "Connect with MyAvina's menopause specialists and get real-time answers to all your questions.",
+    buttonText: "Shop All Treatments",
+    buttonLink: "/treatments",
+    imageUrl: "/Images/homepage/cta1.png",
+    buttonVariant: "dark",
+  },
+  {
+    title: "Did you know there are over 100 menopause symptoms?",
+    description:
+      "Learn what's normal and what to expect, so you're never caught off guard.",
+    buttonText: "Explore Symptoms",
+    buttonLink: "/symptoms",
+    imageUrl: "/Images/homepage/cta2.png",
+    buttonVariant: "light",
+  },
+] as const satisfies ReadonlyArray<CtaCardProps>; // ✅ keeps literals "dark" | "light"
+
+// Card
 const CtaCard: React.FC<CtaCardProps> = ({
   title,
   description,

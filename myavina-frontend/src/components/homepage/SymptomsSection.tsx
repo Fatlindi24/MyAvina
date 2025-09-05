@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
 import {
   Pill,
   BatteryLow,
@@ -17,6 +18,12 @@ import {
   ArrowRightCircle,
 } from "lucide-react";
 
+// ---- Types ----
+type SymptomItem = {
+  name: string;
+  icon: LucideIcon;
+};
+
 // --- Data ---
 const primarySymptomsData = [
   { name: "Weight gain", icon: Pill },
@@ -27,17 +34,17 @@ const primarySymptomsData = [
   { name: "Sleep disruptions", icon: Bed },
   { name: "Anxiety", icon: Activity },
   { name: "Mood swings", icon: Smile },
-];
+] as const satisfies ReadonlyArray<SymptomItem>;
 
 const secondarySymptomsData = [
   { name: "Fatigue", icon: Zap },
   { name: "Brain fog", icon: Brain },
   { name: "Skin changes", icon: Sun },
   { name: "Joint pain", icon: Bone },
-];
+] as const satisfies ReadonlyArray<SymptomItem>;
 
 // --- Card Component ---
-const SymptomTag = ({ symptom }) => {
+const SymptomTag = ({ symptom }: { symptom: SymptomItem }) => {
   const Icon = symptom.icon;
 
   // Split into first word + remaining words
@@ -50,7 +57,7 @@ const SymptomTag = ({ symptom }) => {
       href="/symptoms"
       className="group flex items-center justify-between py-6 px-4 rounded-xl transition-all duration-300 bg-[#F5ECFF] hover:bg-gradient-to-r min-w-[240px] hover:from-[#F5ECFF] hover:via-[#E4D4FF] hover:to-[#D2BBFF]"
     >
-      <span className="text-[16px] font-normal 1">
+      <span className="text-[16px] font-normal">
         <span className="text-black">{firstPart}</span>{" "}
         <span className="text-[#774180]">{secondPart}</span>
       </span>
@@ -68,7 +75,7 @@ const SymptomTag = ({ symptom }) => {
 // --- Main Section ---
 export const SymptomsSection = () => {
   return (
-    <div className="bg-white w-full prompt ">
+    <div className="bg-white w-full prompt">
       <div className="container mx-auto px-4">
         <h1 className="symptoms-main-title lg:text-[40px] text-[32px] mt-10 mb-10 w-full">
           Care for the changes you notice

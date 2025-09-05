@@ -4,21 +4,28 @@ import React from "react";
 import Image from "next/image";
 import { Star, ArrowLeft, ArrowRight } from "lucide-react";
 
-// Import Swiper React components and styles
+// Swiper
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
-import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-// --- Placeholder Data ---
-// In a real app, this data would likely come from an API or CMS.
+// ---- Types ----
+type Testimonial = {
+  quote: string;
+  authorName: string;
+  authorAge: number;
+  authorImage: string;
+  rating: number;
+};
+
+// --- Data ---
 const testimonialsData = [
   {
     quote:
       "I finally sleep through the night again thanks to MyAvina's treatment plan. It's changed my life!",
     authorName: "Monica",
     authorAge: 51,
-    authorImage: "/Images/homepage/Ellipse 23.png", // IMPORTANT: Replace with your image paths
+    authorImage: "/Images/homepage/Ellipse 23.png",
     rating: 5,
   },
   {
@@ -39,7 +46,7 @@ const testimonialsData = [
   },
   {
     quote:
-      "I was skeptical at first, but the personalized care made all the difference. .",
+      "I was skeptical at first, but the personalized care made all the difference.",
     authorName: "Emily",
     authorAge: 55,
     authorImage: "/Images/homepage/Ellipse 23.png",
@@ -53,18 +60,18 @@ const testimonialsData = [
     authorImage: "/Images/homepage/Ellipse 23.png",
     rating: 5,
   },
-];
+] as const satisfies ReadonlyArray<Testimonial>;
 
 // --- Reusable Testimonial Card Component ---
-const TestimonialCard = ({ testimonial }) => (
-  <div className="bg-[#F6F6F6] rounded-2xl p-8 text-center flex flex-col h-fullitems-center min-h-[370px]">
+const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
+  <div className="bg-[#F6F6F6] rounded-2xl p-8 text-center flex flex-col items-center min-h-[370px]">
     <div className="flex text-black items-center justify-center">
-      {[...Array(testimonial.rating)].map((_, i) => (
+      {Array.from({ length: testimonial.rating }).map((_, i) => (
         <Star key={i} className="w-5 h-5 fill-current" />
       ))}
     </div>
     <blockquote className="mt-6 text-[18px] text-dark text-400 flex-grow">
-      "{testimonial.quote}"
+      “{testimonial.quote}”
     </blockquote>
     <div className="mt-6">
       <Image
@@ -74,7 +81,7 @@ const TestimonialCard = ({ testimonial }) => (
         height={56}
         className="rounded-full mx-auto"
       />
-      <p className="mt-4 text-[#828282] font-light text-[16px]  tracking-normal text-center">
+      <p className="mt-4 text-[#828282] font-light text-[16px] tracking-normal text-center">
         {testimonial.authorName}, {testimonial.authorAge}
       </p>
     </div>
@@ -103,13 +110,11 @@ const TestimonialNavButtons = () => {
 };
 
 // --- Main Section Component ---
-// --- Main Section Component ---
 export const TestimonialsSection = () => {
   return (
-    // Changed background to white to match your screenshot
-    <section className="bg-white pt-16 ">
+    <section className="bg-white pt-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-center lg:text-[32px] text-[20px] font-medium  mb-12">
+        <h2 className="text-center lg:text-[32px] text-[20px] font-medium mb-12">
           Thousands of women trust{" "}
           <span className="text-[#774180] uppercase">MyAvina</span> for the{" "}
           <br className="hidden md:block" /> relief, support, and community they
@@ -117,11 +122,8 @@ export const TestimonialsSection = () => {
         </h2>
 
         <Swiper
-          // No longer need modules if not using built-in nav
-
-          // --- UPDATED PROPS ---
-          loop={false} // <-- Set to false to fix layout/direction issues
-          centeredSlides={false} // <-- Remove this to fix the empty space on the right
+          loop={false}
+          centeredSlides={false}
           spaceBetween={30}
           slidesPerView={1.2}
           breakpoints={{
@@ -129,7 +131,7 @@ export const TestimonialsSection = () => {
             1024: { slidesPerView: 3 },
             1280: { slidesPerView: 4 },
           }}
-          className="!pb-16" // Add padding to make space for navigation
+          className="!pb-16"
         >
           {testimonialsData.map((testimonial, index) => (
             <SwiperSlide key={index} className="h-auto p-0">

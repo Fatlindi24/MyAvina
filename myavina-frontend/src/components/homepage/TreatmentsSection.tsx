@@ -2,23 +2,31 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Star, ArrowLeft, ArrowRight } from "lucide-react";
 
-// Import Swiper React components and styles
+// Swiper
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
-import { Navigation } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
+
+// ---- Types ----
+type TreatmentProduct = {
+  name: string;
+  price: number;
+  rating: number;
+  reviews: number;
+  imageUrl: string;
+  isOrganic: boolean;
+};
 
 // --- Placeholder Data ---
-// In a real application, you would fetch this data from an API.
 const treatmentsData = [
   {
     name: "Progesterone Body Cream",
     price: 89,
     rating: 4.9,
     reviews: 29837,
-    imageUrl: "/Images/homepage/bottle-green.png", // IMPORTANT: Replace with your image path
+    imageUrl: "/Images/homepage/bottle-green.png",
     isOrganic: true,
   },
   {
@@ -26,7 +34,7 @@ const treatmentsData = [
     price: 89,
     rating: 4.9,
     reviews: 29837,
-    imageUrl: "/Images/homepage/bottle-purple.png", // IMPORTANT: Replace with your image path
+    imageUrl: "/Images/homepage/bottle-purple.png",
     isOrganic: true,
   },
   {
@@ -34,7 +42,7 @@ const treatmentsData = [
     price: 79,
     rating: 4.9,
     reviews: 29837,
-    imageUrl: "/Images/homepage/patch-img.png", // IMPORTANT: Replace with your image path
+    imageUrl: "/Images/homepage/patch-img.png",
     isOrganic: true,
   },
   {
@@ -42,7 +50,7 @@ const treatmentsData = [
     price: 95,
     rating: 4.8,
     reviews: 15420,
-    imageUrl: "/Images/homepage/bottle-green.png", // IMPORTANT: Replace with your image path
+    imageUrl: "/Images/homepage/bottle-green.png",
     isOrganic: true,
   },
   {
@@ -50,16 +58,15 @@ const treatmentsData = [
     price: 89,
     rating: 4.9,
     reviews: 19500,
-    imageUrl: "/Images/homepage/bottle-purple.png", // IMPORTANT: Replace with your image path
+    imageUrl: "/Images/homepage/bottle-purple.png",
     isOrganic: true,
   },
-];
+] as const satisfies ReadonlyArray<TreatmentProduct>;
 
 // --- Reusable Product Card Component ---
-const ProductCard = ({ product }) => (
-  // This is now the main wrapper for the two separate parts.
+const ProductCard = ({ product }: { product: TreatmentProduct }) => (
   <div>
-    {/* Part 1: The Image Container */}
+    {/* Image */}
     <div className="bg-[#F8F1FF] rounded-[15px] p-4 flex items-center justify-center relative aspect-square">
       {product.isOrganic && (
         <div className="absolute top-4 left-4 bg-[#FFDBC5] text-[12px] text-gray-700 font-normal px-3 py-1 rounded-full z-10">
@@ -71,13 +78,12 @@ const ProductCard = ({ product }) => (
           src={product.imageUrl}
           alt={product.name}
           fill
-          style={{ objectFit: "contain" }}
-          className="p-4"
+          className="object-contain p-4"
         />
       </div>
     </div>
 
-    {/* Part 2: The Text Details Container (Now separate) */}
+    {/* Details */}
     <div className="mt-4 bg-[#F8F1FF] p-4 rounded-[15px]">
       <div className="flex justify-between items-center">
         <h3 className="text-[16px] font-normal text-gray-900">
@@ -92,7 +98,7 @@ const ProductCard = ({ product }) => (
           {product.rating} ({product.reviews.toLocaleString()})
         </span>
         <div className="flex text-black">
-          {[...Array(5)].map((_, i) => (
+          {Array.from({ length: 5 }).map((_, i) => (
             <Star key={i} className="h-4 w-4 fill-current" />
           ))}
         </div>
@@ -129,26 +135,25 @@ export const TreatmentsSection = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-10">
           <h2 className="lg:text-[40px] text-[32px] ">
-            Explore Menopause <br></br>
+            Explore Menopause <br />
             Treatments with <span className="text-[#774180]">MYAVINA</span>
           </h2>
-          <a
-            href="#"
-            className="hidden text-[16px] text-normal sm:inline-block bg-black text-white btn px-4.5 py-2 rounded-full hover:bg-gray-800 transition-colors"
+          <Link
+            href="/treatments"
+            className="hidden text-[16px] sm:inline-block bg-black text-white btn px-5 py-2 rounded-full hover:bg-gray-800 transition-colors"
           >
             Shop All Treatments
-          </a>
+          </Link>
         </div>
 
         <Swiper
-          modules={[Navigation]}
           spaceBetween={24}
-          slidesPerView={1.25} // Show a peek of the next slide on mobile
+          slidesPerView={1.25}
           breakpoints={{
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          className="!pb-5 md:!pb-16 " // Add padding-bottom for navigation
+          className="!pb-5 md:!pb-16"
         >
           {treatmentsData.map((product, index) => (
             <SwiperSlide key={index} className="h-auto">
@@ -160,12 +165,13 @@ export const TreatmentsSection = () => {
             <SwiperNavButtons />
           </div>
         </Swiper>
-        <a
+
+        <Link
           href="/treatments"
-          className="mb-0 md:mb-10 block w-full text-center lg:hidden text-[16px] font-normal bg-black text-white px-4.5 py-2 rounded-full hover:bg-gray-800 transition-colors"
+          className="mb-0 md:mb-10 block w-full text-center lg:hidden text-[16px] font-normal bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition-colors"
         >
           Shop All Treatments
-        </a>
+        </Link>
       </div>
     </section>
   );
