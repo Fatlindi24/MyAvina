@@ -54,7 +54,7 @@ const imagePositions: Record<keyof typeof featuresData, string> = {
 export const FeaturesSection = () => {
   return (
     <section className="bg-white py-16 sm:py-24">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         <h1 className="text-[32px] lg:text-[40px] text-center mb-10">
           What Makes Our Products Work for You
         </h1>

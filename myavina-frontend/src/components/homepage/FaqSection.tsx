@@ -97,7 +97,7 @@ export const FaqSection = () => {
 
   return (
     <section className="bg-white py-16 sm:py-24">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         <div className=" mx-auto">
           <h2 className="lg:text-[40px] text-[32px] text-500 leading-[130%]  sm:text-5xl">
             Frequently Asked Questions

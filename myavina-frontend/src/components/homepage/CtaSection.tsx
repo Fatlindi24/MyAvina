@@ -93,7 +93,7 @@ const CtaCard: React.FC<CtaCardProps> = ({
 export const CtaSection = () => {
   return (
     <section className="bg-white pb-16 ">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {ctaData.map((card, index) => (
             <CtaCard key={index} {...card} />

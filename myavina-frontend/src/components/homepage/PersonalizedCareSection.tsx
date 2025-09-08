@@ -130,7 +130,7 @@ export default function MenopauseCareSlider() {
   const slides = [0, 1, 2];
 
   return (
-    <section className="px-4">
+    <section className="px-6">
       <Swiper
         modules={[Navigation, Pagination, A11y]}
         slidesPerView={1}

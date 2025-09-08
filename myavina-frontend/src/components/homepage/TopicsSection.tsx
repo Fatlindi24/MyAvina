@@ -87,7 +87,7 @@ export const TopicsSection = () => {
     <section className="bg-[#F6F6F6] pt-10 pb-16">
       <div className="container mx-auto">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto px-4">
+        <div className="text-center max-w-3xl mx-auto px-6">
           <h2 className="font-medium text-[28px] lg:text-[32px] leading-[1.3]">
             Explore Topics That Matter to You
           </h2>

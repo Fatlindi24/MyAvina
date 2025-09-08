@@ -132,7 +132,7 @@ const SwiperNavButtons = () => {
 export const TreatmentsSection = () => {
   return (
     <section className="bg-white pb-10">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         <div className="flex justify-between items-center mb-10">
           <h2 className="lg:text-[40px] text-[32px] ">
             Explore Menopause <br />

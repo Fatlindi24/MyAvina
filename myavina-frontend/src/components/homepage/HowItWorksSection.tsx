@@ -125,7 +125,7 @@ function ImageCard({
 export const HowItWorksSection: React.FC = () => {
   return (
     <section className="bg-[#F6F6F6] py-10 md:pt-14 md:pb-20">
-      <div className="container  mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container  mx-auto px-6">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto ">
           <h2 className="text-[32px] md:text-[40px] font-medium text-gray-900">

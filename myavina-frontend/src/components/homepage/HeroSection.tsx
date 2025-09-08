@@ -60,7 +60,7 @@ export default function HeroSection() {
       </div>
 
       {/* CONTENT CONTAINER — reserve space on the right so text never overlaps img */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-6 ">
         {/* Add right padding only on large screens to clear the outside image */}
         <div className="relative py-10 lg:py-16 lg:pr-[450px]">
           {/* TEXT BLOCK — capped at 60% width */}
@@ -89,7 +89,7 @@ export default function HeroSection() {
             <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-8">
               <a
                 href="/get-started"
-                className="inline-flex items-center justify-center btn rounded-full bg-[#774180] text-white px-7 py-3 font-regular text-[16px] shadow hover:bg-purple-700 transition-colors w-full sm:w-auto"
+                className="inline-flex items-center justify-center btn rounded-full bg-[#774180] text-white px-7 py-3 font-regular text-[16px] shadow hover:bg-[#4b2951] transition-colors w-full sm:w-auto"
               >
                 Restore My Hormones
               </a>

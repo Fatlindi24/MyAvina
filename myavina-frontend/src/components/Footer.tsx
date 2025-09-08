@@ -21,7 +21,7 @@ const footerSectionsData = [
       { name: "Start My Free Visit", href: "#" },
       { name: "Check My Symptoms", href: "#" },
       { name: "Shop Treatments", href: "/treatments" },
-      { name: "Bioidentical HRT", href: "#" },
+      { name: "Bioidentical HRT", href: "/bioidentical-hrt" },
     ],
   },
   {

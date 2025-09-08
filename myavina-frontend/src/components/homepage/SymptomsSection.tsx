@@ -76,7 +76,7 @@ const SymptomTag = ({ symptom }: { symptom: SymptomItem }) => {
 export const SymptomsSection = () => {
   return (
     <div className="bg-white w-full prompt">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         <h1 className="symptoms-main-title lg:text-[40px] text-[32px] mt-10 mb-10 w-full">
           Care for the changes you notice
         </h1>

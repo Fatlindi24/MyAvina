@@ -67,7 +67,7 @@ function ChoiceCard({ Icon, title, description }: ChoiceCardProps) {
 export default function TopChoices() {
   return (
     <section className="bg-white text-gray-900">
-      <div className="mx-auto container py-16 sm:pb-24 px-4 ">
+      <div className="mx-auto container py-16 sm:pb-24 px-6 ">
         <div className="lg:grid lg:grid-cols-2 lg:gap-5 lg:items-center">
           {/* Left column */}
           <div>

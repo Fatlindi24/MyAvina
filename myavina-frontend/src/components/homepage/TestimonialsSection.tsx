@@ -113,7 +113,7 @@ const TestimonialNavButtons = () => {
 export const TestimonialsSection = () => {
   return (
     <section className="bg-white pt-16">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         <h2 className="text-center lg:text-[32px] text-[20px] font-medium mb-12">
           Thousands of women trust{" "}
           <span className="text-[#774180] uppercase">MyAvina</span> for the{" "}
