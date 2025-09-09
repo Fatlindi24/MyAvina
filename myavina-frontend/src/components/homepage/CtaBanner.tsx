@@ -98,12 +98,18 @@ export const CtaBannerSection = () => {
                       free, with unlimited follow-ups.
                     </p>
                     <div className="mt-8 flex flex-row gap-4 justify-start">
-                      <button className="bg-black text-white px-8 py-3 rounded-full transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-700">
+                      <a
+                        href="/treatments"
+                        className="bg-black text-white px-8 py-3 rounded-full transition-colors hover:bg-gray-800 cursor-pointer"
+                      >
                         Start Treatment Now
-                      </button>
-                      <button className="bg-white text-black px-8 py-3 rounded-full transition-colors hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                      </a>
+                      <a
+                        href="#"
+                        className="bg-white text-black px-8 py-3 rounded-full transition-colors hover:bg-gray-200 cursor-pointer  "
+                      >
                         Take the Quiz
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
