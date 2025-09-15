@@ -4,7 +4,7 @@ import React from "react";
 
 const SectionOne = () => {
   return (
-    <div className="md:container mx-auto md:px-6">
+    <div className="container mx-auto md:px-6">
       <p className="text-[16px] px-4 pt-10 text-[#774180] uppercase font-light mb-4">
         About Us
       </p>
